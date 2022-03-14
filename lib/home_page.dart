@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("식단 로그를 입력하세요!")),
+      appBar: AppBar(title: const Text("식단 로그를 입력하세요!")),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

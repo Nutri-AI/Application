@@ -1,8 +1,11 @@
+// ignore_for_file: unnecessary_const
+
 import 'package:demo/home_page.dart';
 import 'package:flutter/material.dart';
 
 class InputUserInfo extends StatefulWidget {
-  InputUserInfo({Key? key}) : super(key: key);
+  String email;
+  InputUserInfo({Key? key, required this.email}) : super(key: key);
 
   @override
   State<InputUserInfo> createState() => _InputUserInfoState();
@@ -20,7 +23,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("사용자 정보를 입력해주세요!")),
+      appBar: AppBar(title: const Text("사용자 정보를 입력해주세요!")),
       // resizeToAvoidBottomInset: false,
       body: Center(
           child: Column(
@@ -32,11 +35,11 @@ class _InputUserInfoState extends State<InputUserInfo> {
                 const EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 20),
             child: TextFormField(
               controller: _nameController,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "이름을 입력하세요.",
                 hintStyle: TextStyle(color: Colors.green),
               ),
@@ -47,11 +50,11 @@ class _InputUserInfoState extends State<InputUserInfo> {
             padding: const EdgeInsets.only(left: 50, right: 50, bottom: 20),
             child: TextFormField(
               controller: _birthdateController,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "생년월일을 입력하세요. ex. 1998-10-27",
                 hintStyle: TextStyle(color: Colors.green),
               ),
@@ -63,8 +66,8 @@ class _InputUserInfoState extends State<InputUserInfo> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 50),
+                const Padding(
+                  padding: EdgeInsets.only(right: 50),
                   child: Text(
                     "성별",
                     style: TextStyle(
@@ -98,11 +101,11 @@ class _InputUserInfoState extends State<InputUserInfo> {
             padding: const EdgeInsets.only(left: 50, right: 50, bottom: 20),
             child: TextFormField(
               controller: _heightController,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "키를 입력하세요.(cm)",
                 hintStyle: TextStyle(color: Colors.green),
               ),
@@ -113,11 +116,11 @@ class _InputUserInfoState extends State<InputUserInfo> {
             padding: const EdgeInsets.only(left: 50, right: 50, bottom: 20),
             child: TextFormField(
               controller: _weightController,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "몸무게를 입력하세요.(kg)",
                 hintStyle: TextStyle(color: Colors.green),
               ),
@@ -130,11 +133,11 @@ class _InputUserInfoState extends State<InputUserInfo> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 50),
-                  child: Text(
+                const Padding(
+                  padding: EdgeInsets.only(right: 50),
+                  child: const Text(
                     "운동량",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       color: Colors.green,
                     ),
@@ -185,6 +188,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
                     print("Height: " + _heightController.text);
                     print("Weight: " + _weightController.text);
                     print("PAI: " + dropdownValue2);
+                    print("email: " + widget.email);
 
                     // route me
                     Navigator.push(
@@ -194,7 +198,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
                       ),
                     );
                   },
-                  child: Text("Get Started!"))),
+                  child: const Text("Get Started!"))),
         ],
       )),
     );
