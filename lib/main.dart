@@ -1,4 +1,3 @@
-
 import 'package:demo/Input_UserInfo.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -55,12 +54,12 @@ class _MyLoginPageState extends State<MyLoginPage> {
                   left: 50, right: 50, top: 10, bottom: 20),
               child: TextFormField(
                 controller: _usernameController,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 15,
                 ),
                 cursorColor: Colors.pink,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Input your Email as UserID.",
                   hintStyle: TextStyle(color: Colors.green),
                 ),
@@ -81,11 +80,12 @@ class _MyLoginPageState extends State<MyLoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => InputUserInfo(),
+                          builder: (context) =>
+                              InputUserInfo(email: _usernameController.text),
                         ),
                       );
                     },
-                    child: Text("Login"))),
+                    child: const Text("Login"))),
           ],
         ),
       ),
