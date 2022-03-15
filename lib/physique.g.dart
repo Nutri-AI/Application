@@ -9,9 +9,9 @@ part of 'physique.dart';
 Physique _$PhysiqueFromJson(Map<String, dynamic> json) => Physique(
       birth: json['birth'] as String,
       sex: json['sex'] as String,
-      height: json['height'] as String,
-      weight: json['weight'] as String,
-      PAI: json['PAI'] as String,
+      height: json['height'] as int,
+      weight: json['weight'] as int,
+      PAI: json['PAI'] as double,
     );
 
 Map<String, dynamic> _$PhysiqueToJson(Physique instance) => <String, dynamic>{

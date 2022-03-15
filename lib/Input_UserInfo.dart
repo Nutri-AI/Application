@@ -38,7 +38,7 @@ Future<UserInfo> createAlbum(
     },
     body: jsonEncode(data),
   );
-  print(response.body);
+
   if (response.statusCode == 200) {
     return UserInfo.fromJson(jsonDecode(response.body));
   } else {

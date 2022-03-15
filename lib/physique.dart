@@ -5,9 +5,9 @@ part 'physique.g.dart';
 class Physique {
   final String birth;
   final String sex;
-  final String height;
-  final String weight;
-  final String PAI;
+  final int height;
+  final int weight;
+  final double PAI;
 
   Physique(
       {required this.birth,
