@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:demo/custom_icon.dart';
+import 'package:demo/food_log.dart';
+import 'package:demo/analyze.dart';
+import 'package:demo/recommend.dart';
+import 'package:demo/mypage.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -9,31 +13,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 0; //ok
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
-  static const List<Widget> _widgetOptions = <Widget>[
-    // Tab_0: MakeLog()
-    Text(
-      'Index 0: 기록!',
-      style: optionStyle,
-    ),
-    // Tab_1: Analyze()
-    Text(
-      'Index 1: 분석',
-      style: optionStyle,
-    ),
-    // Tab_2: Recommendation()
-    Text(
-      'Index 2: 추천',
-      style: optionStyle,
-    ),
-    // Tab_3: UserInfo()
-    Text(
-      'Index 3: 마이페이지',
-      style: optionStyle,
-    ),
-  ];
+
+  final List<Widget> _children = [FoodLog(), Analyze(), Recommend(), MyPage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -45,10 +30,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("식단 로그를 입력하세요!")),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _children[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(CustomIcon.edit),
