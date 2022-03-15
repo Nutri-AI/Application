@@ -1,6 +1,5 @@
 import 'package:demo/Input_UserInfo.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +14,7 @@ class NutriaiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      // title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.lightGreen),
       home: const MyLoginPage(title: 'NutriAI Login Demo'),
     );

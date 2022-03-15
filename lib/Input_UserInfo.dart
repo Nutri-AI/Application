@@ -92,6 +92,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
     return Scaffold(
       appBar: AppBar(title: const Text("사용자 정보를 입력해주세요!")),
       // resizeToAvoidBottomInset: false,
+      // 이 센터 자체를 overflow 방지해주는 Box 안에 넣자!
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
