@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:demo/custom_icon.dart';
-import 'package:demo/food_log.dart';
-import 'package:demo/analyze.dart';
-import 'package:demo/recommend.dart';
-import 'package:demo/mypage.dart';
+import 'package:demo/MainScreens/food_log.dart';
+import 'package:demo/MainScreens/analyze.dart';
+import 'package:demo/MainScreens/recommend.dart';
+import 'package:demo/MainScreens/mypage.dart';
+// import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0; //ok
+  int _selectedIndex = 0;
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
@@ -29,7 +30,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("식단 로그를 입력하세요!")),
+      // appBar: AppBar(
+      //   title: Text(DateFormat("MM-dd").format(DateTime.now())),
+      // ),
       body: _children[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
