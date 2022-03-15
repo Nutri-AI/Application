@@ -1,7 +1,64 @@
-// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_const, non_constant_identifier_names
+import 'dart:async';
+import 'dart:convert';
+import 'physique.dart';
 
 import 'package:demo/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:json_annotation/json_annotation.dart';
+part 'Input_UserInfo.g.dart';
+
+Future<UserInfo> createAlbum(
+  String userid,
+  String username,
+  String birth,
+  String sex,
+  String height,
+  String weight,
+  String PAI,
+) async {
+  Map<String, dynamic> data = {
+    'userid': userid,
+    'username': username,
+    'physique': {
+      'birth': birth,
+      'sex': sex,
+      'height': height,
+      'weight': weight,
+      'PAI': PAI,
+    },
+  };
+
+  final response = await http.post(
+    Uri.parse('http://10.0.2.2:8000/user/join'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(data),
+  );
+
+  if (response.statusCode == 200) {
+    return UserInfo.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to create data');
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class UserInfo {
+  final String userid;
+  final String username;
+  Physique physique;
+
+  UserInfo(
+      {required this.userid, required this.username, required this.physique});
+
+  factory UserInfo.fromJson(Map<String, dynamic> json) =>
+      _$UserInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$UserInfoToJson(this);
+}
 
 class InputUserInfo extends StatefulWidget {
   String email;
@@ -17,6 +74,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
   // final TextEditingController _sexController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
+  //Future<UserInfo>? _UserInfo;
 
   String dropdownValue1 = "F";
   String dropdownValue2 = "운동 안 함";
@@ -28,6 +86,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
     "격렬한 운동 주 5~6회": "1.55",
     "격렬한 운동 주 7회 이상": "1.75"
   };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,14 +249,15 @@ class _InputUserInfoState extends State<InputUserInfo> {
               ),
               child: ElevatedButton(
                   onPressed: () {
-                    print("Name: " + _nameController.text);
-                    print("Birthdate: " + _birthdateController.text);
-                    // print("Username: " + _sexController.text);
-                    print("Sex: " + dropdownValue1);
-                    print("Height: " + _heightController.text);
-                    print("Weight: " + _weightController.text);
-                    print("PAI: " + pai[dropdownValue2]);
-                    print("email: " + widget.email);
+                    createAlbum(
+                      widget.email,
+                      _nameController.text,
+                      _birthdateController.text,
+                      dropdownValue1,
+                      _heightController.text,
+                      _weightController.text,
+                      pai[dropdownValue2],
+                    );
 
                     // route me
                     Navigator.push(
