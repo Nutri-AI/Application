@@ -1,16 +1,13 @@
 // ignore_for_file: unnecessary_const, non_constant_identifier_names
 import 'dart:async';
 import 'dart:convert';
-import 'physique.dart';
+import 'package:demo/json/UserSignUpInfo.dart';
 
 import 'package:demo/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:json_annotation/json_annotation.dart';
-part 'Input_UserInfo.g.dart';
-
-Future<UserInfo> createAlbum(
+Future<UserSignUpInfo> createUser(
   String userid,
   String username,
   String birth,
@@ -40,24 +37,10 @@ Future<UserInfo> createAlbum(
   );
 
   if (response.statusCode == 200) {
-    return UserInfo.fromJson(jsonDecode(response.body));
+    return UserSignUpInfo.fromJson(jsonDecode(response.body));
   } else {
     throw Exception('Failed to create data');
   }
-}
-
-@JsonSerializable(explicitToJson: true)
-class UserInfo {
-  final String userid;
-  final String username;
-  Physique physique;
-
-  UserInfo(
-      {required this.userid, required this.username, required this.physique});
-
-  factory UserInfo.fromJson(Map<String, dynamic> json) =>
-      _$UserInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$UserInfoToJson(this);
 }
 
 class InputUserInfo extends StatefulWidget {
@@ -249,7 +232,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
               ),
               child: ElevatedButton(
                   onPressed: () {
-                    createAlbum(
+                    createUser(
                       widget.email,
                       _nameController.text,
                       _birthdateController.text,
