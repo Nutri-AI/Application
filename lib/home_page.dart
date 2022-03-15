@@ -13,18 +13,22 @@ class _HomePageState extends State<HomePage> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
+    // Tab_0: MakeLog()
     Text(
-      'Index 0: 기록',
+      'Index 0: 기록!',
       style: optionStyle,
     ),
+    // Tab_1: Analyze()
     Text(
       'Index 1: 분석',
       style: optionStyle,
     ),
+    // Tab_2: Recommendation()
     Text(
       'Index 2: 추천',
       style: optionStyle,
     ),
+    // Tab_3: UserInfo()
     Text(
       'Index 3: 마이페이지',
       style: optionStyle,
@@ -40,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("식단 로그를 입력하세요!")),
+      appBar: AppBar(title: Text("식단 로그를 입력하세요!")),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
