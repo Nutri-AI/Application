@@ -78,6 +78,15 @@ class _InputUserInfoState extends State<InputUserInfo> {
 
   String dropdownValue1 = "F";
   String dropdownValue2 = "운동 안 함";
+
+  Map pai = {
+    "운동 안 함": "1.2",
+    "격렬한 운동 주 1~2회 or 가벼운 운동 주 3~4회": "1.375",
+    "격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회": "1,425",
+    "격렬한 운동 주 5~6회": "1.55",
+    "격렬한 운동 주 7회 이상": "1.75"
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
