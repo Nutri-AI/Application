@@ -1,6 +1,23 @@
 import 'package:demo/Input_UserInfo.dart';
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+// Future<Album> fetchAlbum(String userid) async {
+//   String baseUrl = 'http://10.0.2.2:8000/info/';
+//   final response = await http.get(
+//     Uri.parse(baseUrl + userid),
+//     //headers: {HttpHeaders.authorizationHeader:'',},
+//   );
+
+//   if (response.statusCode == 200) {
+//     return Album.fromJson(jsonDecode(response.body));
+//   } else {
+//     throw Exception('Failed to load data');
+//   }
+// }
 
 void main() {
   // void: main 함수를 실행하고 아무런 값도 반환하지 않는다.
