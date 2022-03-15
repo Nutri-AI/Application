@@ -255,16 +255,8 @@ class _InputUserInfoState extends State<InputUserInfo> {
                       dropdownValue1,
                       _heightController.text,
                       _weightController.text,
-                      '1.2',
+                      pai[dropdownValue2],
                     );
-                    print("Name: " + _nameController.text);
-                    print("Birthdate: " + _birthdateController.text);
-                    // print("Username: " + _sexController.text);
-                    print("Sex: " + dropdownValue1);
-                    print("Height: " + _heightController.text);
-                    print("Weight: " + _weightController.text);
-                    print("PAI: " + dropdownValue2);
-                    print("email: " + widget.email);
 
                     // route me
                     Navigator.push(
