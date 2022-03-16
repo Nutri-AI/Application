@@ -32,7 +32,7 @@ Future<UserInfo> createAlbum(
   };
 
   final response = await http.post(
-    Uri.parse('http://10.0.2.2:8000/user/join'),
+    Uri.parse('http://127.0.0.1:8000/user/join'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -82,7 +82,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
   Map pai = {
     "운동 안 함": "1.2",
     "격렬한 운동 주 1~2회 or 가벼운 운동 주 3~4회": "1.375",
-    "격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회": "1,425",
+    "격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회": "1.425",
     "격렬한 운동 주 5~6회": "1.55",
     "격렬한 운동 주 7회 이상": "1.75"
   };

@@ -14,6 +14,8 @@ class _FoodLogState extends State<FoodLog> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.only(top: 80, left: 30, right: 30, bottom: 80),
         child: Column(
           // biggest column
@@ -81,10 +83,11 @@ class _FoodLogState extends State<FoodLog> {
             Container(
               // 주요 영양소 content
               padding: EdgeInsets.only(left: 10, right: 10),
-              width: MediaQuery.of(context).size.width / 1.2,
+              width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 4,
               decoration: BoxDecoration(
-                color: Colors.amber[50],
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.amber[100],
               ),
               child: Row(
                 children: [
@@ -170,9 +173,9 @@ class _FoodLogState extends State<FoodLog> {
                         Row(
                           // 지방
                           children: [
-                            const Text("160"), // 지방 섭취량
+                            const Text("170"), // 지방 섭취량
                             const Text("/"),
-                            const Text("200"), // 지방 권장 섭취량
+                            const Text("210"), // 지방 권장 섭취량
                             const Text("g"), // 지방 단위
                           ],
                         ),
@@ -183,11 +186,23 @@ class _FoodLogState extends State<FoodLog> {
               ),
             ),
             SizedBox(height: 30),
+            // Expanded(child: Container()),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               // 식단 로그 stepper
               children: [
                 Container(
-                  color: Colors.amber[50],
+                  decoration: BoxDecoration(
+                      color: Colors.amber[100],
+                      borderRadius: BorderRadius.circular(30),
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.green.withOpacity(0.5),
+                          Color.fromARGB(180, 100, 205, 0),
+                        ],
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.centerRight,
+                      )),
                   width: MediaQuery.of(context).size.width / 1.2,
                   height: MediaQuery.of(context).size.height / 4,
                 ),
