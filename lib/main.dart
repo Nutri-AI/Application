@@ -1,23 +1,20 @@
 import 'package:demo/Input_UserInfo.dart';
+import 'package:demo/home_page.dart';
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// Future<Album> fetchAlbum(String userid) async {
-//   String baseUrl = 'http://10.0.2.2:8000/info/';
-//   final response = await http.get(
-//     Uri.parse(baseUrl + userid),
-//     //headers: {HttpHeaders.authorizationHeader:'',},
-//   );
+Future<bool> fetchUser(String userid) async {
+  String baseUrl = 'http://10.0.2.2:8000/user/info/';
+  final response = await http.get(Uri.parse(baseUrl + userid));
 
-//   if (response.statusCode == 200) {
-//     return Album.fromJson(jsonDecode(response.body));
-//   } else {
-//     throw Exception('Failed to load data');
-//   }
-// }
+  if (response.body == 'null') {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 void main() {
   // void: main 함수를 실행하고 아무런 값도 반환하지 않는다.
@@ -89,17 +86,24 @@ class _MyLoginPageState extends State<MyLoginPage> {
                   color: Colors.amber,
                 ),
                 child: ElevatedButton(
-                    onPressed: () {
-                      print("Username: " + _usernameController.text);
-
-                      // route me
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              InputUserInfo(email: _usernameController.text),
-                        ),
-                      );
+                    onPressed: () async {
+                      bool user = await fetchUser(_usernameController.text);
+                      if (user) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                InputUserInfo(email: _usernameController.text),
+                          ),
+                        );
+                      }
                     },
                     child: const Text("Login"))),
           ],
