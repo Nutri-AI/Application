@@ -8,7 +8,8 @@ import 'package:demo/MainScreens/mypage.dart';
 // import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  String email;
+  HomePage({Key? key, required this.email}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();

@@ -92,7 +92,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HomePage(),
+                            builder: (context) =>
+                                HomePage(email: _usernameController.text),
                           ),
                         );
                       } else {
