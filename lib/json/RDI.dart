@@ -1,40 +1,40 @@
 /////////////// RDI INFO JSON //////////////////
 
 RDI _$RDIFromJson(Map<String, dynamic> json) => RDI(
-      Vitamin_B12: json['Vitamin_B12'] as double,
-      Calcium: json['Calcium'] as double,
-      Iron: json['Iron'] as double,
-      Leucine: json['Leucine'] as double,
-      Histidine: json['Histidine'] as double,
-      Phenylalanine_Tyrosine: json['Phenylalanine+Tyrosine'] as double,
-      Carbohydrate: json['Carbohydrate'] as double,
-      Magnesium: json['Magnesium'] as double,
-      Selenium: json['Selenium'] as double,
-      Copper: json['Copper'] as double,
-      Alpha_Linolenic_Acid: json['Alpha_Linolenic_Acid'] as double,
-      Threonine: json['Threonine'] as double,
-      Linoleic_Acid: json['Linoleic_Acid'] as double,
-      Methionine: json['Methionine'] as double,
-      Phosphorus: json['Phosphorus'] as double,
-      Niacin: json['Niacin'] as double,
-      Zinc: json['Zinc'] as double,
-      Calories: json['Calories'] as double,
-      Protein: json['Protein'] as double,
-      Sodium: json['Sodium'] as double,
-      Vitamin_D: json['Vitamin_D'] as double,
-      Vitamin_C: json['Vitamin_C'] as double,
-      Lysine: json['Lysine'] as double,
-      Valine: json['Valine'] as double,
-      Vitamin_A: json['Vitamin_A'] as double,
-      Fat: json['Fat'] as double,
-      Folic_acid: json['Folic_acid'] as double,
-      Dietary_Fiber: json['Dietary_Fiber'] as double,
-      Vitamin_E: json['Vitamin_E'] as double,
-      Vitamin_B6: json['Vitamin_B6'] as double,
-      Potassium: json['Potassium'] as double,
-      Vitamin_K: json['Vitamin_K'] as double,
-      Iso_Leucine: json['Iso_Leucine'] as double,
-      Manganese: json['Manganese'] as double,
+      Vitamin_B12: json['Vitamin_B12'] as dynamic,
+      Calcium: json['Calcium'] as dynamic,
+      Iron: json['Iron'] as dynamic,
+      Leucine: json['Leucine'] as dynamic,
+      Histidine: json['Histidine'] as dynamic,
+      Phenylalanine_Tyrosine: json['Phenylalanine+Tyrosine'] as dynamic,
+      Carbohydrate: json['Carbohydrate'] as dynamic,
+      Magnesium: json['Magnesium'] as dynamic,
+      Selenium: json['Selenium'] as dynamic,
+      Copper: json['Copper'] as dynamic,
+      Alpha_Linolenic_Acid: json['Alpha_Linolenic_Acid'] as dynamic,
+      Threonine: json['Threonine'] as dynamic,
+      Linoleic_Acid: json['Linoleic_Acid'] as dynamic,
+      Methionine: json['Methionine'] as dynamic,
+      Phosphorus: json['Phosphorus'] as dynamic,
+      Niacin: json['Niacin'] as dynamic,
+      Zinc: json['Zinc'] as dynamic,
+      Calories: json['Calories'] as dynamic,
+      Protein: json['Protein'] as dynamic,
+      Sodium: json['Sodium'] as dynamic,
+      Vitamin_D: json['Vitamin_D'] as dynamic,
+      Vitamin_C: json['Vitamin_C'] as dynamic,
+      Lysine: json['Lysine'] as dynamic,
+      Valine: json['Valine'] as dynamic,
+      Vitamin_A: json['Vitamin_A'] as dynamic,
+      Fat: json['Fat'] as dynamic,
+      Folic_acid: json['Folic_acid'] as dynamic,
+      Dietary_Fiber: json['Dietary_Fiber'] as dynamic,
+      Vitamin_E: json['Vitamin_E'] as dynamic,
+      Vitamin_B6: json['Vitamin_B6'] as dynamic,
+      Potassium: json['Potassium'] as dynamic,
+      Vitamin_K: json['Vitamin_K'] as dynamic,
+      Iso_Leucine: json['Iso_Leucine'] as dynamic,
+      Manganese: json['Manganese'] as dynamic,
     );
 
 Map<String, dynamic> _$RDIToJson(RDI instance) => <String, dynamic>{
@@ -76,40 +76,40 @@ Map<String, dynamic> _$RDIToJson(RDI instance) => <String, dynamic>{
 
 //@JsonSerializable()
 class RDI {
-  final double Vitamin_B12;
-  final double Calcium;
-  final double Iron;
-  final double Leucine;
-  final double Histidine;
-  final double Phenylalanine_Tyrosine;
-  final double Carbohydrate;
-  final double Magnesium;
-  final double Selenium;
-  final double Copper;
-  final double Alpha_Linolenic_Acid;
-  final double Threonine;
-  final double Linoleic_Acid;
-  final double Methionine;
-  final double Phosphorus;
-  final double Niacin;
-  final double Zinc;
-  final double Calories;
-  final double Protein;
-  final double Sodium;
-  final double Vitamin_D;
-  final double Vitamin_C;
-  final double Lysine;
-  final double Valine;
-  final double Vitamin_A;
-  final double Fat;
-  final double Folic_acid;
-  final double Dietary_Fiber;
-  final double Vitamin_E;
-  final double Vitamin_B6;
-  final double Potassium;
-  final double Vitamin_K;
-  final double Iso_Leucine;
-  final double Manganese;
+  final dynamic Vitamin_B12;
+  final dynamic Calcium;
+  final dynamic Iron;
+  final dynamic Leucine;
+  final dynamic Histidine;
+  final dynamic Phenylalanine_Tyrosine;
+  final dynamic Carbohydrate;
+  final dynamic Magnesium;
+  final dynamic Selenium;
+  final dynamic Copper;
+  final dynamic Alpha_Linolenic_Acid;
+  final dynamic Threonine;
+  final dynamic Linoleic_Acid;
+  final dynamic Methionine;
+  final dynamic Phosphorus;
+  final dynamic Niacin;
+  final dynamic Zinc;
+  final dynamic Calories;
+  final dynamic Protein;
+  final dynamic Sodium;
+  final dynamic Vitamin_D;
+  final dynamic Vitamin_C;
+  final dynamic Lysine;
+  final dynamic Valine;
+  final dynamic Vitamin_A;
+  final dynamic Fat;
+  final dynamic Folic_acid;
+  final dynamic Dietary_Fiber;
+  final dynamic Vitamin_E;
+  final dynamic Vitamin_B6;
+  final dynamic Potassium;
+  final dynamic Vitamin_K;
+  final dynamic Iso_Leucine;
+  final dynamic Manganese;
 
   RDI({
     required this.Vitamin_B12,
