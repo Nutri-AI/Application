@@ -10,18 +10,28 @@ import 'package:demo/MainScreens/mypage.dart';
 class HomePage extends StatefulWidget {
   String email;
   HomePage({Key? key, required this.email}) : super(key: key);
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  late String userid = widget.email;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
 
-  final List<Widget> _children = [FoodLog(), Analyze(), Recommend(), MyPage()];
+  List<Widget> _children() => [
+        FoodLog(),
+        Analyze(),
+        Recommend(),
+        MyPage(email: userid),
+      ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -31,11 +41,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pageChildren = _children();
     return Scaffold(
       // appBar: AppBar(
       //   title: Text(DateFormat("MM-dd").format(DateTime.now())),
       // ),
-      body: _children[_selectedIndex],
+      body: pageChildren[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[

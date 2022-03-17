@@ -4,17 +4,15 @@ import 'physique.dart';
 UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => UserInfo(
       pk: json['PK'] as String,
       sk: json['SK'] as String,
-      userid: json['userid'] as String,
       username: json['username'] as String,
       physique: Physique.fromJson(json['physique'] as Map<String, dynamic>),
       rdi: RDI.fromJson(json['RDI'] as Map<String, dynamic>),
-      nutrSuppl: json['nutr_suppl'] as List<String>,
+      nutrSuppl: json['nutr_suppl'] as List<dynamic>,
     );
 
 Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
       'PK': instance.pk,
       'SK': instance.sk,
-      'userid': instance.userid,
       'username': instance.username,
       'physique': instance.physique.toJson(),
       'RDI': instance.rdi.toJson(),
@@ -24,14 +22,12 @@ Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
 class UserInfo {
   final String pk;
   final String sk;
-  final String userid;
   final String username;
   Physique physique;
   RDI rdi;
-  List<String> nutrSuppl;
+  List<dynamic> nutrSuppl;
 
   UserInfo({
-    required this.userid,
     required this.username,
     required this.physique,
     required this.rdi,

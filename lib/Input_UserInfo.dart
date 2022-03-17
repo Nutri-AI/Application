@@ -27,9 +27,9 @@ Future<UserSignUpInfo> createUser(
       'PAI': PAI,
     },
   };
-
+  String baseUrl = 'http://10.0.2.2:8000/user/join';
   final response = await http.post(
-    Uri.parse('http://127.0.0.1:8000/user/join'),
+    Uri.parse(baseUrl),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
