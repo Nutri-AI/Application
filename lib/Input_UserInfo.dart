@@ -65,9 +65,9 @@ class _InputUserInfoState extends State<InputUserInfo> {
   Map pai = {
     "운동 안 함": "1.2",
     "격렬한 운동 주 1~2회 or 가벼운 운동 주 3~4회": "1.375",
-    "격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회": "1,425",
+    "격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회": "1.425",
     "격렬한 운동 주 5~6회": "1.55",
-    "격렬한 운동 주 7회 이상": "1.75"
+    "격렬한 운동 주 7회 이상": "1.75",
   };
 
   @override
@@ -246,7 +246,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => HomePage(email: widget.email),
                       ),
                     );
                   },
