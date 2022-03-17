@@ -42,28 +42,24 @@ class _MyPageState extends State<MyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: 200,
-        height: 200,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(userid),
-            FutureBuilder<UserInfo>(
-              future: userData,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text(snapshot.data!.physique.birth);
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
+          width: 200,
+          height: 200,
+          child: FutureBuilder<UserInfo>(
+            future: userData,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [Text(userid), Text(snapshot.data!.pk)],
+                );
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
 
-                return const CircularProgressIndicator();
-              },
-            )
-          ],
-        ),
-      ),
+              return const CircularProgressIndicator();
+            },
+          )),
     );
   }
 }
