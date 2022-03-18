@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+<<<<<<< HEAD
 import 'package:http/http.dart' as http;
 import 'package:demo/json/FoodLogData.dart';
 import 'dart:async';
@@ -16,6 +17,9 @@ Future<FoodLogData> fetchUserData(String userid) async {
     throw Exception('Failed to load data');
   }
 }
+=======
+// import 'package:syncfusion_flutter_charts/charts.dart';
+>>>>>>> d0ce8ba8e15fa0307456f1e1a2e6a677f6ec600d
 
 class FoodLog extends StatefulWidget {
   String email;
