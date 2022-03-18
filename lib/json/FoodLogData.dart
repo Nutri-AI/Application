@@ -3,7 +3,7 @@ import 'RDI.dart';
 FoodLogData _$FoodLogDataFromJson(Map<String, dynamic> json) => FoodLogData(
       meal: json['MEAL'] as List<dynamic>,
       nutrStatus: RDI.fromJson((json['nutr_status'] ??
-          NoLogToday['nutr_status']) as Map<String, dynamic>),
+          noLogToday['nutr_status']) as Map<String, dynamic>),
       rdi: RDI.fromJson(json['RDI'] as Map<String, dynamic>),
       username: json['username'] as String,
     );
@@ -34,6 +34,6 @@ class FoodLogData {
   Map<String, dynamic> toJson() => _$FoodLogDataToJson(this);
 }
 
-Map<String, dynamic> NoLogToday = {
+Map<String, dynamic> noLogToday = {
   "nutr_status": {"Calories": 0, "Carbohydrate": 0, "Protein": 0, "Fat": 0}
 };
