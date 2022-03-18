@@ -27,14 +27,16 @@ class FoodLog extends StatefulWidget {
 }
 
 class _FoodLogState extends State<FoodLog> {
+  late List<Nutridata> _chartData;
   late String userid;
   late Future<FoodLogData> userData;
 
   @override
   void initState() {
-    super.initState();
     userid = widget.email;
     userData = fetchUserData(userid);
+    _chartData = getChartData();
+    super.initState();
   }
 
   @override
@@ -125,51 +127,34 @@ class _FoodLogState extends State<FoodLog> {
                       child: Row(
                         children: [
                           // 탄단지 title, 그래프, 섭취량
-
-                          Container(
-                            // 탄단지 title
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "탄수화물",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                SizedBox(height: 30),
-                                Text(
-                                  "단백질",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                SizedBox(height: 30),
-                                Text(
-                                  "지방",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(child: Container()),
-
                           Container(
                             // 탄단지 그래프
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "탄수화물 그래프",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                SizedBox(height: 30),
-                                const Text(
-                                  "단백질 그래프",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                SizedBox(height: 30),
-                                const Text(
-                                  "지방 그래프",
-                                  style: TextStyle(fontSize: 20),
+                                SfCartesianChart(
+                                  // legend: Legend(isVisible: true),
+                                  // tooltipBehavior: _tooltipBehavior,
+                                  series: <ChartSeries>[
+                                    StackedBar100Series<Nutridata, String>(
+                                        dataSource: _chartData,
+                                        xValueMapper: (Nutridata nut, _) =>
+                                            nut.nutriCategory,
+                                        yValueMapper: (Nutridata nut, _) =>
+                                            nut.nutriIntake,
+                                        name: '사용자 섭취량',
+                                        color: Colors.green),
+                                    StackedBar100Series<Nutridata, String>(
+                                        dataSource: _chartData,
+                                        xValueMapper: (Nutridata nut, _) =>
+                                            nut.nutriCategory,
+                                        yValueMapper: (Nutridata nut, _) =>
+                                            nut.nutriResidual,
+                                        name: '권장 섭취량',
+                                        color: Colors.grey)
+                                  ],
+                                  primaryXAxis: CategoryAxis(),
                                 ),
                               ],
                             ),
@@ -263,4 +248,21 @@ class _FoodLogState extends State<FoodLog> {
       ),
     );
   }
+
+  List<Nutridata> getChartData() {
+    // Display 되는 순서의 거꾸로 데이터를 입력해야함
+    final List<Nutridata> chartData = [
+      Nutridata("지방", 22, 10), // 32-10=22, 10(섭취량)
+      Nutridata("단백질", 60, 90), // 150-90=60, 90(섭취량)
+      Nutridata("탄수화물", 40, 160), // 200-160 = 40, 160(섭취량)
+    ];
+    return chartData;
+  }
+}
+
+class Nutridata {
+  Nutridata(this.nutriCategory, this.nutriResidual, this.nutriIntake);
+  final String nutriCategory;
+  final num nutriResidual;
+  final num nutriIntake;
 }
