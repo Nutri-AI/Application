@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<bool> fetchUser(String userid) async {
-  String baseUrl = 'http://10.0.2.2:8000/user/info/'; // 영우 local IP address
+  String baseUrl = 'http://192.168.1.98:8000/user/info/'; // 영우 local IP address
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.body == 'null') {

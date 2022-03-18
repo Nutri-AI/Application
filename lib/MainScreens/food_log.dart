@@ -8,12 +8,13 @@ import 'dart:convert';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 Future<FoodLogData> fetchUserData(String userid) async {
-  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/';
+  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/';
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
     return FoodLogData.fromJson(jsonDecode(response.body));
   } else {
+    print(response.toString());
     throw Exception('Failed to load data');
   }
 }
@@ -136,31 +137,38 @@ class _FoodLogState extends State<FoodLog> {
                                 SfCartesianChart(
                                   // legend: Legend(isVisible: true),
                                   // tooltipBehavior: _tooltipBehavior,
+                                  margin: EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 0),
                                   series: <ChartSeries>[
                                     StackedBar100Series<Nutridata, String>(
-                                        dataSource: _chartData,
-                                        xValueMapper: (Nutridata nut, _) =>
-                                            nut.nutriCategory,
-                                        yValueMapper: (Nutridata nut, _) =>
-                                            nut.nutriIntake,
-                                        name: '사용자 섭취량',
-                                        color: Colors.green),
+                                      dataSource: _chartData,
+                                      xValueMapper: (Nutridata nut, _) =>
+                                          nut.nutriCategory,
+                                      yValueMapper: (Nutridata nut, _) =>
+                                          nut.nutriIntake,
+                                      name: '사용자 섭취량',
+                                      color: Colors.green,
+                                      width: 0.3,
+                                      borderRadius: BorderRadius.circular(5),
+                                      spacing: 2,
+                                    ),
                                     StackedBar100Series<Nutridata, String>(
-                                        dataSource: _chartData,
-                                        xValueMapper: (Nutridata nut, _) =>
-                                            nut.nutriCategory,
-                                        yValueMapper: (Nutridata nut, _) =>
-                                            nut.nutriResidual,
-                                        name: '권장 섭취량',
-                                        color: Colors.grey)
+                                      dataSource: _chartData,
+                                      xValueMapper: (Nutridata nut, _) =>
+                                          nut.nutriCategory,
+                                      yValueMapper: (Nutridata nut, _) =>
+                                          nut.nutriResidual,
+                                      name: '권장 섭취량',
+                                      color: Colors.grey,
+                                      width: 0.3,
+                                      borderRadius: BorderRadius.circular(5),
+                                    )
                                   ],
                                   primaryXAxis: CategoryAxis(),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(width: 15),
-
                           Container(
                             // 탄단지 섭취량
                             child: Column(
