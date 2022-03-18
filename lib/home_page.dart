@@ -20,8 +20,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    super.initState();
     userid = widget.email;
+    super.initState();
   }
 
   static const TextStyle optionStyle =

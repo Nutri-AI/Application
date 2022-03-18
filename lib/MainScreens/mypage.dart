@@ -33,9 +33,9 @@ class _MyPageState extends State<MyPage> {
 
   @override
   void initState() {
-    super.initState();
     userid = widget.email;
     userData = fetchUserData(userid);
+    super.initState();
   }
 
   @override
