@@ -5,8 +5,8 @@
 Physique _$PhysiqueFromJson(Map<String, dynamic> json) => Physique(
       birth: json['birth'] as String,
       sex: json['sex'] as String,
-      height: json['height'] as int,
-      weight: json['weight'] as int,
+      height: json['height'] as dynamic,
+      weight: json['weight'] as dynamic,
       PAI: json['PAI'] as double,
     );
 
@@ -22,8 +22,8 @@ Map<String, dynamic> _$PhysiqueToJson(Physique instance) => <String, dynamic>{
 class Physique {
   final String birth;
   final String sex;
-  final int height;
-  final int weight;
+  final dynamic height;
+  final dynamic weight;
   final double PAI;
 
   Physique(

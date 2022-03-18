@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:demo/json/FoodLogData.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 Future<FoodLogData> fetchUserData(String userid) async {
   String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/';
@@ -17,6 +16,7 @@ Future<FoodLogData> fetchUserData(String userid) async {
     throw Exception('Failed to load data');
   }
 }
+// import 'package:syncfusion_flutter_charts/charts.dart';
 
 class FoodLog extends StatefulWidget {
   String email;
