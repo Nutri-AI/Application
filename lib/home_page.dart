@@ -16,18 +16,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  late String userid = widget.email;
+  late String userid;
 
   @override
   void initState() {
     super.initState();
+    userid = widget.email;
   }
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
 
   List<Widget> _children() => [
-        FoodLog(),
+        FoodLog(email: userid),
         Analyze(),
         Recommend(),
         MyPage(email: userid),
