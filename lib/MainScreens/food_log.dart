@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
-import 'package:demo/json/FoodLogData.dart';
+import 'package:demo/json/nutriStat.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-Future<FoodLogData> fetchUserData(String userid) async {
-  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/';
+Future<NutriStat> fetchUserData(String userid) async {
+  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/';
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
-    return FoodLogData.fromJson(jsonDecode(response.body));
+    return NutriStat.fromJson(jsonDecode(response.body));
   } else {
-    print(response.toString());
     throw Exception('Failed to load data');
   }
 }
@@ -30,7 +29,7 @@ class FoodLog extends StatefulWidget {
 class _FoodLogState extends State<FoodLog> {
   late List<Nutridata> _chartData;
   late String userid;
-  late Future<FoodLogData> userData;
+  late Future<NutriStat> userData;
 
   @override
   void initState() {
@@ -47,7 +46,7 @@ class _FoodLogState extends State<FoodLog> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.only(top: 80, left: 30, right: 30, bottom: 80),
-          child: FutureBuilder<FoodLogData>(
+          child: FutureBuilder<NutriStat>(
             future: userData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
