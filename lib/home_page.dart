@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _children() => [
         FoodLog(email: userid),
-        Analyze(),
+        Analyze(email: userid),
         Recommend(),
         MyPage(email: userid),
       ];
