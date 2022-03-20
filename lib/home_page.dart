@@ -30,7 +30,8 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _children() => [
         FoodLog(email: userid),
         Analyze(email: userid),
-        Recommend(),
+        //Recommend(),
+        ImagePickerTest(email: userid),
         MyPage(email: userid),
       ];
 
