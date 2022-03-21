@@ -35,7 +35,7 @@ class _FoodLogState extends State<FoodLog> {
   void initState() {
     userid = widget.email;
     userData = fetchUserData(userid);
-    _chartData = getChartData();
+    // _chartData = getChartData();
     super.initState();
   }
 
@@ -50,6 +50,24 @@ class _FoodLogState extends State<FoodLog> {
             future: userData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                final List<Nutridata> _chartData = [
+                  // (category, 권장-섭취, 섭취량)
+                  Nutridata(
+                      "지방",
+                      snapshot.data?.rdi.Fat - snapshot.data?.nutrStatus.Fat,
+                      snapshot.data?.nutrStatus.Fat), // 32-10=22, 10(섭취량)
+                  Nutridata(
+                      "단백질",
+                      snapshot.data?.rdi.Protein -
+                          snapshot.data?.nutrStatus.Protein,
+                      snapshot.data?.nutrStatus.Protein), // 150-90=60, 90(섭취량)
+                  Nutridata(
+                      "탄수화물",
+                      snapshot.data?.rdi.Carbohydrate -
+                          snapshot.data?.nutrStatus.Carbohydrate,
+                      snapshot.data?.nutrStatus
+                          .Carbohydrate), // 200-160 = 40, 160(섭취량)
+                ];
                 return Column(
                   // biggest column
                   children: [
@@ -244,7 +262,6 @@ class _FoodLogState extends State<FoodLog> {
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
-
               return const CircularProgressIndicator();
             },
           )),
@@ -254,16 +271,6 @@ class _FoodLogState extends State<FoodLog> {
         backgroundColor: Colors.green[600],
       ),
     );
-  }
-
-  List<Nutridata> getChartData() {
-    // Display 되는 순서의 거꾸로 데이터를 입력해야함
-    final List<Nutridata> chartData = [
-      Nutridata("지방", 22, 10), // 32-10=22, 10(섭취량)
-      Nutridata("단백질", 60, 90), // 150-90=60, 90(섭취량)
-      Nutridata("탄수화물", 40, 160), // 200-160 = 40, 160(섭취량)
-    ];
-    return chartData;
   }
 }
 
