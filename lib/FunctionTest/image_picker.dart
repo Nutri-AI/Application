@@ -17,7 +17,8 @@ class ImagePickerTest extends StatefulWidget {
 
 class _ImagePickerTestState extends State<ImagePickerTest> {
   late String userid;
-  File? image; // click lightbulb, then Import library 'dart:io'
+  File? image;
+  late dynamic url;
 
   @override
   void initState() {
@@ -25,37 +26,62 @@ class _ImagePickerTestState extends State<ImagePickerTest> {
     super.initState();
   }
 
-  Future<String> uploadImg(File? image, String userid) async {
-    String result = '';
-    String baseUrl = 'http://10.0.2.2:8000/log/upload/image/';
-    var uri = Uri.parse(baseUrl + userid);
-    var request = http.MultipartRequest('POST', uri);
-    Map<String, String> headers = {"Content-type": "multipart/form-data"};
-    request.files.add(http.MultipartFile(
-      'image',
-      image!.readAsBytes().asStream(),
-      image.lengthSync(),
-      filename: "${userid}/${DateFormat.yMd().add_jm().format(DateTime.now())}",
-    ));
-    request.headers.addAll(headers);
-    print("request: " + request.toString());
+  // Future<String> uploadImg(File? image, String userid) async {
+  //   String result = '';
+  //   String baseUrl = 'http://10.0.2.2:8000/log/upload/image/';
+  //   var uri = Uri.parse(baseUrl + userid);
+  //   var request = http.MultipartRequest('POST', uri);
+  //   Map<String, String> headers = {"Content-type": "multipart/form-data"};
+  //   request.files.add(http.MultipartFile(
+  //     'image',
+  //     image!.readAsBytes().asStream(),
+  //     image.lengthSync(),
+  //     filename: "${userid}/${DateFormat.yMd().add_jm().format(DateTime.now())}",
+  //   ));
+  //   request.headers.addAll(headers);
+  //   print("request: " + request.toString());
 
-    var response = await request.send();
-    result = await response.stream.bytesToString();
-    // var response = Streamedresponse.stream.bytesToString();
-    // response.stream.transform(utf8.decoder).listen((value) {
-    //   result = value;
-    // });
-    return result;
-  }
+  //   var response = await request.send();
+  //   result = await response.stream.bytesToString();
+  //   // var response = Streamedresponse.stream.bytesToString();
+  //   // response.stream.transform(utf8.decoder).listen((value) {
+  //   //   result = value;
+  //   // });
+  //   return result;
+  // }
 
-  Future pickImage() async {
+  Future<dynamic> predictImg(String userid) async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
+      if (image == null) {
+        return;
+      } else {
+        final imageTemporary = File(image.path);
+        // setState(() => this.image = imageTemporary);
 
-      final imageTemporary = File(image.path);
-      setState(() => this.image = imageTemporary);
+        String result = '';
+        String baseUrl = 'http://10.0.2.2:8000/log/upload/image/';
+        var uri = Uri.parse(baseUrl + userid);
+        var request = http.MultipartRequest('POST', uri);
+        Map<String, String> headers = {"Content-type": "multipart/form-data"};
+        request.files.add(http.MultipartFile(
+          'image',
+          imageTemporary.readAsBytes().asStream(),
+          imageTemporary.lengthSync(),
+          filename:
+              "${userid}/${DateFormat.yMd().add_jm().format(DateTime.now())}",
+        ));
+        request.headers.addAll(headers);
+        print("request: " + request.toString());
+
+        var response = await request.send();
+        result = await response.stream.bytesToString();
+        // var response = Streamedresponse.stream.bytesToString();
+        // response.stream.transform(utf8.decoder).listen((value) {
+        //   result = value;
+        // });
+        return result;
+      }
     } on PlatformException catch (e) {
       // Don't allow access to photos
       print('Failed to pick image: $e');
@@ -73,28 +99,32 @@ class _ImagePickerTestState extends State<ImagePickerTest> {
           children: [
             const Text("Show me Selected Photo!"),
             image != null
-                ? Image.file(
-                    image!,
+                ? Image.network(
+                    url,
                     width: 160,
                     height: 160,
                     fit: BoxFit.cover,
                   )
-                : FlutterLogo(size: 160),
-            ElevatedButton(
-              onPressed: () async {
-                dynamic res = await uploadImg(image, userid);
-                print(res);
-              },
-              child: const Text(
-                "Upload",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+                : const FlutterLogo(size: 160),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     dynamic res = await uploadImg(image, userid);
+
+            //     print(jsonDecode(res)['link']);
+            //   },
+            //   child: const Text(
+            //     "Upload",
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            // ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: pickImage,
+        onPressed: () async {
+          dynamic res = await predictImg(userid);
+          url = jsonDecode(res)['link'];
+        },
         child: Icon(
           Icons.add_a_photo,
           color: Colors.green[600],
