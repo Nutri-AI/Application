@@ -77,7 +77,7 @@ class _FoodLogState extends State<FoodLog> {
                         Text(
                           // 날짜
                           DateFormat("MM-dd").format(DateTime.now()),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
@@ -86,7 +86,7 @@ class _FoodLogState extends State<FoodLog> {
                         Text(
                           // 이름
                           "안녕하세요 ${snapshot.data!.username}님",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -105,7 +105,7 @@ class _FoodLogState extends State<FoodLog> {
                         Expanded(child: Container()),
                         Text(
                           "${snapshot.data!.nutrStatus.Calories}", // 섭취 칼로리
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                         const Text(
                           "/",
@@ -124,8 +124,8 @@ class _FoodLogState extends State<FoodLog> {
                     SizedBox(height: 30),
                     Row(
                       // 주요 영양소 title
-                      children: [
-                        const Text(
+                      children: const [
+                        Text(
                           "주요영양소",
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
