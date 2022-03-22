@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:demo/MainScreens/inference.dart';
 
 class ImagePickerTest extends StatefulWidget {
   String email;
@@ -60,7 +61,8 @@ class _ImagePickerTestState extends State<ImagePickerTest> {
         // setState(() => this.image = imageTemporary);
 
         String result = '';
-        String baseUrl = 'http://10.0.2.2:8000/log/upload/image/';
+        // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
+        String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
         var uri = Uri.parse(baseUrl + userid);
         var request = http.MultipartRequest('POST', uri);
         Map<String, String> headers = {"Content-type": "multipart/form-data"};
@@ -124,6 +126,12 @@ class _ImagePickerTestState extends State<ImagePickerTest> {
         onPressed: () async {
           dynamic res = await predictImg(userid);
           url = jsonDecode(res)['link'];
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Inference(),
+            ),
+          );
         },
         child: Icon(
           Icons.add_a_photo,

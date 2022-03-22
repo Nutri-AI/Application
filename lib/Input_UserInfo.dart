@@ -27,7 +27,8 @@ Future<UserSignUpInfo> createUser(
       'PAI': PAI,
     },
   };
-  String baseUrl = 'http://10.0.2.2:8000/user/join';
+  // String baseUrl = 'http://10.0.2.2:8000/user/join'; // 혜원
+  String baseUrl = 'http://192.168.1.98:8000/user/join'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl),
     headers: <String, String>{
@@ -64,8 +65,8 @@ class _InputUserInfoState extends State<InputUserInfo> {
 
   Map pai = {
     "운동 안 함": "1.2",
-    "격렬한 운동 주 1~2회 or 가벼운 운동 주 3~4회": "1.375",
-    "격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회": "1.425",
+    '''격렬한 운동 주 1~2회 or 가벼운 운동 주 3~4회''': "1.375",
+    '''격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회''': "1.425",
     "격렬한 운동 주 5~6회": "1.55",
     "격렬한 운동 주 7회 이상": "1.75",
   };

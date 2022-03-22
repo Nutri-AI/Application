@@ -10,7 +10,8 @@ import 'dart:async';
 import 'dart:convert';
 
 Future<NutriStat> fetchAnalysisData(String userid) async {
-  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/';
+  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // 혜원
+  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // 영우
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
