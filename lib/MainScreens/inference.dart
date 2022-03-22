@@ -55,7 +55,6 @@ class _InferenceState extends State<Inference> {
   // }
 
   Widget build(BuildContext context) {
-    List class_type = ["비빔밥", "김치찌개"];
     return Scaffold(
       body: Container(
         child: Center(
@@ -63,7 +62,13 @@ class _InferenceState extends State<Inference> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              for (var i = 0; i < class_type.length; i++) Text(class_type[i]),
+              Image.network(
+                url,
+                width: 400,
+                height: 400,
+              ),
+              for (var i = 0; i < foodList!.length; i++)
+                Text(foodList![i].toString()),
             ],
           ),
         ),
