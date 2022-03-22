@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:age_calculator/age_calculator.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -18,6 +19,12 @@ Future<UserInfo> fetchUserData(String userid) async {
   } else {
     throw Exception('Failed to load data');
   }
+}
+
+String ageCalc(String birth) {
+  DateTime birthday = DateFormat("yyyy-mm-dd").parse(birth);
+  DateDuration age = AgeCalculator.age(birthday);
+  return age.years.toString();
 }
 
 class MyPage extends StatefulWidget {
@@ -237,7 +244,7 @@ class _MyPageState extends State<MyPage> {
                                                     MainAxisAlignment.start,
                                                 children: [
                                                   Icon(
-                                                    Icons.people,
+                                                    Icons.medication_rounded,
                                                     color:
                                                         Colors.lightGreen[400],
                                                     size: 35,
@@ -338,7 +345,7 @@ class _MyPageState extends State<MyPage> {
                                     height: 5.0,
                                   ),
                                   Text(
-                                    'unknown',
+                                    ageCalc(snapshot.data!.physique.birth),
                                     style: TextStyle(
                                       fontSize: 15.0,
                                     ),
