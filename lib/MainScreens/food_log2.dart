@@ -80,6 +80,7 @@ class _FoodLogState extends State<FoodLog> {
   File? image;
   late dynamic url;
   late List<dynamic> foodList;
+  late dynamic key;
 
   @override
   void initState() {
@@ -299,10 +300,15 @@ class _FoodLogState extends State<FoodLog> {
           dynamic res = await predictImg(userid);
           url = jsonDecode(res)['link'];
           foodList = jsonDecode(res)['food_list'];
+          key = jsonDecode(res)['Origin_S3_key'];
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Inference(uri: url, subcat: foodList),
+              builder: (context) => Inference(
+                uri: url,
+                subcat: foodList,
+                s3Key: key,
+              ),
             ),
           );
         },
