@@ -39,6 +39,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  age_calculator: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,7 @@ flutter:
   assets:
     # - assets/2267CA59-3D9C-4869-8CB3-E9CAB5E15EA2_1_105_c.jpeg
     - assets/NutriAI.png
+    - assets/greenprofile.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
