@@ -36,8 +36,8 @@ Future<dynamic> predictImg(String userid) async {
       // setState(() => this.image = imageTemporary);
 
       String result = '';
-      String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
-      // String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
+      // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
+      String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};
@@ -81,6 +81,7 @@ class _FoodLogState extends State<FoodLog> {
   late dynamic url;
   late List<dynamic> foodList;
   late dynamic key;
+  late List<dynamic> classCategory;
 
   @override
   void initState() {
@@ -301,6 +302,7 @@ class _FoodLogState extends State<FoodLog> {
           url = jsonDecode(res)['link'];
           foodList = jsonDecode(res)['food_list'];
           key = jsonDecode(res)['Origin_S3_key'];
+          classCategory = jsonDecode(res)['Class_type'];
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -308,6 +310,7 @@ class _FoodLogState extends State<FoodLog> {
                 uri: url,
                 subcat: foodList,
                 s3Key: key,
+                classCat: classCategory,
               ),
             ),
           );
