@@ -5,7 +5,9 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class Inference extends StatefulWidget {
   String uri;
   List<dynamic>? subcat;
-  Inference({Key? key, required this.uri, this.subcat}) : super(key: key);
+  String s3Key;
+  Inference({Key? key, required this.uri, this.subcat, required this.s3Key})
+      : super(key: key);
 
   @override
   State<Inference> createState() => _InferenceState();
@@ -14,11 +16,13 @@ class Inference extends StatefulWidget {
 class _InferenceState extends State<Inference> {
   late String url;
   late List<dynamic>? foodList;
+  late String key;
 
   @override
   void initState() {
     url = widget.uri;
     foodList = widget.subcat;
+    key = widget.s3Key;
     super.initState();
   }
 
