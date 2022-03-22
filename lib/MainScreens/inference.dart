@@ -3,13 +3,25 @@ import 'package:image_picker/image_picker.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Inference extends StatefulWidget {
-  Inference({Key? key}) : super(key: key);
+  String uri;
+  List<dynamic>? subcat;
+  Inference({Key? key, required this.uri, this.subcat}) : super(key: key);
 
   @override
   State<Inference> createState() => _InferenceState();
 }
 
 class _InferenceState extends State<Inference> {
+  late String url;
+  late List<dynamic>? foodList;
+
+  @override
+  void initState() {
+    url = widget.uri;
+    foodList = widget.subcat;
+    super.initState();
+  }
+
   @override
   // List class_type = ["비빔밥", "김치찌개"];
   // List food_list = [

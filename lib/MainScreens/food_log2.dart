@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -8,17 +9,59 @@ import 'package:demo/json/nutriStat.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:syncfusion_flutter_charts/charts.dart';
-// import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'inference.dart';
 // import 'package:provider/provider.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/';
+  // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
+  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
     return NutriStat.fromJson(jsonDecode(response.body));
   } else {
     throw Exception('Failed to load data');
+  }
+}
+
+Future<dynamic> predictImg(String userid) async {
+  try {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) {
+      return;
+    } else {
+      final imageTemporary = File(image.path);
+      // setState(() => this.image = imageTemporary);
+
+      String result = '';
+      String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
+      // String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
+      var uri = Uri.parse(baseUrl + userid);
+      var request = http.MultipartRequest('POST', uri);
+      Map<String, String> headers = {"Content-type": "multipart/form-data"};
+      request.files.add(http.MultipartFile(
+        'image',
+        imageTemporary.readAsBytes().asStream(),
+        imageTemporary.lengthSync(),
+        filename:
+            "${userid}/${DateFormat.yMd().add_jm().format(DateTime.now())}",
+      ));
+      request.headers.addAll(headers);
+      print("request: " + request.toString());
+
+      var response = await request.send();
+      result = await response.stream.bytesToString();
+      // var response = Streamedresponse.stream.bytesToString();
+      // response.stream.transform(utf8.decoder).listen((value) {
+      //   result = value;
+      // });
+      return result;
+    }
+  } on PlatformException catch (e) {
+    // Don't allow access to photos
+    print('Failed to pick image: $e');
   }
 }
 
@@ -31,10 +74,12 @@ class FoodLog extends StatefulWidget {
 }
 
 class _FoodLogState extends State<FoodLog> {
-  late List<Nutridata> _chartData;
+  // late List<Nutridata> _chartData;
   late String userid;
   late Future<NutriStat> userData;
-  // File? image; // click lightbulb, then Import library 'dart:io'
+  File? image;
+  late dynamic url;
+  late List<dynamic> foodList;
 
   @override
   void initState() {
@@ -76,7 +121,7 @@ class _FoodLogState extends State<FoodLog> {
               return SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
                       Row(
@@ -100,11 +145,11 @@ class _FoodLogState extends State<FoodLog> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       Row(
                         children: [
                           const Text(
-                            "Total Calories Intake",
+                            "Total Calorie Intake",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
@@ -119,7 +164,7 @@ class _FoodLogState extends State<FoodLog> {
                           ),
                           Text(
                             "${snapshot.data!.rdi.Calories}", // 기초대사량
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           ),
                           const Text(
                             "kcal",
@@ -127,10 +172,10 @@ class _FoodLogState extends State<FoodLog> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Macronutrients",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
@@ -193,7 +238,7 @@ class _FoodLogState extends State<FoodLog> {
                                       const Text("g"), // 탄수화물 단위
                                     ],
                                   ),
-                                  SizedBox(height: 35),
+                                  const SizedBox(height: 35),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     // 단백질
@@ -206,7 +251,7 @@ class _FoodLogState extends State<FoodLog> {
                                       const Text("g"), // 단백질 단위
                                     ],
                                   ),
-                                  SizedBox(height: 35),
+                                  const SizedBox(height: 35),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     // 지방
@@ -219,17 +264,17 @@ class _FoodLogState extends State<FoodLog> {
                                       const Text("g"), // 지방 단위
                                     ],
                                   ),
-                                  SizedBox(height: 30),
+                                  const SizedBox(height: 30),
                                 ],
                               ),
                             )
                           ],
                         ),
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Please Log your Meal!",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
@@ -237,7 +282,7 @@ class _FoodLogState extends State<FoodLog> {
                           Expanded(child: Container())
                         ],
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                     ],
                   ),
                 ),
@@ -250,8 +295,18 @@ class _FoodLogState extends State<FoodLog> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
+        onPressed: () async {
+          dynamic res = await predictImg(userid);
+          url = jsonDecode(res)['link'];
+          foodList = jsonDecode(res)['food_list'];
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Inference(uri: url, subcat: foodList),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
         backgroundColor: Colors.green[600],
       ),
     );

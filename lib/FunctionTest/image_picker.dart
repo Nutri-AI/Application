@@ -129,7 +129,9 @@ class _ImagePickerTestState extends State<ImagePickerTest> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Inference(),
+              builder: (context) => Inference(
+                uri: url,
+              ),
             ),
           );
         },
