@@ -17,8 +17,8 @@ Future<dynamic> sendInfData(
     'class_list': classList,
     'food_list': foodList,
   };
-  String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
-  // String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
+  // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
+  String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl),
     headers: <String, String>{
@@ -58,7 +58,8 @@ class _InferenceState extends State<Inference> {
   late String key;
   late List<dynamic>? classType;
   dynamic? dropdownValue;
-  List<dynamic> foodSelection = ['x', 'x'];
+  // List<dynamic> foodSelection = ['x', 'x'];
+  List<dynamic> foodSelection = [];
 
   @override
   void initState() {
@@ -90,7 +91,7 @@ class _InferenceState extends State<Inference> {
                 children: [
                   for (var i = 0; i < classType!.length; i++)
                     Text(
-                      classType![i] + '의 세부카테고리: ',
+                      classType![i] + '의 세부카테고리:   ',
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -102,13 +103,15 @@ class _InferenceState extends State<Inference> {
                 children: [
                   for (var i = 0; i < classType!.length; i++)
                     DropdownButton<dynamic>(
-                      value: dropdownValue = foodList![i][0],
+                      // value: dropdownValue = foodList![i][0],
+                      value: dropdownValue,
                       icon: const Icon(Icons.arrow_downward),
                       onChanged: (dynamic newValue) {
                         setState(() {
                           dropdownValue = newValue!;
-                          foodSelection[i] = dropdownValue;
-                          print(i);
+                          // foodSelection[i] = dropdownValue;
+                          foodSelection.add(dropdownValue);
+                          // print(i);
                           print(foodSelection);
                         });
                       },
