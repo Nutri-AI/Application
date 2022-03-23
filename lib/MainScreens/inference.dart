@@ -17,8 +17,8 @@ Future<dynamic> sendInfData(
     'class_list': classList,
     'food_list': foodList,
   };
-  // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
-  String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
+  String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
+  // String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl),
     headers: <String, String>{
@@ -57,9 +57,9 @@ class _InferenceState extends State<Inference> {
   late List<dynamic>? foodList;
   late String key;
   late List<dynamic>? classType;
-  dynamic? dropdownValue;
-  // List<dynamic> foodSelection = ['x', 'x'];
-  List<dynamic> foodSelection = [];
+  late List<dynamic> foodSelection = [
+    for (var x = 0; x < foodList!.length; x++) foodList![x][0].toString()
+  ];
 
   @override
   void initState() {
@@ -100,18 +100,15 @@ class _InferenceState extends State<Inference> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   for (var i = 0; i < classType!.length; i++)
                     DropdownButton<dynamic>(
                       // value: dropdownValue = foodList![i][0],
-                      value: dropdownValue,
+                      value: foodSelection[i],
                       icon: const Icon(Icons.arrow_downward),
                       onChanged: (dynamic newValue) {
                         setState(() {
-                          dropdownValue = newValue!;
-                          // foodSelection[i] = dropdownValue;
-                          foodSelection.add(dropdownValue);
-                          // print(i);
+                          foodSelection[i] = newValue!;
                           print(foodSelection);
                         });
                       },
