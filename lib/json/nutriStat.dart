@@ -1,7 +1,7 @@
 import 'RDI.dart';
 
 NutriStat _$nutriStatFromJson(Map<String, dynamic> json) => NutriStat(
-      meal: json['MEAL'] as List<dynamic>,
+      meal: (json['MEAL'] ?? noMealToday) as List<dynamic>,
       nutrStatus: RDI.fromJson((json['nutr_status'] ??
           noLogToday['nutr_status']) as Map<String, dynamic>),
       rdi: RDI.fromJson(json['RDI'] as Map<String, dynamic>),
@@ -32,6 +32,8 @@ class NutriStat {
       _$nutriStatFromJson(json);
   Map<String, dynamic> toJson() => _$nutriStatToJson(this);
 }
+
+List<String> noMealToday = ['Nan'];
 
 Map<String, dynamic> noLogToday = {
   "nutr_status": {
