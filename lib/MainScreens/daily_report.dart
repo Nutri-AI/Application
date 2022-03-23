@@ -57,16 +57,168 @@ class _dailyReportState extends State<dailyReport> {
                 final List<Nutridata> _chartData = [
                   // (category, 권장-섭취, 섭취량)
                   Nutridata(
-                      "지방",
+                      "Valine",
+                      snapshot.data?.rdi.Valine -
+                          snapshot.data?.nutrStatus.Valine,
+                      snapshot.data?.nutrStatus.Valine),
+                  Nutridata(
+                      "Threonine",
+                      snapshot.data?.rdi.Threonine -
+                          snapshot.data?.nutrStatus.Threonine,
+                      snapshot.data?.nutrStatus.Threonine),
+                  Nutridata(
+                      "Phenylalanine_Tyrosine",
+                      snapshot.data?.rdi.Phenylalanine_Tyrosine -
+                          snapshot.data?.nutrStatus.Phenylalanine_Tyrosine,
+                      snapshot.data?.nutrStatus.Phenylalanine_Tyrosine),
+                  Nutridata(
+                      "Methionine",
+                      snapshot.data?.rdi.Methionine -
+                          snapshot.data?.nutrStatus.Methionine,
+                      snapshot.data?.nutrStatus.Methionine),
+                  Nutridata(
+                      "Lysine",
+                      snapshot.data?.rdi.Lysine -
+                          snapshot.data?.nutrStatus.Lysine,
+                      snapshot.data?.nutrStatus.Lysine),
+                  Nutridata(
+                      "Alpha_Linolenic_Acid",
+                      snapshot.data?.rdi.Alpha_Linolenic_Acid -
+                          snapshot.data?.nutrStatus.Alpha_Linolenic_Acid,
+                      snapshot.data?.nutrStatus.Alpha_Linolenic_Acid),
+                  Nutridata(
+                      "Linoleic_Acid",
+                      snapshot.data?.rdi.Linoleic_Acid -
+                          snapshot.data?.nutrStatus.Linoleic_Acid,
+                      snapshot.data?.nutrStatus.Linoleic_Acid),
+                  Nutridata(
+                      "Histidine",
+                      snapshot.data?.rdi.Histidine -
+                          snapshot.data?.nutrStatus.Histidine,
+                      snapshot.data?.nutrStatus.Histidine),
+                  Nutridata(
+                      "Iso_Leucine",
+                      snapshot.data?.rdi.Iso_Leucine -
+                          snapshot.data?.nutrStatus.Iso_Leucine,
+                      snapshot.data?.nutrStatus.Iso_Leucine),
+                  Nutridata(
+                      "Leucine",
+                      snapshot.data?.rdi.Leucine -
+                          snapshot.data?.nutrStatus.Leucine,
+                      snapshot.data?.nutrStatus.Leucine),
+                  Nutridata(
+                      "Selenium",
+                      snapshot.data?.rdi.Selenium -
+                          snapshot.data?.nutrStatus.Selenium,
+                      snapshot.data?.nutrStatus.Selenium),
+                  Nutridata(
+                      "Manganese",
+                      snapshot.data?.rdi.Manganese -
+                          snapshot.data?.nutrStatus.Manganese,
+                      snapshot.data?.nutrStatus.Manganese),
+                  Nutridata(
+                      "Zinc",
+                      snapshot.data?.rdi.Zinc - snapshot.data?.nutrStatus.Zinc,
+                      snapshot.data?.nutrStatus.Zinc),
+                  Nutridata(
+                      "Copper",
+                      snapshot.data?.rdi.Copper -
+                          snapshot.data?.nutrStatus.Copper,
+                      snapshot.data?.nutrStatus.Copper),
+                  Nutridata(
+                      "Iron",
+                      snapshot.data?.rdi.Iron - snapshot.data?.nutrStatus.Iron,
+                      snapshot.data?.nutrStatus.Iron),
+                  Nutridata(
+                      "Magnesium",
+                      snapshot.data?.rdi.Magnesium -
+                          snapshot.data?.nutrStatus.Magnesium,
+                      snapshot.data?.nutrStatus.Magnesium),
+                  Nutridata(
+                      "Sodium",
+                      snapshot.data?.rdi.Sodium -
+                          snapshot.data?.nutrStatus.Sodium,
+                      snapshot.data?.nutrStatus.Sodium),
+                  Nutridata(
+                      "Potassium",
+                      snapshot.data?.rdi.Potassium -
+                          snapshot.data?.nutrStatus.Potassium,
+                      snapshot.data?.nutrStatus.Potassium),
+                  Nutridata(
+                      "Phosphorus",
+                      snapshot.data?.rdi.Phosphorus -
+                          snapshot.data?.nutrStatus.Phosphorus,
+                      snapshot.data?.nutrStatus.Phosphorus),
+                  Nutridata(
+                      "Calcium",
+                      snapshot.data?.rdi.Calcium -
+                          snapshot.data?.nutrStatus.Calcium,
+                      snapshot.data?.nutrStatus.Calcium),
+                  Nutridata(
+                      "Vitamin_K",
+                      snapshot.data?.rdi.Vitamin_K -
+                          snapshot.data?.nutrStatus.Vitamin_K,
+                      snapshot.data?.nutrStatus.Vitamin_K),
+                  Nutridata(
+                      "Vitamin_E",
+                      snapshot.data?.rdi.Vitamin_E -
+                          snapshot.data?.nutrStatus.Vitamin_E,
+                      snapshot.data?.nutrStatus.Vitamin_E),
+                  Nutridata(
+                      "Vitamin_D",
+                      snapshot.data?.rdi.Vitamin_D -
+                          snapshot.data?.nutrStatus.Vitamin_D,
+                      snapshot.data?.nutrStatus.Vitamin_D),
+                  Nutridata(
+                      "Vitamin_A",
+                      snapshot.data?.rdi.Vitamin_A -
+                          snapshot.data?.nutrStatus.Vitamin_A,
+                      snapshot.data?.nutrStatus.Vitamin_A),
+                  Nutridata(
+                      "Vitamin_C",
+                      snapshot.data?.rdi.Vitamin_C -
+                          snapshot.data?.nutrStatus.Vitamin_C,
+                      snapshot.data?.nutrStatus.Vitamin_C),
+                  Nutridata(
+                      "Niacin",
+                      snapshot.data?.rdi.Niacin -
+                          snapshot.data?.nutrStatus.Niacin,
+                      snapshot.data?.nutrStatus.Niacin),
+                  Nutridata(
+                      "Folic_acid",
+                      snapshot.data?.rdi.Folic_acid -
+                          snapshot.data?.nutrStatus.Folic_acid,
+                      snapshot.data?.nutrStatus.Folic_acid),
+                  Nutridata(
+                      "Vitamin_B12",
+                      snapshot.data?.rdi.Vitamin_B12 -
+                          snapshot.data?.nutrStatus.Vitamin_B12,
+                      snapshot.data?.nutrStatus.Vitamin_B12),
+                  Nutridata(
+                      "Vitamin_B6",
+                      snapshot.data?.rdi.Vitamin_B6 -
+                          snapshot.data?.nutrStatus.Vitamin_B6,
+                      snapshot.data?.nutrStatus.Vitamin_B6),
+                  Nutridata(
+                      "Dietary_Fiber",
+                      snapshot.data?.rdi.Dietary_Fiber -
+                          snapshot.data?.nutrStatus.Dietary_Fiber,
+                      snapshot.data?.nutrStatus.Dietary_Fiber),
+                  //  Nutridata(
+                  // "Cholesterol",
+                  // snapshot.data?.rdi.Cholesterol - snapshot.data?.nutrStatus.Cholesterol,
+                  // snapshot.data?.nutrStatus.Cholesterol),
+                  Nutridata(
+                      "Fat",
                       snapshot.data?.rdi.Fat - snapshot.data?.nutrStatus.Fat,
                       snapshot.data?.nutrStatus.Fat), // 32-10=22, 10(섭취량)
                   Nutridata(
-                      "단백질",
+                      "Protein",
                       snapshot.data?.rdi.Protein -
                           snapshot.data?.nutrStatus.Protein,
                       snapshot.data?.nutrStatus.Protein), // 150-90=60, 90(섭취량)
                   Nutridata(
-                      "탄수화물",
+                      "Carbohydrate",
                       snapshot.data?.rdi.Carbohydrate -
                           snapshot.data?.nutrStatus.Carbohydrate,
                       snapshot.data?.nutrStatus
