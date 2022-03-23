@@ -1,4 +1,4 @@
-import 'dart:ffi';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -49,36 +49,22 @@ class _AnalyzeState extends State<Analyze> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        // width: MediaQuery.of(context).size.width,
+        // height: MediaQuery.of(context).size.height,
+        // padding: EdgeInsets.all(30),
         child: FutureBuilder<NutriStat>(
           future: analData,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              final List<Nutridata> _chartData = [
-                // (category, 권장-섭취, 섭취량)
-                Nutridata(
-                    "지방",
-                    snapshot.data?.rdi.Fat - snapshot.data?.nutrStatus.Fat,
-                    snapshot.data?.nutrStatus.Fat), // 32-10=22, 10(섭취량)
-                Nutridata(
-                    "단백질",
-                    snapshot.data?.rdi.Protein -
-                        snapshot.data?.nutrStatus.Protein,
-                    snapshot.data?.nutrStatus.Protein), // 150-90=60, 90(섭취량)
-                Nutridata(
-                    "탄수화물",
-                    snapshot.data?.rdi.Carbohydrate -
-                        snapshot.data?.nutrStatus.Carbohydrate,
-                    snapshot.data?.nutrStatus
-                        .Carbohydrate), // 200-160 = 40, 160(섭취량)
-              ];
               return SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      Row(children: [
-                        Text(
+                      Row(
+                        children: [
+                          Text(
                             // 날짜
                             DateFormat("MM-dd").format(DateTime.now()),
                             style: const TextStyle(
@@ -95,7 +81,7 @@ class _AnalyzeState extends State<Analyze> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                      ],
+                        ],
                       ),
                       const SizedBox(height: 25),
                       Row(
@@ -138,43 +124,13 @@ class _AnalyzeState extends State<Analyze> {
                       SizedBox(height: 20),
                       Container(
                         padding: EdgeInsets.only(right: 15),
-                        // height: MediaQuery.of(context).size.height / 2.5,
+                        height: MediaQuery.of(context).size.height / 4.5,
                         decoration: BoxDecoration(
                           color: Colors.green.withAlpha(100),
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Row(
                           children: [
-                            SfCartesianChart(
-                              enableAxisAnimation: true,
-                              series: <ChartSeries>[
-                                StackedBar100Series<Nutridata, String>(
-                                  dataSource: _chartData,
-                                  xValueMapper: (Nutridata nut, _) =>
-                                      nut.nutriCategory,
-                                  yValueMapper: (Nutridata nut, _) =>
-                                      nut.nutriIntake,
-                                  name: '사용자 섭취량',
-                                  color: Colors.green,
-                                  width: 0.3,
-                                  borderRadius: BorderRadius.circular(5),
-                                  spacing: 2,
-                                ),
-                                StackedBar100Series<Nutridata, String>(
-                                  dataSource: _chartData,
-                                  xValueMapper: (Nutridata nut, _) =>
-                                      nut.nutriCategory,
-                                  yValueMapper: (Nutridata nut, _) =>
-                                      nut.nutriResidual,
-                                  name: '권장 섭취량',
-                                  color: Colors.grey,
-                                  width: 0.3,
-                                  borderRadius: BorderRadius.circular(5),
-                                  spacing: 2,
-                                )
-                              ],
-                              primaryXAxis: CategoryAxis(),
-                            ),
                             Expanded(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -224,17 +180,26 @@ class _AnalyzeState extends State<Analyze> {
                           ],
                         ),
                       ),
+                      const SizedBox(height: 25),
+                      const SizedBox(height: 25),
                     ],
                   ),
                 ),
               );
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
             }
-          }
-
-
-class Nutridata {
-  Nutridata(this.nutriCategory, this.nutriResidual, this.nutriIntake);
-  final String nutriCategory;
-  final String nutriResidual;
-  final String nutriIntake;
+            return const CircularProgressIndicator();
+          },
+        ),
+      ),
+    );
+  }
 }
+
+// class Nutridata {
+//   Nutridata(this.nutriCategory, this.nutriResidual, this.nutriIntake);
+//   final String nutriCategory;
+//   final num nutriResidual;
+//   final num nutriIntake;
+// }
