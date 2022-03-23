@@ -31,8 +31,8 @@ class CustomIcon {
 
   static const IconData edit =
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData chart_bar =
+  static const IconData chartBar =
       IconData(0xf080, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData thumbs_up =
+  static const IconData thumbsUp =
       IconData(0xf164, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

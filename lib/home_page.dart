@@ -1,4 +1,3 @@
-import 'package:demo/FunctionTest/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/CustomDesign/custom_icon.dart';
 // import 'package:demo/MainScreens/food_log.dart';
@@ -59,12 +58,12 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.lightGreen,
           ),
           BottomNavigationBarItem(
-            icon: Icon(CustomIcon.chart_bar),
+            icon: Icon(CustomIcon.chartBar),
             label: '분석',
             backgroundColor: Colors.lightGreen,
           ),
           BottomNavigationBarItem(
-            icon: Icon(CustomIcon.thumbs_up),
+            icon: Icon(CustomIcon.thumbsUp),
             label: '추천',
             backgroundColor: Colors.lightGreen,
           ),
