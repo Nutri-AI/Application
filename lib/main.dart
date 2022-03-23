@@ -79,34 +79,35 @@ class _MyLoginPageState extends State<MyLoginPage> {
               ),
             ),
             Container(
-                width: MediaQuery.of(context).size.width / 1.3,
-                height: MediaQuery.of(context).size.height / 15,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.amber,
-                ),
-                child: ElevatedButton(
-                    onPressed: () async {
-                      bool user = await fetchUser(_usernameController.text);
-                      if (user) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                HomePage(email: _usernameController.text),
-                          ),
-                        );
-                      } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                InputUserInfo(email: _usernameController.text),
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text("Login"))),
+              width: MediaQuery.of(context).size.width / 1.3,
+              height: MediaQuery.of(context).size.height / 15,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.amber,
+              ),
+              child: ElevatedButton(
+                  onPressed: () async {
+                    bool user = await fetchUser(_usernameController.text);
+                    if (user) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              HomePage(email: _usernameController.text),
+                        ),
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              InputUserInfo(email: _usernameController.text),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text("Login")),
+            ),
           ],
         ),
       ),
