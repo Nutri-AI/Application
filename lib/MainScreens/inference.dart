@@ -17,8 +17,8 @@ Future<dynamic> sendInfData(
     'class_list': classList,
     'food_list': foodList,
   };
-  // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
-  String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
+  String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
+  // String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl),
     headers: <String, String>{
@@ -58,8 +58,7 @@ class _InferenceState extends State<Inference> {
   late String key;
   late List<dynamic>? classType;
   dynamic? dropdownValue;
-  // List<dynamic> foodSelection = ['x', 'x'];
-  List<dynamic> foodSelection = [];
+  late List<dynamic> foodSelection = classType!.map((x) => 'x').toList();
 
   @override
   void initState() {
@@ -109,9 +108,7 @@ class _InferenceState extends State<Inference> {
                       onChanged: (dynamic newValue) {
                         setState(() {
                           dropdownValue = newValue!;
-                          // foodSelection[i] = dropdownValue;
-                          foodSelection.add(dropdownValue);
-                          // print(i);
+                          foodSelection[i] = dropdownValue;
                           print(foodSelection);
                         });
                       },
