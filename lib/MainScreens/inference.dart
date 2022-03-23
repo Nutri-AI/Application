@@ -58,6 +58,7 @@ class _InferenceState extends State<Inference> {
   late String key;
   late List<dynamic>? classType;
   String? dropdownValue;
+  var foodSelection = [];
 
   @override
   void initState() {
@@ -107,6 +108,7 @@ class _InferenceState extends State<Inference> {
                       onChanged: (dynamic newValue) {
                         setState(() {
                           dropdownValue = newValue!;
+                          foodSelection.add(dropdownValue);
                         });
                       },
                       items: foodList![i]

@@ -1,4 +1,4 @@
-import 'RDI.dart';
+import 'package:demo/json/RDI.dart';
 
 NutriStat _$nutriStatFromJson(Map<String, dynamic> json) => NutriStat(
       meal: (json['MEAL'] ?? noMealToday) as List<dynamic>,
