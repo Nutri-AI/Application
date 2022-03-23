@@ -76,54 +76,70 @@ class _InferenceState extends State<Inference> {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(15),
-          child: Row(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Column(children: [
-              //   Image.network(
-              //     url,
-              //     width: 300,
-              //     height: 300,
-              //   ),
-              // ]),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
                 children: [
-                  for (var i = 0; i < classType!.length; i++)
-                    Text(
-                      classType![i] + '의 세부카테고리:   ',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
+                  // Column(children: [
+                  //   Image.network(
+                  //     url,
+                  //     width: 300,
+                  //     height: 300,
+                  //   ),
+                  // ]),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (var i = 0; i < classType!.length; i++)
+                        Text(
+                          classType![i] + '의 세부카테고리:   ',
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (var i = 0; i < classType!.length; i++)
+                        DropdownButton<dynamic>(
+                          value: dropdownValue = foodList![i][0],
+                          //value: dropdownValue,
+                          icon: const Icon(Icons.arrow_downward),
+                          onChanged: (dynamic newValue) {
+                            setState(() {
+                              dropdownValue = newValue!;
+                              // foodSelection[i] = dropdownValue;
+                              foodSelection.add(dropdownValue);
+                              // print(i);
+                              print(foodSelection);
+                            });
+                          },
+                          items: foodList![i]
+                              .map<DropdownMenuItem<dynamic>>((dynamic value) {
+                            return DropdownMenuItem<dynamic>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                    ],
+                  ),
                 ],
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for (var i = 0; i < classType!.length; i++)
-                    DropdownButton<dynamic>(
-                      // value: dropdownValue = foodList![i][0],
-                      value: dropdownValue,
-                      icon: const Icon(Icons.arrow_downward),
-                      onChanged: (dynamic newValue) {
-                        setState(() {
-                          dropdownValue = newValue!;
-                          // foodSelection[i] = dropdownValue;
-                          foodSelection.add(dropdownValue);
-                          // print(i);
-                          print(foodSelection);
-                        });
-                      },
-                      items: foodList![i]
-                          .map<DropdownMenuItem<dynamic>>((dynamic value) {
-                        return DropdownMenuItem<dynamic>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )
-                ],
+              Container(
+                width: MediaQuery.of(context).size.width / 1.3,
+                height: MediaQuery.of(context).size.height / 15,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  // color: Colors.amber, // default가 green이네?
+                ),
+                child: ElevatedButton(
+                    onPressed: () async {}, child: const Text("Confirm")),
               ),
             ],
           ),
