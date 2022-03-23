@@ -36,8 +36,8 @@ Future<dynamic> predictImg(String userid) async {
       // setState(() => this.image = imageTemporary);
 
       String result = '';
-      // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
-      String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
+      String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
+      // String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};
