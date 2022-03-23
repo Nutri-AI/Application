@@ -17,8 +17,8 @@ Future<dynamic> sendInfData(
     'class_list': classList,
     'food_list': foodList,
   };
-  String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
-  // String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
+  // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
+  String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl),
     headers: <String, String>{
@@ -76,51 +76,64 @@ class _InferenceState extends State<Inference> {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(15),
-          child: Row(
+          child: Column(
             children: [
-              // Column(children: [
-              //   Image.network(
-              //     url,
-              //     width: 300,
-              //     height: 300,
-              //   ),
-              // ]),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Image.network(
+                url,
+                width: 300,
+                height: 300,
+              ),
+              Row(
                 children: [
-                  for (var i = 0; i < classType!.length; i++)
-                    Text(
-                      classType![i] + '의 세부카테고리:   ',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      for (var i = 0; i < classType!.length; i++)
+                        Text(
+                          classType![i] + '의 세부카테고리:   ',
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      for (var i = 0; i < classType!.length; i++)
+                        DropdownButton<dynamic>(
+                          // value: dropdownValue = foodList![i][0],
+                          value: foodSelection[i],
+                          icon: const Icon(Icons.arrow_downward),
+                          onChanged: (dynamic newValue) {
+                            setState(() {
+                              foodSelection[i] = newValue!;
+                              print(foodSelection);
+                            });
+                          },
+                          items: foodList![i]
+                              .map<DropdownMenuItem<dynamic>>((dynamic value) {
+                            return DropdownMenuItem<dynamic>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        )
+                    ],
+                  ),
                 ],
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  for (var i = 0; i < classType!.length; i++)
-                    DropdownButton<dynamic>(
-                      // value: dropdownValue = foodList![i][0],
-                      value: foodSelection[i],
-                      icon: const Icon(Icons.arrow_downward),
-                      onChanged: (dynamic newValue) {
-                        setState(() {
-                          foodSelection[i] = newValue!;
-                          print(foodSelection);
-                        });
-                      },
-                      items: foodList![i]
-                          .map<DropdownMenuItem<dynamic>>((dynamic value) {
-                        return DropdownMenuItem<dynamic>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )
-                ],
+              Container(
+                width: MediaQuery.of(context).size.width / 1.3,
+                height: MediaQuery.of(context).size.height / 15,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: ElevatedButton(
+                  onPressed: () async {},
+                  child: const Text("Confirm"),
+                ),
               ),
             ],
           ),

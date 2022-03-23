@@ -15,8 +15,8 @@ import 'inference.dart';
 // import 'package:provider/provider.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
-  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
+  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
+  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
