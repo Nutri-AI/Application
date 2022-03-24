@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:demo/MainScreens/daily_report.dart';
-import 'package:demo/MainScreens/weekly_report.dart';
-import 'package:demo/MainScreens/inference.dart';
+import 'package:demo/MainScreens/analyze/daily_report.dart';
+import 'package:demo/MainScreens/analyze/weekly_report.dart';
+import 'package:demo/MainScreens/foodLog/inference.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -13,8 +13,8 @@ import 'dart:async';
 import 'dart:convert';
 
 Future<NutriStat> fetchAnalysisData(String userid) async {
-  //String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // 혜원
-  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // 영우
+  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // 혜원
+  // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // 영우
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {

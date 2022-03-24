@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:demo/CustomDesign/custom_icon.dart';
 // import 'package:demo/MainScreens/food_log.dart';
-import 'package:demo/MainScreens/food_log.dart';
-import 'package:demo/MainScreens/analyze.dart';
+import 'package:demo/MainScreens/foodLog/food_log.dart';
+import 'package:demo/MainScreens/analyze/analyze.dart';
 import 'package:demo/MainScreens/recommend.dart';
 import 'package:demo/MainScreens/mypage.dart';
 // import 'package:intl/intl.dart';

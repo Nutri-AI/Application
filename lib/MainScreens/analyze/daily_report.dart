@@ -11,8 +11,8 @@ import 'dart:async';
 import 'dart:convert';
 
 Future<NutriStat> fetchAnalysisData(String userid) async {
-  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // 혜원
-  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // 영우
+  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // 혜원
+  // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // 영우
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
@@ -22,15 +22,15 @@ Future<NutriStat> fetchAnalysisData(String userid) async {
   }
 }
 
-class weeklyReport extends StatefulWidget {
+class dailyReport extends StatefulWidget {
   String email;
-  weeklyReport({Key? key, required this.email}) : super(key: key);
+  dailyReport({Key? key, required this.email}) : super(key: key);
 
   @override
-  State<weeklyReport> createState() => _weeklyReportState();
+  State<dailyReport> createState() => _dailyReportState();
 }
 
-class _weeklyReportState extends State<weeklyReport> {
+class _dailyReportState extends State<dailyReport> {
   late String userid;
   late Future<NutriStat> analData;
 
@@ -310,14 +310,6 @@ class _weeklyReportState extends State<weeklyReport> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            // Text(
-                            //   // 날짜
-                            //   DateFormat("MM-dd").format(DateTime.now()),
-                            //   style: const TextStyle(
-                            //     fontSize: 23,
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // ),
                             Expanded(child: Container()),
                             Text(
                               // 이름
@@ -1140,10 +1132,9 @@ class _weeklyReportState extends State<weeklyReport> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       // 탄수화물
-
                                       children: [
                                         Text(
-                                          "${double.parse((snapshot.data!.nutrStatus.Leucine / 1000).toStringAsFixed(1))}",
+                                          "${snapshot.data!.nutrStatus.Leucine}",
                                           style: TextStyle(
                                             fontSize: 12,
                                           ),

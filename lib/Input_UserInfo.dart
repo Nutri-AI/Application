@@ -7,6 +7,8 @@ import 'package:demo/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'main.dart';
+
 Future<UserSignUpInfo> createUser(
   String userid,
   String username,
@@ -27,8 +29,8 @@ Future<UserSignUpInfo> createUser(
       'PAI': PAI,
     },
   };
-  // String baseUrl = 'http://10.0.2.2:8000/user/join'; // 혜원
-  String baseUrl = 'http://192.168.1.98:8000/user/join'; // 영우
+  String baseUrl = 'http://10.0.2.2:8000/user/join'; // 혜원
+  // String baseUrl = 'http://192.168.1.98:8000/user/join'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl),
     headers: <String, String>{
@@ -243,11 +245,10 @@ class _InputUserInfoState extends State<InputUserInfo> {
                       pai[dropdownValue2],
                     );
 
-                    // route me
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(email: widget.email),
+                        builder: (context) => const NutriaiApp(),
                       ),
                     );
                   },

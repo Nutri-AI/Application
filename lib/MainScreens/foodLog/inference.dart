@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-import '../home_page.dart';
-import '../json/nutriStat.dart';
+import '../../home_page.dart';
 
 Future<dynamic> sendInfData(
   String userid,
@@ -20,8 +18,8 @@ Future<dynamic> sendInfData(
     'class_list': classList,
     'food_list': foodList,
   };
-  // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
-  String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
+  String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
+  // String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl + userid),
     headers: <String, String>{
@@ -31,7 +29,6 @@ Future<dynamic> sendInfData(
   );
 
   if (response.statusCode == 200) {
-    print('success! ${response.body}');
     return jsonDecode(response.body);
   } else {
     throw Exception('Failed to create data');
@@ -150,12 +147,14 @@ class _InferenceState extends State<Inference> {
                     var res =
                         sendInfData(userid, key, classType, foodSelection);
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(email: userid),
-                      ),
-                    );
+                    Navigator.pop(context);
+
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => HomePage(email: userid),
+                    //   ),
+                    // );
                   },
                   child: const Text("Confirm"),
                 ),
