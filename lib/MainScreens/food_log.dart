@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -106,17 +107,22 @@ class _FoodLogState extends State<FoodLog> {
                 // (category, 권장-섭취, 섭취량)
                 Nutridata(
                     "지방",
-                    snapshot.data?.rdi.Fat - snapshot.data?.nutrStatus.Fat,
+                    max(snapshot.data?.rdi.Fat - snapshot.data?.nutrStatus.Fat,
+                        0),
                     snapshot.data?.nutrStatus.Fat), // 32-10=22, 10(섭취량)
                 Nutridata(
                     "단백질",
-                    snapshot.data?.rdi.Protein -
-                        snapshot.data?.nutrStatus.Protein,
+                    max(
+                        snapshot.data?.rdi.Protein -
+                            snapshot.data?.nutrStatus.Protein,
+                        0),
                     snapshot.data?.nutrStatus.Protein), // 150-90=60, 90(섭취량)
                 Nutridata(
                     "탄수화물",
-                    snapshot.data?.rdi.Carbohydrate -
-                        snapshot.data?.nutrStatus.Carbohydrate,
+                    max(
+                        snapshot.data?.rdi.Carbohydrate -
+                            snapshot.data?.nutrStatus.Carbohydrate,
+                        0),
                     snapshot.data?.nutrStatus
                         .Carbohydrate), // 200-160 = 40, 160(섭취량)
               ];
@@ -206,7 +212,7 @@ class _FoodLogState extends State<FoodLog> {
                                       nut.nutriIntake,
                                   name: '사용자 섭취량',
                                   color: Colors.green,
-                                  width: 0.3,
+                                  width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
                                 ),
@@ -218,7 +224,7 @@ class _FoodLogState extends State<FoodLog> {
                                       nut.nutriResidual,
                                   name: '권장 섭취량',
                                   color: Colors.grey,
-                                  width: 0.3,
+                                  width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
                                 )
