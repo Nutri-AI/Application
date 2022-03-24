@@ -17,8 +17,8 @@ Future<dynamic> sendInfData(
     'class_list': classList,
     'food_list': foodList,
   };
-  String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
-  // String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
+  // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
+  String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl + userid),
     headers: <String, String>{
