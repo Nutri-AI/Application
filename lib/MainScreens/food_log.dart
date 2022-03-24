@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,10 +18,12 @@ import 'inference.dart';
 Future<NutriStat> fetchUserData(String userid) async {
   String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
-  final response = await http.get(Uri.parse(baseUrl + userid));
-
+  final response = await http.get(
+    Uri.parse(baseUrl + userid),
+  );
+  print("${response.statusCode}, ${utf8.decode(response.bodyBytes)}");
   if (response.statusCode == 200) {
-    return NutriStat.fromJson(jsonDecode(response.body));
+    return NutriStat.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
   } else {
     throw Exception('Failed to load data');
   }
@@ -34,7 +37,6 @@ Future<dynamic> predictImg(String userid) async {
     } else {
       final imageTemporary = File(image.path);
       // setState(() => this.image = imageTemporary);
-
       String result = '';
       // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
       String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
@@ -106,20 +108,27 @@ class _FoodLogState extends State<FoodLog> {
                 // (category, 권장-섭취, 섭취량)
                 Nutridata(
                     "지방",
-                    snapshot.data?.rdi.Fat - snapshot.data?.nutrStatus.Fat,
+                    max(snapshot.data?.rdi.Fat - snapshot.data?.nutrStatus.Fat,
+                        0),
                     snapshot.data?.nutrStatus.Fat), // 32-10=22, 10(섭취량)
                 Nutridata(
                     "단백질",
-                    snapshot.data?.rdi.Protein -
-                        snapshot.data?.nutrStatus.Protein,
+                    max(
+                        snapshot.data?.rdi.Protein -
+                            snapshot.data?.nutrStatus.Protein,
+                        0),
                     snapshot.data?.nutrStatus.Protein), // 150-90=60, 90(섭취량)
                 Nutridata(
                     "탄수화물",
-                    snapshot.data?.rdi.Carbohydrate -
-                        snapshot.data?.nutrStatus.Carbohydrate,
+                    max(
+                        snapshot.data?.rdi.Carbohydrate -
+                            snapshot.data?.nutrStatus.Carbohydrate,
+                        0),
                     snapshot.data?.nutrStatus
                         .Carbohydrate), // 200-160 = 40, 160(섭취량)
               ];
+              final List<dynamic> _mealData = snapshot.data!.meal.toList();
+
               return SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Container(
@@ -130,7 +139,7 @@ class _FoodLogState extends State<FoodLog> {
                         children: [
                           Text(
                             // 날짜
-                            DateFormat("MM-dd").format(DateTime.now()),
+                            DateFormat("MM/dd").format(DateTime.now()),
                             style: const TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.bold,
@@ -206,7 +215,7 @@ class _FoodLogState extends State<FoodLog> {
                                       nut.nutriIntake,
                                   name: '사용자 섭취량',
                                   color: Colors.green,
-                                  width: 0.3,
+                                  width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
                                 ),
@@ -218,7 +227,7 @@ class _FoodLogState extends State<FoodLog> {
                                       nut.nutriResidual,
                                   name: '권장 섭취량',
                                   color: Colors.grey,
-                                  width: 0.3,
+                                  width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
                                 )
@@ -234,37 +243,91 @@ class _FoodLogState extends State<FoodLog> {
                                     // 탄수화물
                                     children: [
                                       Text(
-                                          "${snapshot.data!.nutrStatus.Carbohydrate}"), // 탄수화물 섭취량
-                                      const Text("/"),
+                                        "${snapshot.data!.nutrStatus.Carbohydrate}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 탄수화물 섭취량
+                                      const Text(
+                                        "/",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                       Text(
-                                          "${snapshot.data!.rdi.Carbohydrate}"), // 탄수화물 권장 섭취량
-                                      const Text("g"), // 탄수화물 단위
+                                        "${snapshot.data!.rdi.Carbohydrate}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 탄수화물 권장 섭취량
+                                      const Text(
+                                        "g",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 탄수화물 단위
                                     ],
                                   ),
-                                  const SizedBox(height: 35),
+                                  const SizedBox(height: 40),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     // 단백질
                                     children: [
                                       Text(
-                                          "${snapshot.data!.nutrStatus.Protein}"), // 단백질 섭취량
-                                      const Text("/"),
+                                        "${snapshot.data!.nutrStatus.Protein}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 단백질 섭취량
+                                      const Text(
+                                        "/",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                       Text(
-                                          "${snapshot.data!.rdi.Protein}"), // 단백질 권장 섭취량
-                                      const Text("g"), // 단백질 단위
+                                        "${snapshot.data!.rdi.Protein}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 단백질 권장 섭취량
+                                      const Text(
+                                        "g",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 단백질 단위
                                     ],
                                   ),
-                                  const SizedBox(height: 35),
+                                  const SizedBox(height: 40),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     // 지방
                                     children: [
                                       Text(
-                                          "${snapshot.data!.nutrStatus.Fat}"), // 지방 섭취량
-                                      const Text("/"),
+                                        "${snapshot.data!.nutrStatus.Fat}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 지방 섭취량
+                                      const Text(
+                                        "/",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                       Text(
-                                          "${snapshot.data!.rdi.Fat}"), // 지방 권장 섭취량
-                                      const Text("g"), // 지방 단위
+                                        "${snapshot.data!.rdi.Fat}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 지방 권장 섭취량
+                                      const Text(
+                                        "g",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 지방 단위
                                     ],
                                   ),
                                   const SizedBox(height: 30),
@@ -286,6 +349,33 @@ class _FoodLogState extends State<FoodLog> {
                         ],
                       ),
                       const SizedBox(height: 25),
+                      for (var i = 0; i < _mealData.length; i++)
+                        ListTile(
+                          title: Text(
+                            _mealData[i][0].substring(11, 16),
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          subtitle: Text(
+                            _mealData[i][1].toString(),
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                          leading: Icon(
+                            Icons.food_bank_outlined,
+                            color: Colors.yellowAccent[200],
+                            size: 30,
+                          ),
+                          tileColor: Colors.green[200],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -304,6 +394,7 @@ class _FoodLogState extends State<FoodLog> {
           foodList = jsonDecode(res)['food_list'];
           key = jsonDecode(res)['Origin_S3_key'];
           classCategory = jsonDecode(res)['Class_type'];
+
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -312,9 +403,12 @@ class _FoodLogState extends State<FoodLog> {
                 subcat: foodList,
                 s3Key: key,
                 classCat: classCategory,
+                email: userid,
               ),
             ),
-          );
+          ).then((value) => setState(() {
+                userData = fetchUserData(userid);
+              }));
         },
         child: const Icon(Icons.add),
         backgroundColor: Colors.green[600],
