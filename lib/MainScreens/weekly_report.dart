@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -58,151 +59,213 @@ class _weeklyReportState extends State<weeklyReport> {
                   // (category, 권장-섭취, 섭취량)
                   Nutridata(
                       "Valine",
-                      snapshot.data?.rdi.Valine -
-                          snapshot.data?.nutrStatus.Valine,
+                      max(
+                          snapshot.data?.rdi.Valine -
+                              snapshot.data?.nutrStatus.Valine,
+                          0),
                       snapshot.data?.nutrStatus.Valine),
                   Nutridata(
                       "Threonine",
-                      snapshot.data?.rdi.Threonine -
-                          snapshot.data?.nutrStatus.Threonine,
+                      max(
+                          snapshot.data?.rdi.Threonine -
+                              snapshot.data?.nutrStatus.Threonine,
+                          0),
                       snapshot.data?.nutrStatus.Threonine),
                   Nutridata(
-                      "Phenylalanine_Tyrosine",
-                      snapshot.data?.rdi.Phenylalanine_Tyrosine -
-                          snapshot.data?.nutrStatus.Phenylalanine_Tyrosine,
+                      '''Phenylalanine\nTyrosine''',
+                      max(
+                          snapshot.data?.rdi.Phenylalanine_Tyrosine -
+                              snapshot.data?.nutrStatus.Phenylalanine_Tyrosine,
+                          0),
                       snapshot.data?.nutrStatus.Phenylalanine_Tyrosine),
                   Nutridata(
                       "Methionine",
-                      snapshot.data?.rdi.Methionine -
-                          snapshot.data?.nutrStatus.Methionine,
+                      max(
+                          snapshot.data?.rdi.Methionine -
+                              snapshot.data?.nutrStatus.Methionine,
+                          0),
                       snapshot.data?.nutrStatus.Methionine),
                   Nutridata(
                       "Lysine",
-                      snapshot.data?.rdi.Lysine -
-                          snapshot.data?.nutrStatus.Lysine,
+                      max(
+                          snapshot.data?.rdi.Lysine -
+                              snapshot.data?.nutrStatus.Lysine,
+                          0),
                       snapshot.data?.nutrStatus.Lysine),
                   Nutridata(
-                      "Alpha_Linolenic_Acid",
-                      snapshot.data?.rdi.Alpha_Linolenic_Acid -
-                          snapshot.data?.nutrStatus.Alpha_Linolenic_Acid,
+                      '''α-Linolenic\nAcid''',
+                      max(
+                          snapshot.data?.rdi.Alpha_Linolenic_Acid -
+                              snapshot.data?.nutrStatus.Alpha_Linolenic_Acid,
+                          0),
                       snapshot.data?.nutrStatus.Alpha_Linolenic_Acid),
                   Nutridata(
-                      "Linoleic_Acid",
-                      snapshot.data?.rdi.Linoleic_Acid -
-                          snapshot.data?.nutrStatus.Linoleic_Acid,
+                      "Linoleic Acid",
+                      max(
+                          snapshot.data?.rdi.Linoleic_Acid -
+                              snapshot.data?.nutrStatus.Linoleic_Acid,
+                          0),
                       snapshot.data?.nutrStatus.Linoleic_Acid),
                   Nutridata(
                       "Histidine",
-                      snapshot.data?.rdi.Histidine -
-                          snapshot.data?.nutrStatus.Histidine,
+                      max(
+                          snapshot.data?.rdi.Histidine -
+                              snapshot.data?.nutrStatus.Histidine,
+                          0),
                       snapshot.data?.nutrStatus.Histidine),
                   Nutridata(
-                      "Iso_Leucine",
-                      snapshot.data?.rdi.Iso_Leucine -
-                          snapshot.data?.nutrStatus.Iso_Leucine,
+                      "Iso Leucine",
+                      max(
+                          snapshot.data?.rdi.Iso_Leucine -
+                              snapshot.data?.nutrStatus.Iso_Leucine,
+                          0),
                       snapshot.data?.nutrStatus.Iso_Leucine),
                   Nutridata(
                       "Leucine",
-                      snapshot.data?.rdi.Leucine -
-                          snapshot.data?.nutrStatus.Leucine,
+                      max(
+                          snapshot.data?.rdi.Leucine -
+                              snapshot.data?.nutrStatus.Leucine,
+                          0),
                       snapshot.data?.nutrStatus.Leucine),
                   Nutridata(
                       "Selenium",
-                      snapshot.data?.rdi.Selenium -
-                          snapshot.data?.nutrStatus.Selenium,
+                      max(
+                          snapshot.data?.rdi.Selenium -
+                              snapshot.data?.nutrStatus.Selenium,
+                          0),
                       snapshot.data?.nutrStatus.Selenium),
                   Nutridata(
                       "Manganese",
-                      snapshot.data?.rdi.Manganese -
-                          snapshot.data?.nutrStatus.Manganese,
+                      max(
+                          snapshot.data?.rdi.Manganese -
+                              snapshot.data?.nutrStatus.Manganese,
+                          0),
                       snapshot.data?.nutrStatus.Manganese),
                   Nutridata(
                       "Zinc",
-                      snapshot.data?.rdi.Zinc - snapshot.data?.nutrStatus.Zinc,
+                      max(
+                          snapshot.data?.rdi.Zinc -
+                              snapshot.data?.nutrStatus.Zinc,
+                          0),
                       snapshot.data?.nutrStatus.Zinc),
                   Nutridata(
                       "Copper",
-                      snapshot.data?.rdi.Copper -
-                          snapshot.data?.nutrStatus.Copper,
+                      max(
+                          snapshot.data?.rdi.Copper -
+                              snapshot.data?.nutrStatus.Copper,
+                          0),
                       snapshot.data?.nutrStatus.Copper),
                   Nutridata(
                       "Iron",
-                      snapshot.data?.rdi.Iron - snapshot.data?.nutrStatus.Iron,
+                      max(
+                          snapshot.data?.rdi.Iron -
+                              snapshot.data?.nutrStatus.Iron,
+                          0),
                       snapshot.data?.nutrStatus.Iron),
                   Nutridata(
                       "Magnesium",
-                      snapshot.data?.rdi.Magnesium -
-                          snapshot.data?.nutrStatus.Magnesium,
+                      max(
+                          snapshot.data?.rdi.Magnesium -
+                              snapshot.data?.nutrStatus.Magnesium,
+                          0),
                       snapshot.data?.nutrStatus.Magnesium),
                   Nutridata(
                       "Sodium",
-                      snapshot.data?.rdi.Sodium -
-                          snapshot.data?.nutrStatus.Sodium,
+                      max(
+                          snapshot.data?.rdi.Sodium -
+                              snapshot.data?.nutrStatus.Sodium,
+                          0),
                       snapshot.data?.nutrStatus.Sodium),
                   Nutridata(
                       "Potassium",
-                      snapshot.data?.rdi.Potassium -
-                          snapshot.data?.nutrStatus.Potassium,
+                      max(
+                          snapshot.data?.rdi.Potassium -
+                              snapshot.data?.nutrStatus.Potassium,
+                          0),
                       snapshot.data?.nutrStatus.Potassium),
                   Nutridata(
                       "Phosphorus",
-                      snapshot.data?.rdi.Phosphorus -
-                          snapshot.data?.nutrStatus.Phosphorus,
+                      max(
+                          snapshot.data?.rdi.Phosphorus -
+                              snapshot.data?.nutrStatus.Phosphorus,
+                          0),
                       snapshot.data?.nutrStatus.Phosphorus),
                   Nutridata(
                       "Calcium",
-                      snapshot.data?.rdi.Calcium -
-                          snapshot.data?.nutrStatus.Calcium,
+                      max(
+                          snapshot.data?.rdi.Calcium -
+                              snapshot.data?.nutrStatus.Calcium,
+                          0),
                       snapshot.data?.nutrStatus.Calcium),
                   Nutridata(
-                      "Vitamin_K",
-                      snapshot.data?.rdi.Vitamin_K -
-                          snapshot.data?.nutrStatus.Vitamin_K,
+                      "Vit K",
+                      max(
+                          snapshot.data?.rdi.Vitamin_K -
+                              snapshot.data?.nutrStatus.Vitamin_K,
+                          0),
                       snapshot.data?.nutrStatus.Vitamin_K),
                   Nutridata(
-                      "Vitamin_E",
-                      snapshot.data?.rdi.Vitamin_E -
-                          snapshot.data?.nutrStatus.Vitamin_E,
+                      "Vit E",
+                      max(
+                          snapshot.data?.rdi.Vitamin_E -
+                              snapshot.data?.nutrStatus.Vitamin_E,
+                          0),
                       snapshot.data?.nutrStatus.Vitamin_E),
                   Nutridata(
-                      "Vitamin_D",
-                      snapshot.data?.rdi.Vitamin_D -
-                          snapshot.data?.nutrStatus.Vitamin_D,
+                      "Vit D",
+                      max(
+                          snapshot.data?.rdi.Vitamin_D -
+                              snapshot.data?.nutrStatus.Vitamin_D,
+                          0),
                       snapshot.data?.nutrStatus.Vitamin_D),
                   Nutridata(
-                      "Vitamin_A",
-                      snapshot.data?.rdi.Vitamin_A -
-                          snapshot.data?.nutrStatus.Vitamin_A,
+                      "Vit A",
+                      max(
+                          snapshot.data?.rdi.Vitamin_A -
+                              snapshot.data?.nutrStatus.Vitamin_A,
+                          0),
                       snapshot.data?.nutrStatus.Vitamin_A),
                   Nutridata(
-                      "Vitamin_C",
-                      snapshot.data?.rdi.Vitamin_C -
-                          snapshot.data?.nutrStatus.Vitamin_C,
+                      "Vit C",
+                      max(
+                          snapshot.data?.rdi.Vitamin_C -
+                              snapshot.data?.nutrStatus.Vitamin_C,
+                          0),
                       snapshot.data?.nutrStatus.Vitamin_C),
                   Nutridata(
                       "Niacin",
-                      snapshot.data?.rdi.Niacin -
-                          snapshot.data?.nutrStatus.Niacin,
+                      max(
+                          snapshot.data?.rdi.Niacin -
+                              snapshot.data?.nutrStatus.Niacin,
+                          0),
                       snapshot.data?.nutrStatus.Niacin),
                   Nutridata(
-                      "Folic_acid",
-                      snapshot.data?.rdi.Folic_acid -
-                          snapshot.data?.nutrStatus.Folic_acid,
+                      "Folate",
+                      max(
+                          snapshot.data?.rdi.Folic_acid -
+                              snapshot.data?.nutrStatus.Folic_acid,
+                          0),
                       snapshot.data?.nutrStatus.Folic_acid),
                   Nutridata(
-                      "Vitamin_B12",
-                      snapshot.data?.rdi.Vitamin_B12 -
-                          snapshot.data?.nutrStatus.Vitamin_B12,
+                      "Vit B12",
+                      max(
+                          snapshot.data?.rdi.Vitamin_B12 -
+                              snapshot.data?.nutrStatus.Vitamin_B12,
+                          0),
                       snapshot.data?.nutrStatus.Vitamin_B12),
                   Nutridata(
-                      "Vitamin_B6",
-                      snapshot.data?.rdi.Vitamin_B6 -
-                          snapshot.data?.nutrStatus.Vitamin_B6,
+                      "Vit B6",
+                      max(
+                          snapshot.data?.rdi.Vitamin_B6 -
+                              snapshot.data?.nutrStatus.Vitamin_B6,
+                          0),
                       snapshot.data?.nutrStatus.Vitamin_B6),
                   Nutridata(
-                      "Dietary_Fiber",
-                      snapshot.data?.rdi.Dietary_Fiber -
-                          snapshot.data?.nutrStatus.Dietary_Fiber,
+                      "Fiber",
+                      max(
+                          snapshot.data?.rdi.Dietary_Fiber -
+                              snapshot.data?.nutrStatus.Dietary_Fiber,
+                          0),
                       snapshot.data?.nutrStatus.Dietary_Fiber),
                   //  Nutridata(
                   // "Cholesterol",
@@ -210,17 +273,24 @@ class _weeklyReportState extends State<weeklyReport> {
                   // snapshot.data?.nutrStatus.Cholesterol),
                   Nutridata(
                       "Fat",
-                      snapshot.data?.rdi.Fat - snapshot.data?.nutrStatus.Fat,
+                      max(
+                          snapshot.data?.rdi.Fat -
+                              snapshot.data?.nutrStatus.Fat,
+                          0),
                       snapshot.data?.nutrStatus.Fat), // 32-10=22, 10(섭취량)
                   Nutridata(
                       "Protein",
-                      snapshot.data?.rdi.Protein -
-                          snapshot.data?.nutrStatus.Protein,
+                      max(
+                          snapshot.data?.rdi.Protein -
+                              snapshot.data?.nutrStatus.Protein,
+                          0),
                       snapshot.data?.nutrStatus.Protein), // 150-90=60, 90(섭취량)
                   Nutridata(
                       "Carbohydrate",
-                      snapshot.data?.rdi.Carbohydrate -
-                          snapshot.data?.nutrStatus.Carbohydrate,
+                      max(
+                          snapshot.data?.rdi.Carbohydrate -
+                              snapshot.data?.nutrStatus.Carbohydrate,
+                          0),
                       snapshot.data?.nutrStatus
                           .Carbohydrate), // 200-160 = 40, 160(섭취량)
                 ];
