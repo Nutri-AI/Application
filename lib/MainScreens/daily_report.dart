@@ -11,8 +11,8 @@ import 'dart:async';
 import 'dart:convert';
 
 Future<NutriStat> fetchAnalysisData(String userid) async {
-  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // 혜원
-  // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // 영우
+  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // 혜원
+  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // 영우
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
@@ -382,7 +382,7 @@ class _dailyReportState extends State<dailyReport> {
                                     color: Colors.green,
                                     width: 0.5,
                                     borderRadius: BorderRadius.circular(5),
-                                    spacing: 3,
+                                    spacing: 2,
                                   ),
                                   StackedBar100Series<Nutridata, String>(
                                     dataSource: _chartData,
