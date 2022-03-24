@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
+import '../home_page.dart';
+import '../json/nutriStat.dart';
+
 Future<dynamic> sendInfData(
   String userid,
   String imgKey,
@@ -140,7 +143,12 @@ class _InferenceState extends State<Inference> {
                     var res =
                         sendInfData(userid, key, classType, foodSelection);
 
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(email: userid),
+                      ),
+                    );
                   },
                   child: const Text("Confirm"),
                 ),

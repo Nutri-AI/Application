@@ -312,6 +312,7 @@ class _FoodLogState extends State<FoodLog> {
           foodList = jsonDecode(res)['food_list'];
           key = jsonDecode(res)['Origin_S3_key'];
           classCategory = jsonDecode(res)['Class_type'];
+
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -324,7 +325,7 @@ class _FoodLogState extends State<FoodLog> {
               ),
             ),
           ).then((value) => setState(() {
-                userData;
+                userData = fetchUserData(userid);
               }));
         },
         child: const Icon(Icons.add),
