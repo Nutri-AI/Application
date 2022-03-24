@@ -304,7 +304,7 @@ class _dailyReportState extends State<dailyReport> {
                           children: [
                             Text(
                               // 날짜
-                              DateFormat("MM-dd").format(DateTime.now()),
+                              DateFormat("MM/dd").format(DateTime.now()),
                               style: const TextStyle(
                                 fontSize: 23,
                                 fontWeight: FontWeight.bold,

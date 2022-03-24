@@ -127,6 +127,8 @@ class _FoodLogState extends State<FoodLog> {
                     snapshot.data?.nutrStatus
                         .Carbohydrate), // 200-160 = 40, 160(섭취량)
               ];
+              final List<dynamic> _mealData = snapshot.data!.meal.toList();
+
               return SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Container(
@@ -137,7 +139,7 @@ class _FoodLogState extends State<FoodLog> {
                         children: [
                           Text(
                             // 날짜
-                            DateFormat("MM-dd").format(DateTime.now()),
+                            DateFormat("MM/dd").format(DateTime.now()),
                             style: const TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.bold,
@@ -241,37 +243,91 @@ class _FoodLogState extends State<FoodLog> {
                                     // 탄수화물
                                     children: [
                                       Text(
-                                          "${snapshot.data!.nutrStatus.Carbohydrate}"), // 탄수화물 섭취량
-                                      const Text("/"),
+                                        "${snapshot.data!.nutrStatus.Carbohydrate}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 탄수화물 섭취량
+                                      const Text(
+                                        "/",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                       Text(
-                                          "${snapshot.data!.rdi.Carbohydrate}"), // 탄수화물 권장 섭취량
-                                      const Text("g"), // 탄수화물 단위
+                                        "${snapshot.data!.rdi.Carbohydrate}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 탄수화물 권장 섭취량
+                                      const Text(
+                                        "g",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 탄수화물 단위
                                     ],
                                   ),
-                                  const SizedBox(height: 35),
+                                  const SizedBox(height: 40),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     // 단백질
                                     children: [
                                       Text(
-                                          "${snapshot.data!.nutrStatus.Protein}"), // 단백질 섭취량
-                                      const Text("/"),
+                                        "${snapshot.data!.nutrStatus.Protein}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 단백질 섭취량
+                                      const Text(
+                                        "/",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                       Text(
-                                          "${snapshot.data!.rdi.Protein}"), // 단백질 권장 섭취량
-                                      const Text("g"), // 단백질 단위
+                                        "${snapshot.data!.rdi.Protein}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 단백질 권장 섭취량
+                                      const Text(
+                                        "g",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 단백질 단위
                                     ],
                                   ),
-                                  const SizedBox(height: 35),
+                                  const SizedBox(height: 40),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     // 지방
                                     children: [
                                       Text(
-                                          "${snapshot.data!.nutrStatus.Fat}"), // 지방 섭취량
-                                      const Text("/"),
+                                        "${snapshot.data!.nutrStatus.Fat}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 지방 섭취량
+                                      const Text(
+                                        "/",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                       Text(
-                                          "${snapshot.data!.rdi.Fat}"), // 지방 권장 섭취량
-                                      const Text("g"), // 지방 단위
+                                        "${snapshot.data!.rdi.Fat}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 지방 권장 섭취량
+                                      const Text(
+                                        "g",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ), // 지방 단위
                                     ],
                                   ),
                                   const SizedBox(height: 30),
@@ -293,7 +349,33 @@ class _FoodLogState extends State<FoodLog> {
                         ],
                       ),
                       const SizedBox(height: 25),
-                      Text(snapshot.data!.meal.toString())
+                      for (var i = 0; i < _mealData.length; i++)
+                        ListTile(
+                          title: Text(
+                            _mealData[i][0].substring(11, 16),
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          subtitle: Text(
+                            _mealData[i][1].toString(),
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                          leading: Icon(
+                            Icons.food_bank_outlined,
+                            color: Colors.yellowAccent[200],
+                            size: 30,
+                          ),
+                          tileColor: Colors.green[200],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
                     ],
                   ),
                 ),

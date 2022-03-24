@@ -85,18 +85,22 @@ class _InferenceState extends State<Inference> {
         child: Container(
           padding: const EdgeInsets.all(15),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.network(
                 url,
-                width: 300,
-                height: 300,
+                width: MediaQuery.of(context).size.width / 1.1,
+                // height: 400,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
                       for (var i = 0; i < classType.length; i++)
                         Text(
                           classType[i] + '의 세부카테고리:   ',
@@ -106,8 +110,8 @@ class _InferenceState extends State<Inference> {
                     ],
                   ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       for (var i = 0; i < classType.length; i++)
                         DropdownButton<dynamic>(
@@ -124,12 +128,15 @@ class _InferenceState extends State<Inference> {
                               .map<DropdownMenuItem<dynamic>>((dynamic value) {
                             return DropdownMenuItem<dynamic>(
                               value: value,
-                              child: Text(value),
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: 12),
+                              ),
                             );
                           }).toList(),
-                        )
+                        ),
                     ],
-                  ),
+                  )
                 ],
               ),
               Container(

@@ -304,12 +304,20 @@ class _weeklyReportState extends State<weeklyReport> {
                           children: [
                             Text(
                               // 날짜
-                              DateFormat("MM-dd").format(DateTime.now()),
+                              DateFormat("MM/dd").format(DateTime.now()),
                               style: const TextStyle(
                                 fontSize: 23,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            // Text(
+                            //   // 날짜
+                            //   DateFormat("MM-dd").format(DateTime.now()),
+                            //   style: const TextStyle(
+                            //     fontSize: 23,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
                             Expanded(child: Container()),
                             Text(
                               // 이름

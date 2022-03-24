@@ -65,28 +65,32 @@ class _MyPageState extends State<MyPage> {
                           flex: 5,
                           child: Container(
                             width: double.infinity,
+                            // height: MediaQuery.of(context).size.height / 7,
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 197, 165, 226),
                             ),
-                            child: Column(children: [
-                              SizedBox(
-                                height: 110.0,
-                              ),
-                              const CircleAvatar(
-                                radius: 65.0,
-                                backgroundImage:
-                                    AssetImage('assets/greenprofile.jpg'),
-                                backgroundColor: Colors.white,
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Text(snapshot.data!.username,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                  )),
-                            ]),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 110.0,
+                                  ),
+                                  const CircleAvatar(
+                                    radius: 65.0,
+                                    backgroundImage:
+                                        AssetImage('assets/greenprofile.jpg'),
+                                    backgroundColor: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(snapshot.data!.username,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20.0,
+                                      )),
+                                ]),
                           ),
                         ),
                         Expanded(
