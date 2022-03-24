@@ -15,12 +15,14 @@ import 'inference.dart';
 // import 'package:provider/provider.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
-  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
-  final response = await http.get(Uri.parse(baseUrl + userid));
-
+  // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
+  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
+  final response = await http.get(
+    Uri.parse(baseUrl + userid),
+  );
+  print("${response.statusCode}, ${utf8.decode(response.bodyBytes)}");
   if (response.statusCode == 200) {
-    return NutriStat.fromJson(jsonDecode(response.body));
+    return NutriStat.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
   } else {
     throw Exception('Failed to load data');
   }
@@ -34,10 +36,9 @@ Future<dynamic> predictImg(String userid) async {
     } else {
       final imageTemporary = File(image.path);
       // setState(() => this.image = imageTemporary);
-
       String result = '';
-      // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
-      String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
+      String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
+      // String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};
@@ -286,6 +287,7 @@ class _FoodLogState extends State<FoodLog> {
                         ],
                       ),
                       const SizedBox(height: 25),
+                      Text(snapshot.data!.meal.toString())
                     ],
                   ),
                 ),
@@ -312,9 +314,12 @@ class _FoodLogState extends State<FoodLog> {
                 subcat: foodList,
                 s3Key: key,
                 classCat: classCategory,
+                email: userid,
               ),
             ),
-          );
+          ).then((value) => setState(() {
+                userData;
+              }));
         },
         child: const Icon(Icons.add),
         backgroundColor: Colors.green[600],

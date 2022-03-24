@@ -8,19 +8,19 @@ import 'dart:convert';
 Future<dynamic> sendInfData(
   String userid,
   String imgKey,
-  List<String> classList,
-  List<String> foodList,
+  List<dynamic> classList,
+  List<dynamic> foodList,
 ) async {
   Map<String, dynamic> data = {
-    'userid': userid,
+    // 'userid': userid,
     'image_key': imgKey,
     'class_list': classList,
     'food_list': foodList,
   };
-  // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
-  String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
+  String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
+  // String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
-    Uri.parse(baseUrl),
+    Uri.parse(baseUrl + userid),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -28,6 +28,7 @@ Future<dynamic> sendInfData(
   );
 
   if (response.statusCode == 200) {
+    print('success! ${response.body}');
     return jsonDecode(response.body);
   } else {
     throw Exception('Failed to create data');
@@ -35,17 +36,19 @@ Future<dynamic> sendInfData(
 }
 
 class Inference extends StatefulWidget {
+  String email;
   String uri;
   List<dynamic>? subcat;
   String s3Key;
-  List<dynamic>? classCat;
+  List<dynamic> classCat;
 
   Inference(
       {Key? key,
       required this.uri,
+      required this.email,
       this.subcat,
       required this.s3Key,
-      this.classCat})
+      required this.classCat})
       : super(key: key);
 
   @override
@@ -53,10 +56,11 @@ class Inference extends StatefulWidget {
 }
 
 class _InferenceState extends State<Inference> {
+  late String userid;
   late String url;
   late List<dynamic>? foodList;
   late String key;
-  late List<dynamic>? classType;
+  late List<dynamic> classType;
   late List<dynamic> foodSelection = [
     for (var x = 0; x < foodList!.length; x++) foodList![x][0].toString()
   ];
@@ -64,6 +68,7 @@ class _InferenceState extends State<Inference> {
   @override
   void initState() {
     url = widget.uri;
+    userid = widget.email;
     foodList = widget.subcat;
     key = widget.s3Key;
     classType = widget.classCat;
@@ -89,9 +94,9 @@ class _InferenceState extends State<Inference> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      for (var i = 0; i < classType!.length; i++)
+                      for (var i = 0; i < classType.length; i++)
                         Text(
-                          classType![i] + '의 세부카테고리:   ',
+                          classType[i] + '의 세부카테고리:   ',
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -101,7 +106,7 @@ class _InferenceState extends State<Inference> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      for (var i = 0; i < classType!.length; i++)
+                      for (var i = 0; i < classType.length; i++)
                         DropdownButton<dynamic>(
                           // value: dropdownValue = foodList![i][0],
                           value: foodSelection[i],
@@ -131,7 +136,12 @@ class _InferenceState extends State<Inference> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: ElevatedButton(
-                  onPressed: () async {},
+                  onPressed: () {
+                    var res =
+                        sendInfData(userid, key, classType, foodSelection);
+
+                    Navigator.pop(context);
+                  },
                   child: const Text("Confirm"),
                 ),
               ),
