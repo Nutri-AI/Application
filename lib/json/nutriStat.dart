@@ -9,7 +9,7 @@ NutriStat _$nutriStatFromJson(Map<String, dynamic> json) => NutriStat(
     );
 
 Map<String, dynamic> _$nutriStatToJson(NutriStat instance) => <String, dynamic>{
-      'MEAL': instance.meal?.toList(),
+      'MEAL': instance.meal.toList(),
       'RDI': instance.rdi.toJson(),
       'nutr_status': instance.nutrStatus.toJson(),
       'username': instance.username,
@@ -19,13 +19,13 @@ class NutriStat {
   final String username;
   RDI nutrStatus;
   RDI rdi;
-  List<dynamic>? meal;
+  List<dynamic> meal;
 
   NutriStat({
     required this.username,
     required this.rdi,
     required this.nutrStatus,
-    this.meal,
+    required this.meal,
   });
 
   factory NutriStat.fromJson(Map<String, dynamic> json) =>
