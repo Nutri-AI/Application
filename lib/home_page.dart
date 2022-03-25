@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:demo/CustomDesign/custom_icon.dart';
+import 'package:demo/CustomDesign/customIcon.dart';
 // import 'package:demo/MainScreens/food_log.dart';
 import 'package:demo/MainScreens/foodLog/food_log.dart';
 import 'package:demo/MainScreens/analyze/analyze.dart';

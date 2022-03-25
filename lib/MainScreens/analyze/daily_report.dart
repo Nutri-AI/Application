@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:demo/CustomDesign/customColor.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -368,7 +369,7 @@ class _dailyReportState extends State<dailyReport> {
                                     yValueMapper: (Nutridata nut, _) =>
                                         nut.nutriIntake,
                                     name: '사용자 섭취량',
-                                    color: Colors.green,
+                                    color: Appcolor.green,
                                     width: 0.4,
                                     borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
@@ -380,7 +381,7 @@ class _dailyReportState extends State<dailyReport> {
                                     yValueMapper: (Nutridata nut, _) =>
                                         nut.nutriResidual,
                                     name: '권장 섭취량',
-                                    color: Colors.grey,
+                                    color: Appcolor.brown,
                                     width: 0.4,
                                     borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
