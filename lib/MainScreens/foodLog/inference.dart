@@ -18,8 +18,9 @@ Future<dynamic> sendInfData(
     'class_list': classList,
     'food_list': foodList,
   };
-  String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
-  // String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
+  // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
+  String baseUrl = 'http://192.168.1.98:8000/log/post/meal/log/'; // 영우
+  // String baseUrl = 'http://15.164.154.35:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl + userid),
     headers: <String, String>{
@@ -85,36 +86,33 @@ class _InferenceState extends State<Inference> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const Text(
+                "Please Select the Detail!",
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 20),
               Image.network(
                 url,
                 width: MediaQuery.of(context).size.width / 1.1,
                 // height: 400,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      for (var i = 0; i < classType.length; i++)
+              SizedBox(height: 10),
+              Column(
+                children: <Widget>[
+                  for (var i = 0; i < classType.length; i++)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
                         Text(
-                          classType[i] + '의 세부카테고리:   ',
+                          classType[i] + ' →     ',
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.w400),
                         ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      for (var i = 0; i < classType.length; i++)
                         DropdownButton<dynamic>(
                           // value: dropdownValue = foodList![i][0],
                           value: foodSelection[i],
-                          icon: const Icon(Icons.arrow_downward),
+                          icon: const Icon(Icons.arrow_drop_down),
                           onChanged: (dynamic newValue) {
                             setState(() {
                               foodSelection[i] = newValue!;
@@ -127,15 +125,16 @@ class _InferenceState extends State<Inference> {
                               value: value,
                               child: Text(
                                 value,
-                                style: TextStyle(fontSize: 12),
+                                style: TextStyle(fontSize: 16),
                               ),
                             );
                           }).toList(),
                         ),
-                    ],
-                  )
+                      ],
+                    ),
                 ],
               ),
+              SizedBox(height: 15),
               Container(
                 width: MediaQuery.of(context).size.width / 1.3,
                 height: MediaQuery.of(context).size.height / 15,
