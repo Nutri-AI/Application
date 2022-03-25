@@ -15,7 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:demo/MainScreens/foodLog/inference.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  // String baseUrl = 'http://15.164.154.35:8000/log/today/homepage/'; // angwoo
+  // String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
   String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
   final response = await http.get(
@@ -37,7 +37,7 @@ Future<dynamic> predictImg(String userid) async {
       final imageTemporary = File(image.path);
       // setState(() => this.image = imageTemporary);
       String result = '';
-      // String baseUrl = 'http://15.164.154.35:8000/log/upload/image/'; // 혜원
+      // String baseUrl = 'http://52.78.143.49:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
       String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
       var uri = Uri.parse(baseUrl + userid);
