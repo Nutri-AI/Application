@@ -31,7 +31,7 @@ Future<UserSignUpInfo> createUser(
   };
   // String baseUrl = 'http://10.0.2.2:8000/user/join'; // 혜원
   String baseUrl = 'http://192.168.1.98:8000/user/join'; // 영우
-  // String baseUrl = 'http://15.164.154.35:8000/user/join';
+  // String baseUrl = 'http://52.78.143.49:8000/user/join';
 
   final response = await http.post(
     Uri.parse(baseUrl),

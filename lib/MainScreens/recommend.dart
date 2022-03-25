@@ -13,7 +13,7 @@ import 'package:image_picker/image_picker.dart';
 Future<NutriStat> fetchUserData(String userid) async {
   String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
-  // String baseUrl = 'http://15.164.154.35:8000/log/today/homepage/'; // angwoo
+  // String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
   final response = await http.get(
     Uri.parse(baseUrl + userid),
   );

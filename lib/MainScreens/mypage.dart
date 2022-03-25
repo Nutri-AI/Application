@@ -12,11 +12,11 @@ import 'package:demo/json/UserInfo.dart';
 Future<UserInfo> fetchUserData(String userid) async {
   // String baseUrl = 'http://10.0.2.2:8000/user/info/'; // 혜원
   String baseUrl = 'http://192.168.1.98:8000/user/info/'; // 영우
-  // String baseUrl = 'http://15.164.154.35:8000/user/info/'; // 영우
+  // String baseUrl = 'http://52.78.143.49:8000/user/info/'; // 영우
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
-    return UserInfo.fromJson(jsonDecode(response.body));
+    return UserInfo.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
   } else {
     throw Exception('Failed to load data');
   }

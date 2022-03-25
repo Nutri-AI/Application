@@ -13,11 +13,11 @@ import 'dart:convert';
 Future<NutriStat> fetchAnalysisData(String userid) async {
   // String baseUrl = 'http://10.0.2.2:8000/log/week/status/'; // 혜원
   String baseUrl = 'http://192.168.1.98:8000/log/week/status/'; // 영우
-  // String baseUrl = 'http://15.164.154.35:8000/log/week/status/'; // 영우
+  // String baseUrl = 'http://52.78.143.49:8000/log/week/status/'; // 영우
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
-    return NutriStat.fromJson(jsonDecode(response.body));
+    return NutriStat.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
   } else {
     throw Exception('Failed to load data');
   }
@@ -51,7 +51,6 @@ class _weeklyReportState extends State<weeklyReport> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          // padding: EdgeInsets.all(5),
           child: FutureBuilder<NutriStat>(
             future: analData,
             builder: (context, snapshot) {
@@ -298,7 +297,8 @@ class _weeklyReportState extends State<weeklyReport> {
                 return SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(15),
+                    height: MediaQuery.of(context).size.height / 0.4,
                     child: Column(
                       children: [
                         Row(
@@ -311,14 +311,6 @@ class _weeklyReportState extends State<weeklyReport> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            // Text(
-                            //   // 날짜
-                            //   DateFormat("MM-dd").format(DateTime.now()),
-                            //   style: const TextStyle(
-                            //     fontSize: 23,
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // ),
                             Expanded(child: Container()),
                             Text(
                               // 이름
@@ -389,7 +381,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                         nut.nutriIntake,
                                     name: '사용자 섭취량',
                                     color: Colors.green,
-                                    width: 0.5,
+                                    width: 0.4,
                                     borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
                                   ),
@@ -401,7 +393,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                         nut.nutriResidual,
                                     name: '권장 섭취량',
                                     color: Colors.grey,
-                                    width: 0.5,
+                                    width: 0.4,
                                     borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
                                   )
@@ -411,1042 +403,281 @@ class _weeklyReportState extends State<weeklyReport> {
                               Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     const SizedBox(height: 30),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Carbohydrate}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Carbohydrate}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "g",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Carbohydrate}/${snapshot.data!.rdi.Carbohydrate}\n(g)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 38),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 단백질
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Protein}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 단백질 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Protein}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 단백질 권장 섭취량
-                                        const Text(
-                                          "g",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 단백질 단위
-                                      ],
+
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Protein}/${snapshot.data!.rdi.Protein}\n(g)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
+                                    ), // 단백질 섭취량
+                                    const SizedBox(height: 38),
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Fat}/${snapshot.data!.rdi.Fat}\n(g)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 38),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 지방
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Fat}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 지방 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Fat}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 지방 권장 섭취량
-                                        const Text(
-                                          "g",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 지방 단위
-                                      ],
-                                    ),
-                                    const SizedBox(height: 38),
-                                    // Row(
-                                    //   mainAxisAlignment: MainAxisAlignment.end,
-                                    //   // 콜레스테롤 어딨어!
-                                    //   children: [
-                                    //     Text(
-                                    //         "${snapshot.data!.nutrStatus.Cholesterol}"),
-                                    //     const Text("/"),
-                                    //     Text(
-                                    //         "${snapshot.data!.rdi.Cholesterol}"),
-                                    //     const Text("g"),
-                                    //   ],
-                                    // ),
+                                    // Text(
+                                    //       "${snapshot.data!.nutrStatus.Cholesterol}/${snapshot.data!.rdi.Cholesterol}g",
+                                    //       style: TextStyle(
+                                    //         fontSize: 12,
+                                    //       ),
+                                    //     ),
                                     // const SizedBox(height: 35),
-                                    Row(
-                                      // 총 식이섬유
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Dietary_Fiber}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Dietary_Fiber}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "g",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Dietary_Fiber}/${snapshot.data!.rdi.Dietary_Fiber}\n(g)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 37),
 
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Vitamin_B6}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Vitamin_B6}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Vitamin_B6}/${snapshot.data!.rdi.Vitamin_B6}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 37),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Vitamin_B12}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Vitamin_B12}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "μg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Vitamin_B12}/${snapshot.data!.rdi.Vitamin_B12}\n(μg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 37),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Folic_acid}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Folic_acid}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "DFE μg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), //
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Folic_acid}/${snapshot.data!.rdi.Folic_acid}\n(DFE μg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 38),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Niacin}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Niacin}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "mgNE",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Niacin}/${snapshot.data!.rdi.Niacin}\n(mgNE)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Vitamin_C}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Vitamin_C}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Vitamin_C}/${snapshot.data!.rdi.Vitamin_C}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Vitamin_A}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Vitamin_A}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "μg RAE",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Vitamin_A}/${snapshot.data!.rdi.Vitamin_A}\n(μg RAE)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Vitamin_D}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Vitamin_D}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "μg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Vitamin_D}/${snapshot.data!.rdi.Vitamin_D}\n(μg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Vitamin_E}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Vitamin_E}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg α-TE",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Vitamin_E}/${snapshot.data!.rdi.Vitamin_E}\n(mg α-TE)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Vitamin_K}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Vitamin_K}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "μg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Vitamin_K}/${snapshot.data!.rdi.Vitamin_K}\n(μg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Calcium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Calcium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Calcium}/${snapshot.data!.rdi.Calcium}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Phosphorus}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Phosphorus}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Phosphorus}/${snapshot.data!.rdi.Phosphorus}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Potassium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Potassium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Potassium}/${snapshot.data!.rdi.Potassium}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Sodium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Sodium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Sodium}/${snapshot.data!.rdi.Sodium}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Magnesium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Magnesium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Magnesium}/${snapshot.data!.rdi.Magnesium}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Iron}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Iron}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Iron}/${snapshot.data!.rdi.Iron}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Copper}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Copper}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Copper}/${snapshot.data!.rdi.Copper}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Zinc}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Zinc}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Zinc}/${snapshot.data!.rdi.Zinc}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Manganese}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Manganese}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Manganese}/${snapshot.data!.rdi.Manganese}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Selenium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Selenium}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "μg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Selenium}/${snapshot.data!.rdi.Selenium}\n(μg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-
-                                      children: [
-                                        Text(
-                                          "${double.parse((snapshot.data!.nutrStatus.Leucine / 1000).toStringAsFixed(1))}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Leucine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Leucine}/${snapshot.data!.rdi.Leucine}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Iso_Leucine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Iso_Leucine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Iso_Leucine}/${snapshot.data!.rdi.Iso_Leucine}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Histidine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Histidine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Histidine}/${snapshot.data!.rdi.Histidine}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 42),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Linoleic_Acid}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Linoleic_Acid}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "g",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Linoleic_Acid}/${snapshot.data!.rdi.Linoleic_Acid}\n(g)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Alpha_Linolenic_Acid}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Alpha_Linolenic_Acid}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "g",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Alpha_Linolenic_Acid}/${snapshot.data!.rdi.Alpha_Linolenic_Acid}\n(g)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 42),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Lysine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Lysine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Lysine}/${snapshot.data!.rdi.Lysine}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 42),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Methionine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Methionine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Methionine}/${snapshot.data!.rdi.Methionine}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Phenylalanine_Tyrosine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Phenylalanine_Tyrosine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Phenylalanine_Tyrosine}/${snapshot.data!.rdi.Phenylalanine_Tyrosine}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Threonine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Threonine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Threonine}/${snapshot.data!.rdi.Threonine}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 40),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      // 탄수화물
-                                      children: [
-                                        Text(
-                                          "${snapshot.data!.nutrStatus.Valine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 섭취량
-                                        const Text(
-                                          "/",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${snapshot.data!.rdi.Valine}",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 권장 섭취량
-                                        const Text(
-                                          "mg",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ), // 탄수화물 단위
-                                      ],
+                                    Text(
+                                      "${snapshot.data!.nutrStatus.Valine}/${snapshot.data!.rdi.Valine}\n(mg)",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.end,
                                     ),
                                     const SizedBox(height: 30),
                                   ],
