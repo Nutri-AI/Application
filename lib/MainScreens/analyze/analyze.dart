@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:demo/CustomDesign/customColor.dart';
 import 'package:demo/MainScreens/analyze/daily_report.dart';
 import 'package:demo/MainScreens/analyze/weekly_report.dart';
 import 'package:demo/MainScreens/foodLog/inference.dart';
@@ -56,17 +56,19 @@ class _AnalyzeState extends State<Analyze> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.green,
+            backgroundColor: Appcolor.darkGreen1,
             toolbarHeight: 10,
             bottom: const TabBar(
+              padding: EdgeInsets.all(10),
+              isScrollable: true,
               tabs: [
                 const Text(
                   "Daily Report",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const Text(
                   "Weekly Report",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),

@@ -9,6 +9,7 @@ import 'package:demo/json/nutriStat.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
   String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo

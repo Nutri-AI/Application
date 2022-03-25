@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:math';
-
+import 'package:demo/CustomDesign/customColor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter/services.dart';
@@ -139,9 +139,9 @@ class _FoodLogState extends State<FoodLog> {
                         children: [
                           Text(
                             // 날짜
-                            DateFormat("MM/dd").format(DateTime.now()),
+                            DateFormat("yy-MM-dd").format(DateTime.now()),
                             style: const TextStyle(
-                              fontSize: 23,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -199,7 +199,7 @@ class _FoodLogState extends State<FoodLog> {
                         padding: EdgeInsets.only(right: 15),
                         height: MediaQuery.of(context).size.height / 4.5,
                         decoration: BoxDecoration(
-                          color: Colors.green.withAlpha(100),
+                          color: Appcolor.lightGreen,
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Row(
@@ -214,7 +214,7 @@ class _FoodLogState extends State<FoodLog> {
                                   yValueMapper: (Nutridata nut, _) =>
                                       nut.nutriIntake,
                                   name: '사용자 섭취량',
-                                  color: Colors.green,
+                                  color: Appcolor.green,
                                   width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
@@ -226,7 +226,7 @@ class _FoodLogState extends State<FoodLog> {
                                   yValueMapper: (Nutridata nut, _) =>
                                       nut.nutriResidual,
                                   name: '권장 섭취량',
-                                  color: Colors.grey,
+                                  color: Appcolor.brown,
                                   width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
@@ -371,10 +371,10 @@ class _FoodLogState extends State<FoodLog> {
                             ),
                             leading: Icon(
                               Icons.food_bank_outlined,
-                              color: Colors.yellowAccent[200],
+                              color: Appcolor.green,
                               size: 30,
                             ),
-                            tileColor: Colors.green[200],
+                            tileColor: Appcolor.lightGreen,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
