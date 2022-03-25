@@ -12,12 +12,12 @@ import 'dart:convert';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'inference.dart';
-// import 'package:provider/provider.dart';
+import 'package:demo/MainScreens/foodLog/inference.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
-  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
+  // String baseUrl = 'http://15.164.154.35:8000/log/today/homepage/'; // angwoo
+  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
+  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
   final response = await http.get(
     Uri.parse(baseUrl + userid),
   );
@@ -37,8 +37,9 @@ Future<dynamic> predictImg(String userid) async {
       final imageTemporary = File(image.path);
       // setState(() => this.image = imageTemporary);
       String result = '';
-      String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
-      // String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
+      // String baseUrl = 'http://15.164.154.35:8000/log/upload/image/'; // 혜원
+      // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
+      String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};
@@ -349,30 +350,34 @@ class _FoodLogState extends State<FoodLog> {
                       ),
                       const SizedBox(height: 25),
                       for (var i = 0; i < _mealData.length; i++)
-                        ListTile(
-                          title: Text(
-                            _mealData[i][0].substring(11, 16),
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          child: ListTile(
+                            title: Text(
+                              _mealData[i][0].substring(11, 16),
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w300,
+                              ),
                             ),
-                          ),
-                          subtitle: Text(
-                            _mealData[i][1].toString(),
-                            style: TextStyle(
-                              fontSize: 19,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black,
+                            subtitle: Text(
+                              _mealData[i][1].toString().substring(
+                                  1, (_mealData[i][1].toString().length - 1)),
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          leading: Icon(
-                            Icons.food_bank_outlined,
-                            color: Colors.yellowAccent[200],
-                            size: 30,
-                          ),
-                          tileColor: Colors.green[200],
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            leading: Icon(
+                              Icons.food_bank_outlined,
+                              color: Colors.yellowAccent[200],
+                              size: 30,
+                            ),
+                            tileColor: Colors.green[200],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                           ),
                         ),
                     ],

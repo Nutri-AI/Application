@@ -29,8 +29,10 @@ Future<UserSignUpInfo> createUser(
       'PAI': PAI,
     },
   };
-  String baseUrl = 'http://10.0.2.2:8000/user/join'; // 혜원
-  // String baseUrl = 'http://192.168.1.98:8000/user/join'; // 영우
+  // String baseUrl = 'http://10.0.2.2:8000/user/join'; // 혜원
+  String baseUrl = 'http://192.168.1.98:8000/user/join'; // 영우
+  // String baseUrl = 'http://15.164.154.35:8000/user/join';
+
   final response = await http.post(
     Uri.parse(baseUrl),
     headers: <String, String>{
@@ -132,7 +134,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
                 ),
                 DropdownButton(
                   value: dropdownValue1,
-                  icon: const Icon(Icons.arrow_downward_rounded),
+                  icon: const Icon(Icons.arrow_drop_down),
                   elevation: 0,
                   onChanged: (String? newValue) {
                     setState(() {
@@ -199,7 +201,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
                 ),
                 DropdownButton(
                   value: dropdownValue2,
-                  icon: const Icon(Icons.arrow_downward_rounded),
+                  icon: const Icon(Icons.arrow_drop_down),
                   elevation: 0,
                   style: const TextStyle(
                     fontSize: 11,

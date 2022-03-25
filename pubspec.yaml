@@ -66,9 +66,9 @@ flutter:
   uses-material-design: true
 
   assets:
-    # - assets/2267CA59-3D9C-4869-8CB3-E9CAB5E15EA2_1_105_c.jpeg
     - assets/NutriAI.png
     - assets/greenprofile.jpg
+    - assets/Iherb_logo.jpeg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
