@@ -17,8 +17,8 @@ import 'package:demo/MainScreens/foodLog/inference.dart';
 Future<NutriStat> fetchUserData(String userid) async {
   // String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
-  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
-  String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
+  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
+  // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
   final response = await http.get(
     Uri.parse(baseUrl + userid),
   );
@@ -39,9 +39,9 @@ Future<dynamic> predictImg(String userid) async {
       // setState(() => this.image = imageTemporary);
       String result = '';
       // String baseUrl = 'http://52.78.143.49:8000/log/upload/image/'; // 혜원
-      // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
+      String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
-      String baseUrl = 'http://192.168.219.107:8000/log/upload/image/';
+      //String baseUrl = 'http://192.168.219.107:8000/log/upload/image/';
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};

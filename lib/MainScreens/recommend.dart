@@ -1,26 +1,26 @@
 import 'dart:io';
 
+import 'package:demo/json/nutriRecommend.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
-import 'package:demo/json/nutriStat.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-Future<NutriStat> fetchUserData(String userid) async {
+Future<Product> fetchRecommendations(String userid) async {
   // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
-  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
+  String baseUrl = 'http://10.0.2.2:8000/log/recommend/nutrients/'; // hhw
   // String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
-  String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
+  // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
   final response = await http.get(
     Uri.parse(baseUrl + userid),
   );
   if (response.statusCode == 200) {
-    return NutriStat.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    return Product.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
   } else {
     throw Exception('Failed to load data');
   }
@@ -36,9 +36,10 @@ class Recommend extends StatefulWidget {
 
 class _RecommendState extends State<Recommend> {
   late String userid;
-  late Future<NutriStat> userData;
+  late Future<Product> recommendations;
   late dynamic url;
   late dynamic key;
+  NumberFormat myFormat = NumberFormat.decimalPattern('en_us');
   launchBrower(String url) async {
     if (await canLaunch(url)) {
       await launch(url, forceSafariVC: true);
@@ -48,7 +49,7 @@ class _RecommendState extends State<Recommend> {
   @override
   void initState() {
     userid = widget.email;
-    userData = fetchUserData(userid);
+    recommendations = fetchRecommendations(userid);
     // _chartData = getChartData();
     super.initState();
   }
@@ -57,8 +58,8 @@ class _RecommendState extends State<Recommend> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: FutureBuilder<NutriStat>(
-          future: userData,
+        child: FutureBuilder<Product>(
+          future: recommendations,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               // final1
@@ -81,7 +82,7 @@ class _RecommendState extends State<Recommend> {
                           Expanded(child: Container()),
                           Text(
                             // 이름
-                            "Hello ${snapshot.data!.username}!",
+                            "Hello Hyewon!",
                             style: const TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.bold,
@@ -119,7 +120,7 @@ class _RecommendState extends State<Recommend> {
                             children: [
                               Row(
                                 children: <Widget>[
-                                  for (var i = 0; i < 4; i++)
+                                  for (var i = 0; i < 3; i++)
                                     Container(
                                       padding: EdgeInsets.all(10),
                                       width: MediaQuery.of(context).size.width /
@@ -134,16 +135,17 @@ class _RecommendState extends State<Recommend> {
                                             child: OutlinedButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  launchBrower(
-                                                      "https://kr.iherb.com/pr/now-foods-vitamin-d-3-125-mcg-5-000-iu-120-softgels/10421");
+                                                  launchBrower(snapshot
+                                                      .data!.vitamin[i].url);
                                                 });
                                               },
                                               child: Image.asset(
                                                   'assets/Iherb_logo.jpeg'),
                                             ),
                                           ),
-                                          const Text("Nutrients Title"),
-                                          const Text("Nutrients Price"),
+                                          Text(snapshot.data!.vitamin[i].title),
+                                          Text(
+                                              "${myFormat.format(snapshot.data!.vitamin[i].price).toString()}원"),
                                         ],
                                       ),
                                     ),
@@ -171,7 +173,7 @@ class _RecommendState extends State<Recommend> {
                             children: [
                               Row(
                                 children: <Widget>[
-                                  for (var i = 0; i < 4; i++)
+                                  for (var i = 0; i < 3; i++)
                                     Container(
                                       padding: EdgeInsets.all(10),
                                       width: MediaQuery.of(context).size.width /
@@ -186,16 +188,17 @@ class _RecommendState extends State<Recommend> {
                                             child: OutlinedButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  launchBrower(
-                                                      "https://kr.iherb.com/pr/now-foods-vitamin-d-3-125-mcg-5-000-iu-120-softgels/10421");
+                                                  launchBrower(snapshot
+                                                      .data!.mineral[i].url);
                                                 });
                                               },
                                               child: Image.asset(
                                                   'assets/Iherb_logo.jpeg'),
                                             ),
                                           ),
-                                          const Text("Nutrients Title"),
-                                          const Text("Nutrients Price"),
+                                          Text(snapshot.data!.mineral[i].title),
+                                          Text(
+                                              "${myFormat.format(snapshot.data!.mineral[i].price).toString()}원"),
                                         ],
                                       ),
                                     ),
@@ -224,7 +227,7 @@ class _RecommendState extends State<Recommend> {
                             children: [
                               Row(
                                 children: <Widget>[
-                                  for (var i = 0; i < 4; i++)
+                                  for (var i = 0; i < 3; i++)
                                     Container(
                                       padding: EdgeInsets.all(10),
                                       width: MediaQuery.of(context).size.width /
@@ -239,16 +242,18 @@ class _RecommendState extends State<Recommend> {
                                             child: OutlinedButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  launchBrower(
-                                                      "https://kr.iherb.com/pr/now-foods-vitamin-d-3-125-mcg-5-000-iu-120-softgels/10421");
+                                                  launchBrower(snapshot
+                                                      .data!.aminoAcid[i].url);
                                                 });
                                               },
                                               child: Image.asset(
                                                   'assets/Iherb_logo.jpeg'),
                                             ),
                                           ),
-                                          const Text("Nutrients Title"),
-                                          const Text("Nutrients Price"),
+                                          Text(snapshot
+                                              .data!.aminoAcid[i].title),
+                                          Text(
+                                              "${myFormat.format(snapshot.data!.aminoAcid[i].price).toString()}원"),
                                         ],
                                       ),
                                     ),
