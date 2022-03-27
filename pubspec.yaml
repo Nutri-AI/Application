@@ -70,6 +70,7 @@ flutter:
     - assets/NutriAI.png
     - assets/greenprofile.jpg
     - assets/Iherb_logo.jpeg
+    - assets/logos.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

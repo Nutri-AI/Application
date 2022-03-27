@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:demo/json/nutriRecommend.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,6 +37,7 @@ class _RecommendState extends State<Recommend> {
   late Future<Product> recommendations;
   late dynamic url;
   late dynamic key;
+  dynamic imgUrls;
   NumberFormat myFormat = NumberFormat.decimalPattern('en_us');
   launchBrower(String url) async {
     if (await canLaunch(url)) {
@@ -46,11 +45,19 @@ class _RecommendState extends State<Recommend> {
     }
   }
 
+  Future loadImgUrls() async {
+    var jsonText = await rootBundle.loadString('assets/logos.json');
+    final logoUrls = jsonDecode(jsonText);
+    setState(() {
+      imgUrls = logoUrls;
+    });
+  }
+
   @override
   void initState() {
     userid = widget.email;
     recommendations = fetchRecommendations(userid);
-    // _chartData = getChartData();
+    imgUrls = loadImgUrls();
     super.initState();
   }
 
@@ -62,8 +69,22 @@ class _RecommendState extends State<Recommend> {
           future: recommendations,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              // final1
-              // final2
+              Image imgUrl(String name) {
+                if (imgUrls.containsKey(name.split(',')[0])) {
+                  return Image.network(
+                    imgUrls[name.split(',')[0]],
+                    width: 150,
+                    height: 100,
+                  );
+                } else {
+                  return Image.asset(
+                    'assets/Iherb_logo.jpeg',
+                    width: 150,
+                    height: 100,
+                  );
+                }
+              }
+
               return SingleChildScrollView(
                 padding: const EdgeInsets.all(20),
                 child: Container(
@@ -139,8 +160,8 @@ class _RecommendState extends State<Recommend> {
                                                       .data!.vitamin[i].url);
                                                 });
                                               },
-                                              child: Image.asset(
-                                                  'assets/Iherb_logo.jpeg'),
+                                              child: imgUrl(snapshot
+                                                  .data!.vitamin[i].title),
                                             ),
                                           ),
                                           Text(snapshot.data!.vitamin[i].title),
@@ -192,8 +213,8 @@ class _RecommendState extends State<Recommend> {
                                                       .data!.mineral[i].url);
                                                 });
                                               },
-                                              child: Image.asset(
-                                                  'assets/Iherb_logo.jpeg'),
+                                              child: imgUrl(snapshot
+                                                  .data!.mineral[i].title),
                                             ),
                                           ),
                                           Text(snapshot.data!.mineral[i].title),
@@ -246,8 +267,8 @@ class _RecommendState extends State<Recommend> {
                                                       .data!.aminoAcid[i].url);
                                                 });
                                               },
-                                              child: Image.asset(
-                                                  'assets/Iherb_logo.jpeg'),
+                                              child: imgUrl(snapshot
+                                                  .data!.aminoAcid[i].title),
                                             ),
                                           ),
                                           Text(snapshot
