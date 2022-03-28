@@ -13,8 +13,8 @@ import 'dart:async';
 import 'dart:convert';
 
 Future<NutriStat> fetchAnalysisData(String userid) async {
-  String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // 혜원
-  // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // 영우
+  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // 혜원
+  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // 영우
   // String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/';
   // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
   final response = await http.get(Uri.parse(baseUrl + userid));
@@ -57,18 +57,18 @@ class _AnalyzeState extends State<Analyze> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Appcolor.darkGreen1,
+            backgroundColor: Appcolor.green,
             toolbarHeight: 10,
             bottom: const TabBar(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.only(bottom: 15),
               isScrollable: true,
               tabs: [
                 const Text(
-                  "Daily Report",
+                  "Daily Report     ",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const Text(
-                  "Weekly Report",
+                  "     Weekly Report",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],

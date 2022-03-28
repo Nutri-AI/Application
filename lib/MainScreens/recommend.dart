@@ -10,8 +10,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<Product> fetchRecommendations(String userid) async {
-  // String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
-  String baseUrl = 'http://10.0.2.2:8000/log/recommend/nutrients/'; // hhw
+  String baseUrl =
+      'http://192.168.1.98:8000/log/recommend/nutrients/'; // angwoo
+  // String baseUrl = 'http://10.0.2.2:8000/log/recommend/nutrients/'; // hhw
   // String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
   final response = await http.get(
@@ -41,7 +42,7 @@ class _RecommendState extends State<Recommend> {
   NumberFormat myFormat = NumberFormat.decimalPattern('en_us');
   launchBrower(String url) async {
     if (await canLaunch(url)) {
-      await launch(url, forceSafariVC: false, forceWebView: false);
+      await launch(url, forceSafariVC: true);
     }
   }
 
@@ -75,6 +76,13 @@ class _RecommendState extends State<Recommend> {
                     imgUrls[name.split(',')[0]],
                     width: 150,
                     height: 100,
+                    errorBuilder: (context, exception, stackTrace) {
+                      return Image.asset(
+                        'assets/Iherb_logo.jpeg',
+                        width: 150,
+                        height: 100,
+                      );
+                    },
                   );
                 } else {
                   return Image.asset(
@@ -117,7 +125,7 @@ class _RecommendState extends State<Recommend> {
                           const Text(
                             "Only For You!",
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
+                                fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                           Expanded(child: Container()),
                         ],
@@ -164,9 +172,29 @@ class _RecommendState extends State<Recommend> {
                                                   .data!.vitamin[i].title),
                                             ),
                                           ),
-                                          Text(snapshot.data!.vitamin[i].title),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
                                           Text(
-                                              "${myFormat.format(snapshot.data!.vitamin[i].price).toString()}원"),
+                                            snapshot.data!.vitamin[i].title
+                                                .substring(0, 35),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          SizedBox(height: 5),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "${myFormat.format(snapshot.data!.vitamin[i].price).toString()}원",
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w300,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -217,9 +245,30 @@ class _RecommendState extends State<Recommend> {
                                                   .data!.mineral[i].title),
                                             ),
                                           ),
-                                          Text(snapshot.data!.mineral[i].title),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
                                           Text(
-                                              "${myFormat.format(snapshot.data!.mineral[i].price).toString()}원"),
+                                            snapshot.data!.mineral[i].title
+                                                .substring(0, 30),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "${myFormat.format(snapshot.data!.mineral[i].price).toString()}원",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w300,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -271,10 +320,30 @@ class _RecommendState extends State<Recommend> {
                                                   .data!.aminoAcid[i].title),
                                             ),
                                           ),
-                                          Text(snapshot
-                                              .data!.aminoAcid[i].title),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
                                           Text(
-                                              "${myFormat.format(snapshot.data!.aminoAcid[i].price).toString()}원"),
+                                            snapshot.data!.aminoAcid[i].title
+                                                .substring(0, 30),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "${myFormat.format(snapshot.data!.aminoAcid[i].price).toString()}원",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w300,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ),
