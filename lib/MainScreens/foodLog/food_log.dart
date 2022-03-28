@@ -401,20 +401,25 @@ class _FoodLogState extends State<FoodLog> {
           key = jsonDecode(res)['Origin_S3_key'];
           classCategory = jsonDecode(res)['Class_type'];
 
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Inference(
-                uri: url,
-                subcat: foodList,
-                s3Key: key,
-                classCat: classCategory,
-                email: userid,
+          if (classCategory.isEmpty) {
+            print('None detected');
+            Text('None detected, Sorry');
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Inference(
+                  uri: url,
+                  subcat: foodList,
+                  s3Key: key,
+                  classCat: classCategory,
+                  email: userid,
+                ),
               ),
-            ),
-          ).then((value) => setState(() {
-                userData = fetchUserData(userid);
-              }));
+            ).then((value) => setState(() {
+                  userData = fetchUserData(userid);
+                }));
+          }
         },
         child: const Icon(Icons.add),
         backgroundColor: Colors.green[600],

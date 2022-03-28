@@ -41,7 +41,7 @@ class _RecommendState extends State<Recommend> {
   NumberFormat myFormat = NumberFormat.decimalPattern('en_us');
   launchBrower(String url) async {
     if (await canLaunch(url)) {
-      await launch(url, forceSafariVC: true);
+      await launch(url, forceSafariVC: false, forceWebView: false);
     }
   }
 
@@ -103,7 +103,7 @@ class _RecommendState extends State<Recommend> {
                           Expanded(child: Container()),
                           Text(
                             // 이름
-                            "Hello Hyewon!",
+                            "Hello ${snapshot.data!.username}!",
                             style: const TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.bold,

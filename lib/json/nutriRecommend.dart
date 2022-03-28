@@ -10,6 +10,7 @@ Product _$nutriStatFromJson(Map<String, dynamic> json) {
     aminoAcid: aaList,
     vitamin: vitList,
     mineral: minList,
+    username: json['name'] as String,
   );
 }
 
@@ -17,9 +18,13 @@ class Product {
   final List<Suppl> aminoAcid;
   final List<Suppl> vitamin;
   final List<Suppl> mineral;
+  final String username;
 
   Product(
-      {required this.aminoAcid, required this.vitamin, required this.mineral});
+      {required this.aminoAcid,
+      required this.vitamin,
+      required this.mineral,
+      required this.username});
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$nutriStatFromJson(json);
