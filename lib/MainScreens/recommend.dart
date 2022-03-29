@@ -177,7 +177,18 @@ class _RecommendState extends State<Recommend> {
                                           ),
                                           Text(
                                             snapshot.data!.vitamin[i].title
-                                                .substring(0, 35),
+                                                .split(",")
+                                                .sublist(1, 3)
+                                                .toString()
+                                                .substring(
+                                                    1,
+                                                    snapshot.data!.vitamin[i]
+                                                            .title
+                                                            .split(",")
+                                                            .sublist(1, 3)
+                                                            .toString()
+                                                            .length -
+                                                        1),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -250,7 +261,18 @@ class _RecommendState extends State<Recommend> {
                                           ),
                                           Text(
                                             snapshot.data!.mineral[i].title
-                                                .substring(0, 30),
+                                                .split(",")
+                                                .sublist(1, 3)
+                                                .toString()
+                                                .substring(
+                                                    1,
+                                                    snapshot.data!.mineral[i]
+                                                            .title
+                                                            .split(",")
+                                                            .sublist(1, 3)
+                                                            .toString()
+                                                            .length -
+                                                        1),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -325,7 +347,18 @@ class _RecommendState extends State<Recommend> {
                                           ),
                                           Text(
                                             snapshot.data!.aminoAcid[i].title
-                                                .substring(0, 30),
+                                                .split(",")
+                                                .sublist(1, 3)
+                                                .toString()
+                                                .substring(
+                                                    1,
+                                                    snapshot.data!.aminoAcid[i]
+                                                            .title
+                                                            .split(",")
+                                                            .sublist(1, 3)
+                                                            .toString()
+                                                            .length -
+                                                        1),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
