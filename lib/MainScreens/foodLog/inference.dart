@@ -147,14 +147,14 @@ class _InferenceState extends State<Inference> {
                     var res =
                         sendInfData(userid, key, classType, foodSelection);
 
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
 
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => HomePage(email: userid),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(email: userid),
+                      ),
+                    );
                   },
                   child: const Text("Confirm"),
                 ),
