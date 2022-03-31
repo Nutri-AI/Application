@@ -57,7 +57,7 @@ class _AnalyzeState extends State<Analyze> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Appcolor.green,
+            backgroundColor: Colors.green,
             toolbarHeight: 10,
             bottom: const TabBar(
               padding: EdgeInsets.only(bottom: 15),

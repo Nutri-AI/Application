@@ -202,7 +202,7 @@ class _FoodLogState extends State<FoodLog> {
                         padding: EdgeInsets.only(right: 15),
                         height: MediaQuery.of(context).size.height / 4.5,
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(255, 247, 226, 1),
+                          color: Color.fromARGB(100, 247, 239, 153),
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Row(
@@ -337,12 +337,17 @@ class _FoodLogState extends State<FoodLog> {
                                 color: Colors.black,
                               ),
                             ),
-                            leading: Icon(
-                              Icons.food_bank_outlined,
-                              color: Color.fromRGBO(245, 118, 21, 1),
-                              size: 30,
+                            leading: Image.asset(
+                              'assets/forkspoon.png',
+                              width: 35,
+                              height: 35,
                             ),
-                            tileColor: Color.fromRGBO(223, 247, 202, 1),
+                            tileColor: Color.fromARGB(
+                              100,
+                              172,
+                              223,
+                              135,
+                            ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
