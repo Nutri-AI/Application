@@ -15,8 +15,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:demo/MainScreens/foodLog/inference.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  // String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
-  String baseUrl = 'http://192.168.1.98:8000/log/today/homepage/'; // angwoo
+  String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
+  // String baseUrl = 'http://192.168.1.7:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
   // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
   final response = await http.get(
@@ -38,9 +38,9 @@ Future<dynamic> predictImg(String userid) async {
       final imageTemporary = File(image.path);
       // setState(() => this.image = imageTemporary);
       String result = '';
-      // String baseUrl = 'http://52.78.143.49:8000/log/upload/image/'; // 혜원
+      String baseUrl = 'http://52.78.143.49:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
-      String baseUrl = 'http://192.168.1.98:8000/log/upload/image/'; // 영우
+      // String baseUrl = 'http://192.168.1.7:8000/log/upload/image/'; // 영우
       //String baseUrl = 'http://192.168.219.107:8000/log/upload/image/';
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
@@ -201,7 +201,7 @@ class _FoodLogState extends State<FoodLog> {
                         padding: EdgeInsets.only(right: 15),
                         height: MediaQuery.of(context).size.height / 4.5,
                         decoration: BoxDecoration(
-                          color: Appcolor.beige,
+                          color: Color.fromRGBO(255, 247, 226, 1),
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Row(
@@ -216,7 +216,8 @@ class _FoodLogState extends State<FoodLog> {
                                   yValueMapper: (Nutridata nut, _) =>
                                       nut.nutriIntake,
                                   name: '사용자 섭취량',
-                                  color: Appcolor.darkGreen1,
+                                  color: Color.fromARGB(255, 62, 165, 65),
+                                  borderColor: Colors.green[100],
                                   width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
@@ -228,7 +229,7 @@ class _FoodLogState extends State<FoodLog> {
                                   yValueMapper: (Nutridata nut, _) =>
                                       nut.nutriResidual,
                                   name: '권장 섭취량',
-                                  color: Appcolor.brown,
+                                  color: Color.fromARGB(255, 92, 92, 92),
                                   width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
@@ -337,10 +338,10 @@ class _FoodLogState extends State<FoodLog> {
                             ),
                             leading: Icon(
                               Icons.food_bank_outlined,
-                              color: Appcolor.green,
+                              color: Color.fromRGBO(246, 136, 2, 1),
                               size: 30,
                             ),
-                            tileColor: Appcolor.lightGreen,
+                            tileColor: Color.fromRGBO(223, 247, 202, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
