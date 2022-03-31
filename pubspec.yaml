@@ -73,6 +73,7 @@ flutter:
     - assets/Iherb_logo.jpeg
     - assets/logos.json
     - assets/Login_design.png
+    - assets/forkspoon.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

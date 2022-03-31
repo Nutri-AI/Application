@@ -367,7 +367,12 @@ class _weeklyReportState extends State<weeklyReport> {
                           padding: EdgeInsets.only(right: 15),
                           height: MediaQuery.of(context).size.height / 0.4,
                           decoration: BoxDecoration(
-                            color: Appcolor.lightGreen,
+                            color: Color.fromARGB(
+                              100,
+                              172,
+                              223,
+                              135,
+                            ),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -382,7 +387,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     yValueMapper: (Nutridata nut, _) =>
                                         nut.nutriIntake,
                                     name: '사용자 섭취량',
-                                    color: Appcolor.green,
+                                    color: Color.fromARGB(255, 62, 165, 65),
                                     width: 0.4,
                                     borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
@@ -394,7 +399,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     yValueMapper: (Nutridata nut, _) =>
                                         nut.nutriResidual,
                                     name: '권장 섭취량',
-                                    color: Appcolor.brown,
+                                    color: Color.fromARGB(245, 92, 92, 92),
                                     width: 0.4,
                                     borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
