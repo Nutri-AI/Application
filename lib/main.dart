@@ -8,8 +8,8 @@ import 'package:http/http.dart' as http;
 
 Future<bool> fetchUser(String userid) async {
   // String baseUrl = 'http://10.0.2.2:8000/user/info/'; // 혜원
-  String baseUrl = 'http://192.168.1.98:8000/user/info/'; // 영우
-  // String baseUrl = 'http://52.78.143.49:8000/user/info/'; // 영우
+  // String baseUrl = 'http://192.168.1.7:8000/user/info/'; // 영우
+  String baseUrl = 'http://52.78.143.49:8000/user/info/'; // 영우
   // String baseUrl = 'http://192.168.219.107:8000/user/info/'; // 영우 집
   final response = await http.get(Uri.parse(baseUrl + userid));
   if (response.body == 'null') {
@@ -32,7 +32,7 @@ class NutriaiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.lightGreen),
+      theme: ThemeData(primarySwatch: Colors.green),
       home: const MyLoginPage(title: 'NutriAI Login Demo'),
     );
   }
@@ -58,8 +58,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              width: MediaQuery.of(context).size.width / 1.2,
-              child: Image.asset('assets/NutriAI.png'),
+              width: MediaQuery.of(context).size.width / 1.1,
+              child: Image.asset('assets/Login_design.png'),
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -83,6 +83,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
               height: MediaQuery.of(context).size.height / 15,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
+                color: Appcolor.green,
               ),
               child: ElevatedButton(
                 onPressed: () async {
