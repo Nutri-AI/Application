@@ -201,7 +201,7 @@ class _FoodLogState extends State<FoodLog> {
                         padding: EdgeInsets.only(right: 15),
                         height: MediaQuery.of(context).size.height / 4.5,
                         decoration: BoxDecoration(
-                          color: Appcolor.beige,
+                          color: Color.fromRGBO(255, 247, 226, 1),
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Row(
@@ -216,7 +216,8 @@ class _FoodLogState extends State<FoodLog> {
                                   yValueMapper: (Nutridata nut, _) =>
                                       nut.nutriIntake,
                                   name: '사용자 섭취량',
-                                  color: Appcolor.darkGreen1,
+                                  color: Color.fromARGB(255, 62, 165, 65),
+                                  borderColor: Colors.green[100],
                                   width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
@@ -228,7 +229,7 @@ class _FoodLogState extends State<FoodLog> {
                                   yValueMapper: (Nutridata nut, _) =>
                                       nut.nutriResidual,
                                   name: '권장 섭취량',
-                                  color: Appcolor.brown,
+                                  color: Color.fromARGB(255, 92, 92, 92),
                                   width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
@@ -337,10 +338,10 @@ class _FoodLogState extends State<FoodLog> {
                             ),
                             leading: Icon(
                               Icons.food_bank_outlined,
-                              color: Appcolor.green,
+                              color: Color.fromRGBO(246, 136, 2, 1),
                               size: 30,
                             ),
-                            tileColor: Appcolor.lightGreen,
+                            tileColor: Color.fromRGBO(223, 247, 202, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
