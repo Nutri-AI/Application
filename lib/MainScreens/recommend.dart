@@ -1,4 +1,5 @@
 import 'package:demo/json/nutriRecommend.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter/services.dart';
@@ -394,7 +395,7 @@ class _RecommendState extends State<Recommend> {
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
-            return const CircularProgressIndicator();
+            return const CupertinoActivityIndicator();
           },
         ),
       ),

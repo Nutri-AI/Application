@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:demo/CustomDesign/customColor.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -355,7 +356,7 @@ class _dailyReportState extends State<dailyReport> {
                           height: MediaQuery.of(context).size.height / 0.4,
                           decoration: BoxDecoration(
                             color: Appcolor.lightGreen,
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
                             children: [
@@ -371,7 +372,7 @@ class _dailyReportState extends State<dailyReport> {
                                     name: '사용자 섭취량',
                                     color: Appcolor.green,
                                     width: 0.4,
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
                                   ),
                                   StackedBar100Series<Nutridata, String>(
@@ -383,7 +384,7 @@ class _dailyReportState extends State<dailyReport> {
                                     name: '권장 섭취량',
                                     color: Appcolor.brown,
                                     width: 0.4,
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
                                   )
                                 ],
@@ -718,7 +719,7 @@ class _dailyReportState extends State<dailyReport> {
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
-              return const CircularProgressIndicator();
+              return const CupertinoActivityIndicator();
             },
           ),
         ),

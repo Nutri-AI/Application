@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:demo/CustomDesign/customColor.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter/services.dart';
@@ -338,7 +339,7 @@ class _FoodLogState extends State<FoodLog> {
                             ),
                             leading: Icon(
                               Icons.food_bank_outlined,
-                              color: Color.fromRGBO(246, 136, 2, 1),
+                              color: Color.fromRGBO(245, 118, 21, 1),
                               size: 30,
                             ),
                             tileColor: Color.fromRGBO(223, 247, 202, 1),
@@ -354,7 +355,7 @@ class _FoodLogState extends State<FoodLog> {
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
-            return const CircularProgressIndicator();
+            return const CupertinoActivityIndicator();
           },
         ),
       ),
@@ -367,8 +368,9 @@ class _FoodLogState extends State<FoodLog> {
           classCategory = jsonDecode(res)['Class_type'];
 
           if (classCategory.isEmpty) {
-            print('None detected');
-            Text('None detected, Sorry');
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Oops! 유료계정으로 전환해주세요! :)'),
+            ));
           } else {
             Navigator.push(
               context,
