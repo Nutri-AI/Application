@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:demo/CustomDesign/customColor.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
@@ -41,8 +40,6 @@ class _weeklyReportState extends State<weeklyReport> {
   void initState() {
     userid = widget.email;
     analData = fetchAnalysisData(userid);
-    // _chartData = getChartData();
-    // _tooltipBehavior = TooltipBehavior(enable: true);
     super.initState();
   }
 
@@ -51,8 +48,9 @@ class _weeklyReportState extends State<weeklyReport> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          // width: MediaQuery.of(context).size.width,
-          // height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          // padding: EdgeInsets.all(5),
           child: FutureBuilder<NutriStat>(
             future: analData,
             builder: (context, snapshot) {
@@ -74,7 +72,7 @@ class _weeklyReportState extends State<weeklyReport> {
                           0),
                       snapshot.data?.nutrStatus.Threonine),
                   Nutridata(
-                      "Phenylalanine\nTyrosine",
+                      '''Phenylalanine\nTyrosine''',
                       max(
                           snapshot.data?.rdi.Phenylalanine_Tyrosine -
                               snapshot.data?.nutrStatus.Phenylalanine_Tyrosine,
@@ -95,7 +93,7 @@ class _weeklyReportState extends State<weeklyReport> {
                           0),
                       snapshot.data?.nutrStatus.Lysine),
                   Nutridata(
-                      "α-Linolenic\nAcid",
+                      '''α-Linolenic\nAcid''',
                       max(
                           snapshot.data?.rdi.Alpha_Linolenic_Acid -
                               snapshot.data?.nutrStatus.Alpha_Linolenic_Acid,
@@ -300,27 +298,10 @@ class _weeklyReportState extends State<weeklyReport> {
                   scrollDirection: Axis.vertical,
                   child: Container(
                     padding: const EdgeInsets.all(20),
-                    height: MediaQuery.of(context).size.height / 0.4,
                     child: Column(
                       children: [
                         Row(
                           children: [
-                            Text(
-                              // 날짜
-                              DateFormat("MM/dd").format(
-                                  DateTime.now().subtract(Duration(days: 7))),
-                              style: const TextStyle(
-                                fontSize: 23,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Text(
-                              "~",
-                              style: const TextStyle(
-                                fontSize: 23,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                             Text(
                               // 날짜
                               DateFormat("MM/dd").format(DateTime.now()),
@@ -350,20 +331,8 @@ class _weeklyReportState extends State<weeklyReport> {
                             ),
                             Expanded(child: Container()),
                             Text(
-                              "${snapshot.data!.nutrStatus.Calories}", // 섭취 칼로리
+                              "${snapshot.data!.nutrStatus.Calories}/${snapshot.data!.rdi.Calories}kcal", // 섭취 칼로리
                               style: const TextStyle(fontSize: 18),
-                            ),
-                            const Text(
-                              "/",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            Text(
-                              "${snapshot.data!.rdi.Calories}", // 기초대사량
-                              style: const TextStyle(fontSize: 18),
-                            ),
-                            const Text(
-                              "kcal",
-                              style: TextStyle(fontSize: 18),
                             ),
                           ],
                         ),
@@ -383,12 +352,7 @@ class _weeklyReportState extends State<weeklyReport> {
                           padding: EdgeInsets.only(right: 15),
                           height: MediaQuery.of(context).size.height / 0.4,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(
-                              100,
-                              172,
-                              223,
-                              135,
-                            ),
+                            color: Color.fromARGB(100, 247, 239, 153),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -415,7 +379,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     yValueMapper: (Nutridata nut, _) =>
                                         nut.nutriResidual,
                                     name: '권장 섭취량',
-                                    color: Color.fromARGB(245, 92, 92, 92),
+                                    color: Color.fromARGB(255, 92, 92, 92),
                                     width: 0.4,
                                     borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
@@ -576,7 +540,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     // const SizedBox(height: 40),
                                     Expanded(child: Container()),
                                     Text(
-                                      "${(snapshot.data!.nutrStatus.Potassium / 1000).toStringAsFixed(1)}/${(snapshot.data!.rdi.Potassium / 1000).toStringAsFixed(1)}\n(g)",
+                                      "${snapshot.data!.nutrStatus.Potassium / 1000}/${snapshot.data!.rdi.Potassium / 1000}\n(g)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -585,7 +549,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     // const SizedBox(height: 40),
                                     Expanded(child: Container()),
                                     Text(
-                                      "${(snapshot.data!.nutrStatus.Sodium / 1000).toStringAsFixed(1)}/${(snapshot.data!.rdi.Sodium / 1000).toStringAsFixed(1)}\n(g)",
+                                      "${snapshot.data!.nutrStatus.Sodium / 1000}/${snapshot.data!.rdi.Sodium / 1000}\n(g)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -648,7 +612,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     // const SizedBox(height: 40),
                                     Expanded(child: Container()),
                                     Text(
-                                      "${(snapshot.data!.nutrStatus.Leucine / 1000).toStringAsFixed(1)}/${(snapshot.data!.rdi.Leucine / 1000).toStringAsFixed(1)}\n(g)",
+                                      "${(snapshot.data!.nutrStatus.Leucine / 1000).toStringAsFixed(1)}/${snapshot.data!.rdi.Leucine / 1000}\n(g)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -657,7 +621,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     // const SizedBox(height: 40),
                                     Expanded(child: Container()),
                                     Text(
-                                      "${(snapshot.data!.nutrStatus.Iso_Leucine / 1000).toStringAsFixed(1)}/${(snapshot.data!.rdi.Iso_Leucine / 1000).toStringAsFixed(1)}\n(g)",
+                                      "${(snapshot.data!.nutrStatus.Iso_Leucine / 1000).toStringAsFixed(1)}/${snapshot.data!.rdi.Iso_Leucine / 1000}\n(g)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -693,7 +657,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     // const SizedBox(height: 42),
                                     Expanded(child: Container()),
                                     Text(
-                                      "${(snapshot.data!.nutrStatus.Lysine / 1000).toStringAsFixed(1)}/${(snapshot.data!.rdi.Lysine / 1000).toStringAsFixed(1)}\n(g)",
+                                      "${(snapshot.data!.nutrStatus.Lysine / 1000).toStringAsFixed(1)}/${snapshot.data!.rdi.Lysine / 1000}\n(g)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -702,7 +666,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     // const SizedBox(height: 42),
                                     Expanded(child: Container()),
                                     Text(
-                                      "${(snapshot.data!.nutrStatus.Methionine / 1000).toStringAsFixed(1)}/${(snapshot.data!.rdi.Methionine / 1000).toStringAsFixed(1)}\n(g)",
+                                      "${(snapshot.data!.nutrStatus.Methionine / 1000).toStringAsFixed(1)}/${snapshot.data!.rdi.Methionine / 1000}\n(g)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -711,7 +675,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     // const SizedBox(height: 40),
                                     Expanded(child: Container()),
                                     Text(
-                                      "${(snapshot.data!.nutrStatus.Phenylalanine_Tyrosine / 1000).toStringAsFixed(1)}/${(snapshot.data!.rdi.Phenylalanine_Tyrosine / 1000).toStringAsFixed(1)}\n(g)",
+                                      "${(snapshot.data!.nutrStatus.Phenylalanine_Tyrosine / 1000).toStringAsFixed(1)}/${snapshot.data!.rdi.Phenylalanine_Tyrosine / 1000}\n(g)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -720,7 +684,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     // const SizedBox(height: 40),
                                     Expanded(child: Container()),
                                     Text(
-                                      "${(snapshot.data!.nutrStatus.Threonine / 1000).toStringAsFixed(1)}/${(snapshot.data!.rdi.Threonine / 1000).toStringAsFixed(1)}\n(g)",
+                                      "${(snapshot.data!.nutrStatus.Threonine / 1000).toStringAsFixed(1)}/${snapshot.data!.rdi.Threonine / 1000}\n(g)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -729,7 +693,7 @@ class _weeklyReportState extends State<weeklyReport> {
                                     // const SizedBox(height: 40),
                                     Expanded(child: Container()),
                                     Text(
-                                      "${(snapshot.data!.nutrStatus.Valine / 1000).toStringAsFixed(1)}/${(snapshot.data!.rdi.Valine / 1000).toStringAsFixed(1)}\n(g)",
+                                      "${(snapshot.data!.nutrStatus.Valine / 1000).toStringAsFixed(1)}/${snapshot.data!.rdi.Valine / 1000}\n(g)",
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
