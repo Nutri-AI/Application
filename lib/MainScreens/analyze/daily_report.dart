@@ -355,12 +355,7 @@ class _dailyReportState extends State<dailyReport> {
                           padding: EdgeInsets.only(right: 15),
                           height: MediaQuery.of(context).size.height / 0.4,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(
-                              100,
-                              172,
-                              223,
-                              135,
-                            ),
+                            color: Color.fromARGB(100, 247, 239, 153),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -387,7 +382,7 @@ class _dailyReportState extends State<dailyReport> {
                                     yValueMapper: (Nutridata nut, _) =>
                                         nut.nutriResidual,
                                     name: '권장 섭취량',
-                                    color: Color.fromARGB(245, 92, 92, 92),
+                                    color: Color.fromARGB(255, 92, 92, 92),
                                     width: 0.4,
                                     borderRadius: BorderRadius.circular(5),
                                     spacing: 2,
