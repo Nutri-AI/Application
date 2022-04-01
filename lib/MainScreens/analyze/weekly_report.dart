@@ -51,8 +51,8 @@ class _weeklyReportState extends State<weeklyReport> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          // width: MediaQuery.of(context).size.width,
+          // height: MediaQuery.of(context).size.height,
           child: FutureBuilder<NutriStat>(
             future: analData,
             builder: (context, snapshot) {
@@ -74,7 +74,7 @@ class _weeklyReportState extends State<weeklyReport> {
                           0),
                       snapshot.data?.nutrStatus.Threonine),
                   Nutridata(
-                      '''Phenylalanine\nTyrosine''',
+                      "Phenylalanine\nTyrosine",
                       max(
                           snapshot.data?.rdi.Phenylalanine_Tyrosine -
                               snapshot.data?.nutrStatus.Phenylalanine_Tyrosine,
@@ -95,7 +95,7 @@ class _weeklyReportState extends State<weeklyReport> {
                           0),
                       snapshot.data?.nutrStatus.Lysine),
                   Nutridata(
-                      '''α-Linolenic\nAcid''',
+                      "α-Linolenic\nAcid",
                       max(
                           snapshot.data?.rdi.Alpha_Linolenic_Acid -
                               snapshot.data?.nutrStatus.Alpha_Linolenic_Acid,
@@ -305,6 +305,22 @@ class _weeklyReportState extends State<weeklyReport> {
                       children: [
                         Row(
                           children: [
+                            Text(
+                              // 날짜
+                              DateFormat("MM/dd").format(
+                                  DateTime.now().subtract(Duration(days: 7))),
+                              style: const TextStyle(
+                                fontSize: 23,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Text(
+                              "~",
+                              style: const TextStyle(
+                                fontSize: 23,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             Text(
                               // 날짜
                               DateFormat("MM/dd").format(DateTime.now()),
