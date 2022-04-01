@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:demo/CustomDesign/customColor.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
@@ -41,8 +40,6 @@ class _dailyReportState extends State<dailyReport> {
   void initState() {
     userid = widget.email;
     analData = fetchAnalysisData(userid);
-    // _chartData = getChartData();
-    // _tooltipBehavior = TooltipBehavior(enable: true);
     super.initState();
   }
 

@@ -304,6 +304,22 @@ class _weeklyReportState extends State<weeklyReport> {
                           children: [
                             Text(
                               // 날짜
+                              DateFormat("MM/dd").format(
+                                  DateTime.now().subtract(Duration(days: 7))),
+                              style: const TextStyle(
+                                fontSize: 23,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Text(
+                              " ~ ",
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              // 날짜
                               DateFormat("MM/dd").format(DateTime.now()),
                               style: const TextStyle(
                                 fontSize: 23,
