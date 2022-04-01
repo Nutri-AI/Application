@@ -189,7 +189,8 @@ class _RecommendState extends State<Recommend> {
                                                             .sublist(1, 3)
                                                             .toString()
                                                             .length -
-                                                        1),
+                                                        1)
+                                                .trim(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -233,6 +234,8 @@ class _RecommendState extends State<Recommend> {
                           child: Column(
                             children: [
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   for (var i = 0; i < 3; i++)
                                     Container(
@@ -273,7 +276,8 @@ class _RecommendState extends State<Recommend> {
                                                             .sublist(1, 3)
                                                             .toString()
                                                             .length -
-                                                        1),
+                                                        1)
+                                                .trim(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -359,7 +363,8 @@ class _RecommendState extends State<Recommend> {
                                                             .sublist(1, 3)
                                                             .toString()
                                                             .length -
-                                                        1),
+                                                        1)
+                                                .trim(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
