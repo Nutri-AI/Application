@@ -1,7 +1,52 @@
-// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_const, non_constant_identifier_names
+import 'dart:async';
+import 'dart:convert';
+import 'package:demo/json/UserSignUpInfo.dart';
 
 import 'package:demo/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import 'main.dart';
+
+Future<UserSignUpInfo> createUser(
+  String userid,
+  String username,
+  String birth,
+  String sex,
+  String height,
+  String weight,
+  String PAI,
+) async {
+  Map<String, dynamic> data = {
+    'userid': userid,
+    'username': username,
+    'physique': {
+      'birth': birth,
+      'sex': sex,
+      'height': height,
+      'weight': weight,
+      'PAI': PAI,
+    },
+  };
+  // String baseUrl = 'http://10.0.2.2:8000/user/join'; // 혜원
+  // String baseUrl = 'http://192.168.1.7:8000/user/join'; // 영우
+  String baseUrl = 'http://52.78.143.49:8000/user/join';
+
+  final response = await http.post(
+    Uri.parse(baseUrl),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(data),
+  );
+
+  if (response.statusCode == 200) {
+    return UserSignUpInfo.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to create data');
+  }
+}
 
 class InputUserInfo extends StatefulWidget {
   String email;
@@ -17,14 +62,25 @@ class _InputUserInfoState extends State<InputUserInfo> {
   // final TextEditingController _sexController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
+  //Future<UserInfo>? _UserInfo;
 
   String dropdownValue1 = "F";
   String dropdownValue2 = "운동 안 함";
+
+  Map pai = {
+    "운동 안 함": "1.2",
+    '''격렬한 운동 주 1~2회 or 가벼운 운동 주 3~4회''': "1.375",
+    '''격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회''': "1.425",
+    "격렬한 운동 주 5~6회": "1.55",
+    "격렬한 운동 주 7회 이상": "1.75",
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("사용자 정보를 입력해주세요!")),
       // resizeToAvoidBottomInset: false,
+      // 이 센터 자체를 overflow 방지해주는 Box 안에 넣자!
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +134,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
                 ),
                 DropdownButton(
                   value: dropdownValue1,
-                  icon: const Icon(Icons.arrow_downward_rounded),
+                  icon: const Icon(Icons.arrow_drop_down),
                   elevation: 0,
                   onChanged: (String? newValue) {
                     setState(() {
@@ -145,7 +201,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
                 ),
                 DropdownButton(
                   value: dropdownValue2,
-                  icon: const Icon(Icons.arrow_downward_rounded),
+                  icon: const Icon(Icons.arrow_drop_down),
                   elevation: 0,
                   style: const TextStyle(
                     fontSize: 11,
@@ -181,20 +237,20 @@ class _InputUserInfoState extends State<InputUserInfo> {
               ),
               child: ElevatedButton(
                   onPressed: () {
-                    print("Name: " + _nameController.text);
-                    print("Birthdate: " + _birthdateController.text);
-                    // print("Username: " + _sexController.text);
-                    print("Sex: " + dropdownValue1);
-                    print("Height: " + _heightController.text);
-                    print("Weight: " + _weightController.text);
-                    print("PAI: " + dropdownValue2);
-                    print("email: " + widget.email);
+                    createUser(
+                      widget.email,
+                      _nameController.text,
+                      _birthdateController.text,
+                      dropdownValue1,
+                      _heightController.text,
+                      _weightController.text,
+                      pai[dropdownValue2],
+                    );
 
-                    // route me
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => const NutriaiApp(),
                       ),
                     );
                   },
