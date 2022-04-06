@@ -1,4 +1,4 @@
-# nutriai_app
+# Nutriai App
 
 A new Flutter project.
 
