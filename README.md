@@ -1,16 +1,19 @@
-# Nutriai App
+# NutriAI App
 
-A new Flutter project.
+## Function
 
-## Getting Started
+### User Initialization
+- Login with UserID
+- Input user information
 
-This project is a starting point for a Flutter application.
+### Log user's diet
+- Take photos from the gallery
+- Select detailed menu with toggle button
+- Display the macronutrient intake for the day with bar charts
 
-A few resources to get you started if this is your first Flutter project:
+### Analysis user's diet
+- Provide daily/weekly report on user's nutritional status with bar chart (total 34 nutrients)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Recommend nutrients supplements based on user's nutritional status
+- Display 3 product in each vitamin, mineral, amino acids category
+- Hyperlink to Iherb product page
