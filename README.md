@@ -30,7 +30,7 @@
 ## Details
 
 <details>
-  <summary>Click to expand!</summary>
+  <summary>Click to expand to see directory tree!</summary>
   
 ```
 lib
