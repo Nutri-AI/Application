@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:demo/CustomDesign/customColor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,10 +15,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:demo/MainScreens/foodLog/inference.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
+  // String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://192.168.1.7:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
-  // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
+  String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
+  // String baseUrl = 'http://192.168.0.243:8000/log/today/homepage/';
   final response = await http.get(
     Uri.parse(baseUrl + userid),
   );
@@ -39,10 +39,11 @@ Future<dynamic> predictImg(String userid) async {
       final imageTemporary = File(image.path);
       // setState(() => this.image = imageTemporary);
       String result = '';
-      String baseUrl = 'http://52.78.143.49:8000/log/upload/image/'; // 혜원
+      // String baseUrl = 'http://52.78.143.49:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://192.168.1.7:8000/log/upload/image/'; // 영우
-      //String baseUrl = 'http://192.168.219.107:8000/log/upload/image/';
+      String baseUrl = 'http://192.168.219.107:8000/log/upload/image/'; // 영우 집
+      // String baseUrl = 'http://192.168.0.243:8000/log/upload/image/';
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};
@@ -197,12 +198,12 @@ class _FoodLogState extends State<FoodLog> {
                           Expanded(child: Container())
                         ],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Container(
-                        padding: EdgeInsets.only(right: 15),
+                        padding: const EdgeInsets.only(right: 15),
                         height: MediaQuery.of(context).size.height / 4.5,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(100, 247, 239, 153),
+                          color: const Color.fromARGB(100, 247, 239, 153),
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Row(
@@ -217,7 +218,7 @@ class _FoodLogState extends State<FoodLog> {
                                   yValueMapper: (Nutridata nut, _) =>
                                       nut.nutriIntake,
                                   name: '사용자 섭취량',
-                                  color: Color.fromARGB(255, 62, 165, 65),
+                                  color: const Color.fromARGB(255, 62, 165, 65),
                                   borderColor: Colors.green[100],
                                   width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
@@ -230,7 +231,7 @@ class _FoodLogState extends State<FoodLog> {
                                   yValueMapper: (Nutridata nut, _) =>
                                       nut.nutriResidual,
                                   name: '권장 섭취량',
-                                  color: Color.fromARGB(255, 92, 92, 92),
+                                  color: const Color.fromARGB(255, 92, 92, 92),
                                   width: 0.5,
                                   borderRadius: BorderRadius.circular(5),
                                   spacing: 2,
@@ -248,7 +249,7 @@ class _FoodLogState extends State<FoodLog> {
                                     children: [
                                       Text(
                                         "${snapshot.data!.nutrStatus.Carbohydrate}/${snapshot.data!.rdi.Carbohydrate}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 12,
                                         ),
                                       ), // 탄수화물 섭취량
@@ -267,7 +268,7 @@ class _FoodLogState extends State<FoodLog> {
                                     children: [
                                       Text(
                                         "${snapshot.data!.nutrStatus.Protein}/${snapshot.data!.rdi.Protein}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 12,
                                         ),
                                       ), // 단백질 섭취량
@@ -286,7 +287,7 @@ class _FoodLogState extends State<FoodLog> {
                                     children: [
                                       Text(
                                         "${snapshot.data!.nutrStatus.Fat}/${snapshot.data!.rdi.Fat}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 12,
                                         ),
                                       ), // 지방 섭취량
@@ -319,11 +320,11 @@ class _FoodLogState extends State<FoodLog> {
                       const SizedBox(height: 25),
                       for (var i = 0; i < _mealData.length; i++)
                         Container(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           child: ListTile(
                             title: Text(
                               _mealData[i][0].substring(11, 16),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w300,
                               ),
@@ -331,7 +332,7 @@ class _FoodLogState extends State<FoodLog> {
                             subtitle: Text(
                               _mealData[i][1].toString().substring(
                                   1, (_mealData[i][1].toString().length - 1)),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black,
@@ -342,7 +343,7 @@ class _FoodLogState extends State<FoodLog> {
                               width: 35,
                               height: 35,
                             ),
-                            tileColor: Color.fromARGB(
+                            tileColor: const Color.fromARGB(
                               100,
                               172,
                               223,
