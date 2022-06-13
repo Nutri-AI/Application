@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter/services.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:demo/json/nutriStat.dart';
@@ -13,13 +13,14 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:demo/MainScreens/foodLog/inference.dart';
+import 'package:demo/MainScreens/foodLog/barcode.dart';
+import 'package:demo/MainScreens/foodLog/foodSearch/food_search.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  // String baseUrl = 'http://52.78.143.49:8000/log/today/homepage/'; // angwoo
-  // String baseUrl = 'http://192.168.1.7:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
-  String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
+  // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
   // String baseUrl = 'http://192.168.0.243:8000/log/today/homepage/';
+  String baseUrl = 'http://172.30.1.40:8000/log/today/homepage/'; // 프릳츠
   final response = await http.get(
     Uri.parse(baseUrl + userid),
   );
@@ -39,11 +40,11 @@ Future<dynamic> predictImg(String userid) async {
       final imageTemporary = File(image.path);
       // setState(() => this.image = imageTemporary);
       String result = '';
-      // String baseUrl = 'http://52.78.143.49:8000/log/upload/image/'; // 혜원
+      // String baseUrl = 'http://192.168.0.242:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
-      // String baseUrl = 'http://192.168.1.7:8000/log/upload/image/'; // 영우
-      String baseUrl = 'http://192.168.219.107:8000/log/upload/image/'; // 영우 집
+      // String baseUrl = 'http://192.168.219.107:8000/log/upload/image/'; // 영우 집
       // String baseUrl = 'http://192.168.0.243:8000/log/upload/image/';
+      String baseUrl = 'http://172.30.1.40:8000/log/upload/image/'; // 프릳츠
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};
@@ -365,39 +366,93 @@ class _FoodLogState extends State<FoodLog> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          dynamic res = await predictImg(userid);
-          url = jsonDecode(res)['link'];
-          foodList = jsonDecode(res)['food_list'];
-          key = jsonDecode(res)['Origin_S3_key'];
-          classCategory = jsonDecode(res)['Class_type'];
+      // FAB - speed dial 쓰삼
+      floatingActionButton: SpeedDial(
+        //Speed dial menu
+        marginBottom: 10, //margin bottom
+        icon: Icons.add, //icon on Floating action button
+        activeIcon: Icons.close, //icon when menu is expanded on button
+        backgroundColor: Colors.deepOrangeAccent, //background color of button
+        foregroundColor: Colors.white, //font color, icon color in button
+        activeBackgroundColor:
+            Colors.deepPurpleAccent, //background color when menu is expanded
+        activeForegroundColor: Colors.white,
+        buttonSize: 56.0, //button size
+        visible: true,
+        closeManually: false,
+        curve: Curves.bounceIn,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.5,
+        onOpen: () => print('OPENING DIAL'), // action when menu opens
+        onClose: () => print('DIAL CLOSED'), //action when menu closes
 
-          if (classCategory.isEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Oops! 유료계정으로 전환해주세요! :)'),
-            ));
-          } else {
-            Navigator.push(
+        elevation: 8.0, //shadow elevation of button
+        shape: CircleBorder(), //shape of button
+
+        children: [
+          SpeedDialChild(
+            //speed dial child
+            child: Icon(Icons.image),
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            label: 'Add Food Image',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () async {
+              dynamic res = await predictImg(userid);
+              url = jsonDecode(res)['link'];
+              foodList = jsonDecode(res)['food_list'];
+              key = jsonDecode(res)['Origin_S3_key'];
+              classCategory = jsonDecode(res)['Class_type'];
+
+              if (classCategory.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Oops! 유료계정으로 전환해주세요! :)'),
+                ));
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Inference(
+                      uri: url,
+                      subcat: foodList,
+                      s3Key: key,
+                      classCat: classCategory,
+                      email: userid,
+                    ),
+                  ),
+                ).then((value) => setState(() {
+                      userData = fetchUserData(userid);
+                    }));
+              }
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.align_vertical_center_sharp),
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            label: 'Add Barcode',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Inference(
-                  uri: url,
-                  subcat: foodList,
-                  s3Key: key,
-                  classCat: classCategory,
-                  email: userid,
-                ),
+                builder: (context) => BarcodeScanner(),
               ),
-            ).then((value) => setState(() {
-                  userData = fetchUserData(userid);
-                }));
-          }
-        },
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.green[600],
+            ),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.search),
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.green,
+            label: 'Search Food',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => foodSearch(email: userid))),
+          ),
+        ],
       ),
-    );
+    ); // speed dial
   }
 }
 

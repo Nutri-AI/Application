@@ -4,7 +4,6 @@ import 'package:demo/MainScreens/foodLog/food_log.dart';
 import 'package:demo/MainScreens/analyze/analyze.dart';
 import 'package:demo/MainScreens/recommend.dart';
 import 'package:demo/MainScreens/mypage.dart';
-import 'package:demo/MainScreens/searchTest/searchTest.dart';
 // import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +30,6 @@ class _HomePageState extends State<HomePage> {
         Analyze(email: userid),
         Recommend(email: userid),
         MyPage(email: userid),
-        SearchTest(email: userid),
       ];
 
   void _onItemTapped(int index) {
@@ -69,11 +67,6 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: '내 정보',
-            backgroundColor: Colors.lightGreen,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '검색 테스트',
             backgroundColor: Colors.lightGreen,
           ),
         ],

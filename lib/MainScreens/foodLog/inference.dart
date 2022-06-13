@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -91,13 +90,13 @@ class _InferenceState extends State<Inference> {
                 "Please Select the Detail!",
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Image.network(
                 url,
                 width: MediaQuery.of(context).size.width / 1.1,
                 // height: 400,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Column(
                 children: <Widget>[
                   for (var i = 0; i < classType.length; i++)
@@ -126,7 +125,7 @@ class _InferenceState extends State<Inference> {
                               value: value,
                               child: Text(
                                 value,
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             );
                           }).toList(),
@@ -135,7 +134,7 @@ class _InferenceState extends State<Inference> {
                     ),
                 ],
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Container(
                 width: MediaQuery.of(context).size.width / 1.3,
                 height: MediaQuery.of(context).size.height / 15,
