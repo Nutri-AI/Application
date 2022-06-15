@@ -6,24 +6,21 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 
 class BarcodeScanner extends StatefulWidget {
+  String email;
+  BarcodeScanner({Key? key, required this.email}) : super(key: key);
   @override
   State<BarcodeScanner> createState() => _BarcodeScanner();
 }
 
 class _BarcodeScanner extends State<BarcodeScanner> {
-  String _scanBarcode = 'Unknown';
+  late String userid;
+  String _scanBarcode = 'NaN';
 
   @override
   void initState() {
+    userid = widget.email;
     super.initState();
   }
-
-  Future<void> startBarcodeScanStream() async {
-    FlutterBarcodeScanner.getBarcodeStreamReceiver(
-            '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
-        .listen((barcode) => print(barcode));
-  }
-
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> scanBarcodeNormal() async {

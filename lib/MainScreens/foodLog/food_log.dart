@@ -431,7 +431,7 @@ class _FoodLogState extends State<FoodLog> {
             onTap: () => Navigator.push(
               context, 
               MaterialPageRoute(
-                builder: (context) => BarcodeScanner(),),),
+                builder: (context) => BarcodeScanner(email: userid),),),
           ),
           SpeedDialChild(
             child: Icon(Icons.search),
