@@ -17,7 +17,7 @@ import 'package:demo/MainScreens/foodLog/inference.dart';
 import 'package:demo/MainScreens/foodLog/barcode.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  String baseUrl = 'http://192.168.0.242:8000/log/today/homepage/'; // angwoo
+  String baseUrl = 'http://172.30.1.5:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://192.168.1.7:8000/log/today/homepage/'; // angwoo
   // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
   // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
@@ -40,7 +40,7 @@ Future<dynamic> predictImg(String userid) async {
       final imageTemporary = File(image.path);
       // setState(() => this.image = imageTemporary);
       String result = '';
-      String baseUrl = 'http://192.168.0.242:8000/log/upload/image/'; // 혜원
+      String baseUrl = 'http://172.30.1.5:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://192.168.1.7:8000/log/upload/image/'; // 영우
       //String baseUrl = 'http://192.168.219.107:8000/log/upload/image/';
@@ -366,13 +366,15 @@ class _FoodLogState extends State<FoodLog> {
         ),
       ),
       // FAB - speed dial 쓰삼
-      floatingActionButton: SpeedDial( //Speed dial menu
+      floatingActionButton: SpeedDial(
+        //Speed dial menu
         marginBottom: 10, //margin bottom
         icon: Icons.menu, //icon on Floating action button
         activeIcon: Icons.close, //icon when menu is expanded on button
         backgroundColor: Colors.deepOrangeAccent, //background color of button
         foregroundColor: Colors.white, //font color, icon color in button
-        activeBackgroundColor: Colors.deepPurpleAccent, //background color when menu is expanded
+        activeBackgroundColor:
+            Colors.deepPurpleAccent, //background color when menu is expanded
         activeForegroundColor: Colors.white,
         buttonSize: 56.0, //button size
         visible: true,
@@ -385,9 +387,10 @@ class _FoodLogState extends State<FoodLog> {
 
         elevation: 8.0, //shadow elevation of button
         shape: CircleBorder(), //shape of button
-        
+
         children: [
-          SpeedDialChild( //speed dial child
+          SpeedDialChild(
+            //speed dial child
             child: Icon(Icons.image),
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
@@ -416,9 +419,7 @@ class _FoodLogState extends State<FoodLog> {
                       email: userid,
                     ),
                   ),
-                ).then((value) => setState(() {
-                      userData = fetchUserData(userid);
-                    }));
+                );
               }
             },
           ),
@@ -429,9 +430,11 @@ class _FoodLogState extends State<FoodLog> {
             label: 'Add Barcode',
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () => Navigator.push(
-              context, 
+              context,
               MaterialPageRoute(
-                builder: (context) => BarcodeScanner(email: userid),),),
+                builder: (context) => BarcodeScanner(email: userid),
+              ),
+            ),
           ),
           SpeedDialChild(
             child: Icon(Icons.search),
@@ -442,7 +445,8 @@ class _FoodLogState extends State<FoodLog> {
             onTap: () => print('THIRD CHILD'),
           ),
         ],
-    ),); // speed dial
+      ),
+    ); // speed dial
   }
 }
 
