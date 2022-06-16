@@ -13,8 +13,6 @@ dependencies:
   flutter:
     sdk: flutter
   get: 4.6.1
-  # elastic_client: ^0.3.11
-  elastic_client: ^0.1.13
   http: ^0.13.4
   json_annotation: ^4.4.0
   intl: ^0.17.0
@@ -26,6 +24,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   age_calculator: ^1.0.0
   flutter_speed_dial: ^3.0.5
+  supabase_flutter: ^0.3.1
 
 dev_dependencies:
   flutter_test:
@@ -45,7 +44,6 @@ flutter:
     - assets/Iherb_logo.jpeg
     - assets/logos.json
     - assets/Login_design.png
-    - assets/forkspoon.png
 
   fonts:
     - family: CustomIcon

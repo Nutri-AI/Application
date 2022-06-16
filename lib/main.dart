@@ -2,16 +2,19 @@ import 'package:demo/Input_UserInfo.dart';
 import 'package:demo/home_page.dart';
 import 'dart:async';
 import 'package:demo/CustomDesign/customColor.dart';
-// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:demo/CustomDesign/style.dart';
 
 Future<bool> fetchUser(String userid) async {
   // String baseUrl = 'http://192.168.0.242:8000/user/info/'; // 혜원
   // String baseUrl = 'http://192.168.1.7:8000/user/info/'; // 영우
-  // String baseUrl = 'http://52.78.143.49:8000/user/info/'; // 영우
-  // String baseUrl = 'http://192.168.219.107:8000/user/info/'; // 영우 집
-  String baseUrl = 'http://172.30.1.40:8000/user/info/'; // 프릳츠
+  String baseUrl = 'http://192.168.219.107:8000/user/info/'; // 영우 집
+  // String baseUrl = 'http://172.30.1.40:8000/user/info/'; // 프릳츠
+  // String baseUrl = 'http://192.168.0.62:8000/user/info/'; // spc
+  // String baseUrl = 'http://192.1.1.232:8000/user/info/'; // moi
+
   final response = await http.get(Uri.parse(baseUrl + userid));
   if (response.statusCode == 404) {
     return false;
@@ -20,7 +23,7 @@ Future<bool> fetchUser(String userid) async {
   }
 }
 
-void main() {
+void main() async {
   // void: main 함수를 실행하고 아무런 값도 반환하지 않는다.
   runApp(const NutriaiApp()); // runApp은 widget을 인자로 받음
 }
@@ -34,6 +37,7 @@ class NutriaiApp extends StatelessWidget {
     return MaterialApp(
       // title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.green),
+      // theme: appTheme,
       home: const MyLoginPage(title: 'NutriAI Login Demo'),
     );
   }
@@ -84,7 +88,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
               height: MediaQuery.of(context).size.height / 15,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                color: Appcolor.green,
+                color: Colors.green,
               ),
               child: ElevatedButton(
                 onPressed: () async {
