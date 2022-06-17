@@ -17,7 +17,9 @@ import 'package:demo/MainScreens/foodLog/barcode.dart';
 import 'package:demo/MainScreens/foodLog/foodSearch/food_search.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  String baseUrl = 'http://192.168.45.181:8000/log/today/homepage/'; // spc
+  // String baseUrl = 'http://192.168.45.181:8000/log/today/homepage/'; // spc
+  String baseUrl =
+      'http://172.16.101.248:8000/log/today/homepage/'; // coffebean
 
   final response = await http.get(
     Uri.parse(baseUrl + userid),
@@ -39,8 +41,10 @@ Future<dynamic> predictImg(String userid) async {
       // setState(() => this.image = imageTemporary);
       String result = '';
 
-      String baseUrl = 'http://192.168.45.181:8000/log/upload/image/'; // spc
+      // String baseUrl = 'http://192.168.45.181:8000/log/upload/image/'; // spc
       // String baseUrl = 'http://192.1.1.232:8000/log/upload/image/'; // moi
+      String baseUrl =
+          'http://172.16.101.248:8000/log/upload/image/'; // coffebean
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};
@@ -429,7 +433,6 @@ class _FoodLogState extends State<FoodLog> {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-
                 builder: (context) => BarcodeScanner(email: userid),
               ),
             ),
@@ -443,7 +446,7 @@ class _FoodLogState extends State<FoodLog> {
             onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => foodSearch(email: userid))),
+                    builder: (context) => FoodSearch(email: userid))),
           ),
         ],
       ),
