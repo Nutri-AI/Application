@@ -64,7 +64,7 @@ class _BarcodeScanner extends State<BarcodeScanner> {
     );
 
     if (response.statusCode == 200) {
-      print('bacord logging successful');
+      print('barcode logging successful');
     } else {
       print(response.statusCode);
     }

@@ -4,30 +4,46 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:demo/json/UserInfo.dart';
+import 'package:demo/json/RDI.dart';
 
-Future<UserInfo> fetchUserData(String userid) async {
 
-  String baseUrl = 'http://192.168.45.181:8000/user/info/'; // spc
-  // String baseUrl = 'http://192.1.1.232:8000/user/info/'; // moi
-  final response = await http.get(Uri.parse(baseUrl + userid));
+Future<void> postTxtSearchFood(
+  String userid,
+  List<dynamic> classList,
+  List<dynamic> foodList,
+  ) async {
 
+  Map<String, dynamic> data = {
+    // 'userid': userid,
+    'class_list': classList,
+    'food_list': foodList,
+  };
+
+  String baseUrl = 'http://192.168.45.181:8000/log/post/meal/log/'; // spc
+  var uri = Uri.parse(baseUrl + userid);
+  final response = await http.post(
+    uri,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(data),
+  );  
   if (response.statusCode == 200) {
-    return UserInfo.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    print('txt search logging successful');
   } else {
-    throw Exception('Failed to load data');
+    print(response.statusCode);
   }
 }
 
-class foodSearch extends StatefulWidget {
+class FoodSearch extends StatefulWidget {
   String email;
-  foodSearch({Key? key, required this.email}) : super(key: key);
+  FoodSearch({Key? key, required this.email}) : super(key: key);
 
   @override
   State<foodSearch> createState() => _foodSearchState();
 }
 
-class _foodSearchState extends State<foodSearch> {
+class _foodSearchState extends State<FoodSearch> {
   late Future<UserInfo> userData;
   late String userid;
 
