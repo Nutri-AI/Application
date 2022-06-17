@@ -11,8 +11,10 @@ import 'package:demo/json/UserInfo.dart';
 
 Future<UserInfo> fetchUserData(String userid) async {
   // String baseUrl = 'http://10.0.2.2:8000/user/info/'; // 혜원
-  // String baseUrl = 'http://192.168.1.7:8000/user/info/'; // 영우
-  String baseUrl = 'http://172.30.1.5:8000/user/info/'; // 영우
+  // String baseUrl = 'http://192.168.0.243:8000/user/info/'; // 후웨이즈
+  String baseUrl = 'http://192.168.219.107:8000/user/info/'; // 영우집
+
+
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {
