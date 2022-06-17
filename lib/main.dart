@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<bool> fetchUser(String userid) async {
-  String baseUrl = 'http://192.168.0.242:8000/user/info/'; // 혜원
+  String baseUrl = 'http://172.16.100.125:8000/user/info/'; // 혜원
   // String baseUrl = 'http://192.168.1.7:8000/user/info/'; // 영우
   // String baseUrl = 'http://52.78.143.49:8000/user/info/'; // 영우
   // String baseUrl = 'http://192.168.219.107:8000/user/info/'; // 영우 집
   final response = await http.get(Uri.parse(baseUrl + userid));
-  if (response.statusCode == 404) {
+  if (response.body == 'null') {
     return false;
   } else {
     return true;
