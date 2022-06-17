@@ -11,11 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<Product> fetchRecommendations(String userid) async {
-  // String baseUrl = 'http://192.168.1.7:8000/log/recommend/nutrients/'; // angwoo
-  // String baseUrl = 'http://10.0.2.2:8000/log/recommend/nutrients/'; // hhw
-  String baseUrl =
-      'http://52.78.143.49:8000/log/recommend/nutrients/'; // angwoo
-  // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
+  String baseUrl = 'http://192.168.45.181:8000/log/today/homepage/'; // 영우 집
   final response = await http.get(
     Uri.parse(baseUrl + userid),
   );

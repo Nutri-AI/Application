@@ -12,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get: 4.6.1
   http: ^0.13.4
   json_annotation: ^4.4.0
   intl: ^0.17.0
@@ -19,9 +20,11 @@ dependencies:
   syncfusion_flutter_charts: ^19.4.56
   url_launcher: ^6.0.20
   flutter_svg: ^0.21.0-nullsafety.0
-
+  flutter_barcode_scanner: ^2.0.0
   cupertino_icons: ^1.0.2
   age_calculator: ^1.0.0
+  flutter_speed_dial: ^3.0.5
+  supabase_flutter: ^0.3.1
 
 dev_dependencies:
   flutter_test:
@@ -41,7 +44,6 @@ flutter:
     - assets/Iherb_logo.jpeg
     - assets/logos.json
     - assets/Login_design.png
-    - assets/forkspoon.png
 
   fonts:
     - family: CustomIcon
