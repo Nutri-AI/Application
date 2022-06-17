@@ -17,12 +17,8 @@ import 'package:demo/MainScreens/foodLog/barcode.dart';
 import 'package:demo/MainScreens/foodLog/foodSearch/food_search.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
-  // String baseUrl = 'http://10.0.2.2:8000/log/today/homepage/'; // hhw
-  // String baseUrl = 'http://192.168.219.107:8000/log/today/homepage/'; // 영우 집
-  // String baseUrl = 'http://192.168.0.243:8000/log/today/homepage/';
-  // String baseUrl = 'http://172.30.1.40:8000/log/today/homepage/'; // 프릳츠
-  String baseUrl = 'http://192.168.0.62:8000/log/today/homepage/'; // spc
-  // String baseUrl = 'http://192.1.1.232:8000/log/today/homepage/'; // moi
+  String baseUrl = 'http://192.168.45.181:8000/log/today/homepage/'; // spc
+
   final response = await http.get(
     Uri.parse(baseUrl + userid),
   );
@@ -43,12 +39,7 @@ Future<dynamic> predictImg(String userid) async {
       // setState(() => this.image = imageTemporary);
       String result = '';
 
-      String baseUrl = 'http://172.30.1.5:8000/log/upload/image/'; // 혜원
-      // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
-      // String baseUrl = 'http://192.168.219.107:8000/log/upload/image/'; // 영우 집
-      // String baseUrl = 'http://192.168.0.243:8000/log/upload/image/';
-      // String baseUrl = 'http://172.30.1.40:8000/log/upload/image/'; // 프릳츠
-      String baseUrl = 'http://192.168.0.62:8000/log/upload/image/'; // spc
+      String baseUrl = 'http://192.168.45.181:8000/log/upload/image/'; // spc
       // String baseUrl = 'http://192.1.1.232:8000/log/upload/image/'; // moi
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);

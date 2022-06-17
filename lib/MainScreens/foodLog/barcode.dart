@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
+import '../../home_page.dart';
+
 class BarcodeScanner extends StatefulWidget {
   String email;
   BarcodeScanner({Key? key, required this.email}) : super(key: key);
@@ -51,7 +53,7 @@ class _BarcodeScanner extends State<BarcodeScanner> {
       barcodeScanRes = 'Failed to get platform version.';
     }
 
-    String baseUrl = 'http://172.30.1.5:8000/log/barcode/product/';
+    String baseUrl = 'http://192.168.45.181:8000/log/barcode/product/';
     var uri = Uri.parse(baseUrl + userid + '/' + barcodeScanRes);
     final response = await http.post(
       uri,
