@@ -19,7 +19,7 @@ Future<dynamic> sendInfData(
   };
   // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
   // String baseUrl = 'http://192.168.1.7:8000/log/post/meal/log/'; // 영우
-  String baseUrl = 'http://52.78.143.49:8000/log/post/meal/log/'; // 영우
+  String baseUrl = 'http://172.30.1.5:8000/log/post/meal/log/'; // 영우
   // String baseUrl = 'http://192.168.219.107:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl + userid),
@@ -142,13 +142,13 @@ class _InferenceState extends State<Inference> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     var res =
                         sendInfData(userid, key, classType, foodSelection);
 
                     //Navigator.pop(context);
 
-                    Navigator.push(
+                    await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => HomePage(email: userid),

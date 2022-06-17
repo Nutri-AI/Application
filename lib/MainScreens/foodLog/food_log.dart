@@ -42,7 +42,8 @@ Future<dynamic> predictImg(String userid) async {
       final imageTemporary = File(image.path);
       // setState(() => this.image = imageTemporary);
       String result = '';
-      // String baseUrl = 'http://192.168.0.242:8000/log/upload/image/'; // 혜원
+
+      String baseUrl = 'http://172.30.1.5:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://10.0.2.2:8000/log/upload/image/'; // 혜원
       // String baseUrl = 'http://192.168.219.107:8000/log/upload/image/'; // 영우 집
       // String baseUrl = 'http://192.168.0.243:8000/log/upload/image/';
@@ -424,9 +425,7 @@ class _FoodLogState extends State<FoodLog> {
                       email: userid,
                     ),
                   ),
-                ).then((value) => setState(() {
-                      userData = fetchUserData(userid);
-                    }));
+                );
               }
             },
           ),
@@ -439,9 +438,8 @@ class _FoodLogState extends State<FoodLog> {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => BarcodeScanner(
-                  email: userid,
-                ),
+
+                builder: (context) => BarcodeScanner(email: userid),
               ),
             ),
           ),
