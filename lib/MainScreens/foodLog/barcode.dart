@@ -25,6 +25,12 @@ class _BarcodeScanner extends State<BarcodeScanner> {
     super.initState();
   }
 
+  Future<void> startBarcodeScanStream() async {
+    FlutterBarcodeScanner.getBarcodeStreamReceiver(
+            '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
+        .listen((barcode) => print(barcode));
+  }
+
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> scanBarcodeNormal(String userid) async {
     String barcodeScanRes;
@@ -47,7 +53,7 @@ class _BarcodeScanner extends State<BarcodeScanner> {
       barcodeScanRes = 'Failed to get platform version.';
     }
 
-    String baseUrl = 'http://172.30.1.5:8000/log/barcode/product/';
+    String baseUrl = 'http://192.168.45.181:8000/log/barcode/product/';
     var uri = Uri.parse(baseUrl + userid + '/' + barcodeScanRes);
     final response = await http.post(
       uri,

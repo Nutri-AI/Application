@@ -1,9 +1,7 @@
-// ignore_for_file: unnecessary_const, non_constant_identifier_names
 import 'dart:async';
 import 'dart:convert';
 import 'package:demo/json/UserSignUpInfo.dart';
 
-import 'package:demo/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,9 +27,10 @@ Future<UserSignUpInfo> createUser(
       'PAI': PAI,
     },
   };
-  String baseUrl = 'http://192.168.0.21:8000/user/join'; // 혜원
-  // String baseUrl = 'http://192.168.1.7:8000/user/join'; // 영우
+  // String baseUrl = 'http://192.168.0.21:8000/user/join'; // 혜원
+  // String baseUrl = 'http://192.168.219.107:8000/user/join'; // 영우
   // String baseUrl = 'http://52.78.143.49:8000/user/join';
+  String baseUrl = 'http://192.168.45.181:8000/user/join'; // spc
 
   final response = await http.post(
     Uri.parse(baseUrl),

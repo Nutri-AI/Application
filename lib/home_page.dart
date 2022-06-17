@@ -23,8 +23,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
+  // static TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
 
   List<Widget> _children() => [
         FoodLog(email: userid),

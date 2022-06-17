@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -18,10 +17,7 @@ Future<dynamic> sendInfData(
     'class_list': classList,
     'food_list': foodList,
   };
-  // String baseUrl = 'http://10.0.2.2:8000/log/post/meal/log/'; // 혜원
-  // String baseUrl = 'http://192.168.1.7:8000/log/post/meal/log/'; // 영우
-  String baseUrl = 'http://172.30.1.5:8000/log/post/meal/log/'; // 영우
-  // String baseUrl = 'http://192.168.219.107:8000/log/post/meal/log/'; // 영우
+  String baseUrl = 'http://192.168.45.181:8000/log/post/meal/log/'; // 영우
   final response = await http.post(
     Uri.parse(baseUrl + userid),
     headers: <String, String>{
@@ -91,13 +87,13 @@ class _InferenceState extends State<Inference> {
                 "Please Select the Detail!",
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Image.network(
                 url,
                 width: MediaQuery.of(context).size.width / 1.1,
                 // height: 400,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Column(
                 children: <Widget>[
                   for (var i = 0; i < classType.length; i++)
@@ -126,7 +122,7 @@ class _InferenceState extends State<Inference> {
                               value: value,
                               child: Text(
                                 value,
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             );
                           }).toList(),
@@ -135,7 +131,7 @@ class _InferenceState extends State<Inference> {
                     ),
                 ],
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Container(
                 width: MediaQuery.of(context).size.width / 1.3,
                 height: MediaQuery.of(context).size.height / 15,
