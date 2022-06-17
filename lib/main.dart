@@ -14,7 +14,7 @@ Future<bool> fetchUser(String userid) async {
   // String baseUrl = 'http://192.1.1.232:8000/user/info/'; // moi
 
   final response = await http.get(Uri.parse(baseUrl + userid));
-  if (response.statusCode == 404) {
+  if (response.body == 'null') {
     return false;
   } else {
     return true;
