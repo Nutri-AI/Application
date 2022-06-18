@@ -18,8 +18,7 @@ import 'package:demo/MainScreens/foodLog/foodSearch/food_search.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
   // String baseUrl = 'http://192.168.45.181:8000/log/today/homepage/'; // spc
-  String baseUrl =
-      'http://172.16.101.248:8000/log/today/homepage/'; // coffebean
+  String baseUrl = 'http://172.30.104.68:8000/log/today/homepage/'; // star
 
   final response = await http.get(
     Uri.parse(baseUrl + userid),
@@ -43,8 +42,7 @@ Future<dynamic> predictImg(String userid) async {
 
       // String baseUrl = 'http://192.168.45.181:8000/log/upload/image/'; // spc
       // String baseUrl = 'http://192.1.1.232:8000/log/upload/image/'; // moi
-      String baseUrl =
-          'http://172.16.101.248:8000/log/upload/image/'; // coffebean
+      String baseUrl = 'http://172.30.104.68:8000/log/upload/image/'; // star
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};
