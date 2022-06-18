@@ -11,7 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<Product> fetchRecommendations(String userid) async {
-  String baseUrl = 'http://192.168.45.181:8000/log/today/homepage/'; // 영우 집
+  // String baseUrl = 'http://192.168.45.181:8000/log/recommend/nutrients/'; // 영우 집
+  String baseUrl = 'http://172.30.104.68:8000/log/recommend/nutrients/'; // 영우집
   final response = await http.get(
     Uri.parse(baseUrl + userid),
   );

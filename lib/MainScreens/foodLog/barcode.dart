@@ -80,7 +80,10 @@ class _BarcodeScanner extends State<BarcodeScanner> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            appBar: AppBar(title: const Text('Barcode scan')),
+            appBar: AppBar(
+              title: const Text('Barcode scan'),
+              backgroundColor: Colors.green,
+            ),
             body: Builder(builder: (BuildContext context) {
               return Container(
                   alignment: Alignment.center,
@@ -89,6 +92,10 @@ class _BarcodeScanner extends State<BarcodeScanner> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green,
+                              onPrimary: Colors.white,
+                            ),
                             onPressed: () async {
                               scanBarcodeNormal(userid);
                               await Navigator.push(

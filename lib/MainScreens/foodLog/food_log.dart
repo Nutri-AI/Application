@@ -390,11 +390,11 @@ class _FoodLogState extends State<FoodLog> {
         children: [
           SpeedDialChild(
             //speed dial child
-            child: Icon(Icons.image),
+            child: const Icon(Icons.image),
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             label: 'Add Food Image',
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () async {
               dynamic res = await predictImg(userid);
               url = jsonDecode(res)['link'];
@@ -423,11 +423,11 @@ class _FoodLogState extends State<FoodLog> {
             },
           ),
           SpeedDialChild(
-            child: Icon(Icons.align_vertical_center_sharp),
+            child: const Icon(Icons.align_vertical_center_sharp),
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,
             label: 'Add Barcode',
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
@@ -436,11 +436,11 @@ class _FoodLogState extends State<FoodLog> {
             ),
           ),
           SpeedDialChild(
-            child: Icon(Icons.search),
+            child: const Icon(Icons.search),
             foregroundColor: Colors.white,
             backgroundColor: Colors.green,
             label: 'Search Food',
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(

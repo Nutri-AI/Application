@@ -7827,7 +7827,7 @@ class _foodSearchState extends State<FoodSearch> {
                       itemCount: _foundFood.length,
                       itemBuilder: (context, index) => Card(
                         key: ValueKey(_foundFood[index]["food_nm"]),
-                        color: Colors.green[100],
+                        color: Color.fromARGB(255, 250, 248, 188),
                         elevation: 2,
                         margin: const EdgeInsets.symmetric(vertical: 5),
                         child: ListTile(

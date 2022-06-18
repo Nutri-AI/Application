@@ -10,8 +10,8 @@ import 'dart:convert';
 import 'package:demo/json/UserInfo.dart';
 
 Future<UserInfo> fetchUserData(String userid) async {
-  String baseUrl = 'http://192.168.45.181:8000/user/info/'; // 영우집
-
+  // String baseUrl = 'http://192.168.45.181:8000/user/info/'; // 영우집
+  String baseUrl = 'http://172.30.104.68:8000/user/info/'; // 영우집
 
   final response = await http.get(Uri.parse(baseUrl + userid));
 
