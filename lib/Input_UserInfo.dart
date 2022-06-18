@@ -27,11 +27,12 @@ Future<UserSignUpInfo> createUser(
       'PAI': PAI,
     },
   };
+  // user/join함수는 뒤에 / 붙이면 안됨
   // String baseUrl = 'http://192.168.0.21:8000/user/join/'; // 혜원
   // String baseUrl = 'http://192.168.219.107:8000/user/join/'; // 영우
   // String baseUrl = 'http://52.78.143.49:8000/user/join/';
   // String baseUrl = 'http://192.168.45.181:8000/user/join/'; // spc
-  String baseUrl = 'http://172.16.101.248:8000/user/join/'; // coffebean
+  String baseUrl = 'http://172.30.104.68:8000/user/join'; // 영우집
 
   final response = await http.post(
     Uri.parse(baseUrl),
@@ -59,7 +60,6 @@ class InputUserInfo extends StatefulWidget {
 class _InputUserInfoState extends State<InputUserInfo> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _birthdateController = TextEditingController();
-  // final TextEditingController _sexController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   //Future<UserInfo>? _UserInfo;
@@ -69,8 +69,8 @@ class _InputUserInfoState extends State<InputUserInfo> {
 
   Map pai = {
     "운동 안 함": "1.2",
-    '''격렬한 운동 주 1~2회 or 가벼운 운동 주 3~4회''': "1.375",
-    '''격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회''': "1.425",
+    "격렬한 운동 주 1~2회 or \n가벼운 운동 주 3~4회": "1.375",
+    "격렬한 운동 주 3~4회 or \n가벼운 운동 주 5~7회": "1.425",
     "격렬한 운동 주 5~6회": "1.55",
     "격렬한 운동 주 7회 이상": "1.75",
   };
@@ -191,9 +191,9 @@ class _InputUserInfoState extends State<InputUserInfo> {
               children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.only(right: 50),
-                  child: const Text(
+                  child: Text(
                     "운동량",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
                       color: Colors.green,
                     ),
@@ -204,7 +204,7 @@ class _InputUserInfoState extends State<InputUserInfo> {
                   icon: const Icon(Icons.arrow_drop_down),
                   elevation: 0,
                   style: const TextStyle(
-                    fontSize: 11,
+                    fontSize: 14,
                     color: Colors.black,
                   ),
                   onChanged: (String? newValue) {
@@ -214,8 +214,8 @@ class _InputUserInfoState extends State<InputUserInfo> {
                   },
                   items: <String>[
                     "운동 안 함",
-                    "격렬한 운동 주 1~2회 or 가벼운 운동 주 3~4회",
-                    "격렬한 운동 주 3~4회 or 가벼운 운동 주 5~7회",
+                    "격렬한 운동 주 1~2회 or \n가벼운 운동 주 3~4회",
+                    "격렬한 운동 주 3~4회 or \n가벼운 운동 주 5~7회",
                     "격렬한 운동 주 5~6회",
                     "격렬한 운동 주 7회 이상"
                   ].map<DropdownMenuItem<String>>((String value) {

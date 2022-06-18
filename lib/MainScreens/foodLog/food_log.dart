@@ -18,8 +18,7 @@ import 'package:demo/MainScreens/foodLog/foodSearch/food_search.dart';
 
 Future<NutriStat> fetchUserData(String userid) async {
   // String baseUrl = 'http://192.168.45.181:8000/log/today/homepage/'; // spc
-  String baseUrl =
-      'http://172.16.101.248:8000/log/today/homepage/'; // coffebean
+  String baseUrl = 'http://172.30.104.68:8000/log/today/homepage/'; // star
 
   final response = await http.get(
     Uri.parse(baseUrl + userid),
@@ -43,8 +42,7 @@ Future<dynamic> predictImg(String userid) async {
 
       // String baseUrl = 'http://192.168.45.181:8000/log/upload/image/'; // spc
       // String baseUrl = 'http://192.1.1.232:8000/log/upload/image/'; // moi
-      String baseUrl =
-          'http://172.16.101.248:8000/log/upload/image/'; // coffebean
+      String baseUrl = 'http://172.30.104.68:8000/log/upload/image/'; // star
       var uri = Uri.parse(baseUrl + userid);
       var request = http.MultipartRequest('POST', uri);
       Map<String, String> headers = {"Content-type": "multipart/form-data"};
@@ -392,11 +390,11 @@ class _FoodLogState extends State<FoodLog> {
         children: [
           SpeedDialChild(
             //speed dial child
-            child: Icon(Icons.image),
+            child: const Icon(Icons.image),
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             label: 'Add Food Image',
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () async {
               dynamic res = await predictImg(userid);
               url = jsonDecode(res)['link'];
@@ -425,11 +423,11 @@ class _FoodLogState extends State<FoodLog> {
             },
           ),
           SpeedDialChild(
-            child: Icon(Icons.align_vertical_center_sharp),
+            child: const Icon(Icons.align_vertical_center_sharp),
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,
             label: 'Add Barcode',
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
@@ -438,11 +436,11 @@ class _FoodLogState extends State<FoodLog> {
             ),
           ),
           SpeedDialChild(
-            child: Icon(Icons.search),
+            child: const Icon(Icons.search),
             foregroundColor: Colors.white,
             backgroundColor: Colors.green,
             label: 'Search Food',
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(

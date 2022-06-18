@@ -44,6 +44,7 @@ flutter:
     - assets/Iherb_logo.jpeg
     - assets/logos.json
     - assets/Login_design.png
+    - assets/forkspoon.png
 
   fonts:
     - family: CustomIcon

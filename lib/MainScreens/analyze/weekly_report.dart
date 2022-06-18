@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 
@@ -12,8 +11,9 @@ import 'dart:async';
 import 'dart:convert';
 
 Future<NutriStat> fetchAnalysisData(String userid) async {
-  String baseUrl = 'http://192.168.45.181:8000/log/week/status/'; // 영우집
+  // String baseUrl = 'http://192.168.45.181:8000/log/week/status/'; // 영우집
   // String baseUrl = 'http://52.78.143.49:8000/log/week/status/'; // EC2
+  String baseUrl = 'http://172.30.104.68:8000/log/week/status/'; // 영우집
   final response = await http.get(Uri.parse(baseUrl + userid));
 
   if (response.statusCode == 200) {

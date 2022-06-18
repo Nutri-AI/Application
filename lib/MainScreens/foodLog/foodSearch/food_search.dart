@@ -1,14 +1,14 @@
-import 'package:demo/json/UserInfo.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
 import 'dart:async';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
+import 'package:flutter/material.dart';
+import 'package:demo/json/UserInfo.dart';
 import 'package:demo/home_page.dart';
 
 Future<UserInfo> fetchUserData(String userid) async {
-  String baseUrl = 'http://172.16.101.248:8000/user/info/'; // 영우집
+  // String baseUrl = 'http://172.16.101.248:8000/user/info/'; // 영우집
+  String baseUrl = 'http://172.30.104.68:8000/user/info/'; // star
 
   final response = await http.get(Uri.parse(baseUrl + userid));
 
@@ -21,17 +21,20 @@ Future<UserInfo> fetchUserData(String userid) async {
 
 Future<void> postTxtSearchFood(
   String userid,
+  String imgKey,
   List<dynamic> classList,
   List<dynamic> foodList,
 ) async {
   Map<String, dynamic> data = {
     // 'userid': userid,
+    'image_key': imgKey,
     'class_list': classList,
     'food_list': foodList,
   };
 
   // String baseUrl = 'http://192.168.45.181:8000/log/post/meal/log/'; // spc
-  String baseUrl = 'http://172.16.101.248:8000/log/post/meal/log/'; // coffebean
+  // String baseUrl = 'http://172.16.101.248:8000/log/post/meal/log/'; // coffebean
+  String baseUrl = 'http://172.30.104.68:8000/log/post/meal/log/'; // star
   var uri = Uri.parse(baseUrl + userid);
   final response = await http.post(
     uri,
@@ -7824,7 +7827,7 @@ class _foodSearchState extends State<FoodSearch> {
                       itemCount: _foundFood.length,
                       itemBuilder: (context, index) => Card(
                         key: ValueKey(_foundFood[index]["food_nm"]),
-                        color: Colors.green[100],
+                        color: Color.fromARGB(255, 250, 248, 188),
                         elevation: 2,
                         margin: const EdgeInsets.symmetric(vertical: 5),
                         child: ListTile(
@@ -7835,17 +7838,12 @@ class _foodSearchState extends State<FoodSearch> {
                           onTap: () async {
                             late List<dynamic> foodCat;
                             late List<dynamic> foodNm;
+
                             foodCat = [
-                              '"' +
-                                  _foundFood[index]["food_cat"].toString() +
-                                  '"'
+                              _foundFood[index]["food_cat"].toString()
                             ];
-                            foodNm = [
-                              '"' +
-                                  _foundFood[index]["food_nm"].toString() +
-                                  '"'
-                            ];
-                            postTxtSearchFood(userid, foodCat, foodNm);
+                            foodNm = [_foundFood[index]["food_nm"].toString()];
+                            postTxtSearchFood(userid, userid, foodCat, foodNm);
                             print(foodNm);
                             await Navigator.push(
                               context,

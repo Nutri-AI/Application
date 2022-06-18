@@ -12,10 +12,10 @@ Future<bool> fetchUser(String userid) async {
   // String baseUrl = 'http://172.30.1.40:8000/user/info/'; // 프릳츠
   // String baseUrl = 'http://192.168.0.62:8000/user/info/'; // spc
   // String baseUrl = 'http://192.1.1.232:8000/user/info/'; // moi
-  String baseUrl = 'http://172.16.101.248:8000/user/info/'; // coffebeahn
+  String baseUrl = 'http://172.30.104.68:8000/user/info/'; // star
 
   final response = await http.get(Uri.parse(baseUrl + userid));
-  if (response.statusCode == 404) {
+  if (response.body == 'null') {
     return false;
   } else {
     return true;
